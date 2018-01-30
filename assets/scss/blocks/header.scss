@@ -1,0 +1,57 @@
+.header {
+    width: 100%;
+    padding: 0 15px;
+    background: $orange-pink;
+}
+
+.nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    & .current-time {
+        display: flex;
+        justify-content: space-between;
+        align-self: flex-start;
+        order: 3;
+        margin: 15px auto 15px 0;
+        color: $white;
+
+        & svg {
+            width: 25px;
+            height: 25px;
+            fill: $yellow;
+        }
+
+        & time {
+            margin-left: 5px;
+        }
+    }
+    & .logo {
+        order: 1;
+        width: 100%;
+        padding: 15px 0;
+
+        & svg {
+            width: 290px;
+            fill: $yellow;
+        }
+    }
+    & .login {
+        display: flex;
+        justify-content: space-between;
+        order: 2;
+        width: 100%;
+        text-transform: uppercase;
+
+        &__button {
+            width: 140px;
+            color: $white;
+            background: $orange-red-light;
+
+            &:hover {
+                background: $orange-red;
+            }
+        }
+    }
+}

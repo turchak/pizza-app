@@ -1,0 +1,82 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&subset=cyrillic");
+* {
+  box-sizing: border-box; }
+
+img {
+  width: 100%; }
+
+button {
+  display: block;
+  appearance: none;
+  user-select: none;
+  text-align: center;
+  white-space: nowrap;
+  text-decoration: none;
+  height: 3rem;
+  padding: 0 0.5rem;
+  border: 0.125rem solid transparent;
+  font-family: "Open Sans", sans-serif;
+  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: 600;
+  font-size: 0.8125rem;
+  line-height: 2.625rem;
+  -webkit-font-smoothing: antialiased;
+  border-radius: 0.25rem;
+  letter-spacing: 0.09375rem;
+  transition: all 0.3s ease;
+  box-shadow: 8px 10px 20px 0px rgba(46, 61, 73, 0.15);
+  cursor: pointer; }
+  button:hover {
+    box-shadow: 2px 4px 8px 0px rgba(46, 61, 73, 0.2); }
+
+body {
+  color: #525c65;
+  font-size: 16px;
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.5rem;
+  -webkit-font-smoothing: antialiased; }
+
+.header {
+  width: 100%;
+  padding: 0 15px;
+  background: #cc3354; }
+
+.nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap; }
+  .nav .current-time {
+    display: flex;
+    justify-content: space-between;
+    align-self: flex-start;
+    order: 3;
+    margin: 15px auto 15px 0;
+    color: #fff; }
+    .nav .current-time svg {
+      width: 25px;
+      height: 25px;
+      fill: #ffd31a; }
+    .nav .current-time time {
+      margin-left: 5px; }
+  .nav .logo {
+    order: 1;
+    width: 100%;
+    padding: 15px 0; }
+    .nav .logo svg {
+      width: 290px;
+      fill: #ffd31a; }
+  .nav .login {
+    display: flex;
+    justify-content: space-between;
+    order: 2;
+    width: 100%;
+    text-transform: uppercase; }
+    .nav .login__button {
+      width: 140px;
+      color: #fff;
+      background: #f43745; }
+      .nav .login__button:hover {
+        background: #e5354b; }
+
+/*# sourceMappingURL=app.css.map */
