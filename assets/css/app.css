@@ -99,6 +99,8 @@ main {
       border-radius: 0.375rem;
       box-shadow: 5px 5px 25px 0px rgba(46, 61, 73, 0.2);
       transition: all 0.3s ease; }
+      main section .pizza .pizza__img {
+        align-self: center; }
       main section .pizza:hover {
         box-shadow: 2px 4px 8px 0px rgba(46, 61, 73, 0.2); }
       main section .pizza__time {
@@ -113,5 +115,18 @@ main {
       main section .pizza__price {
         width: 50%;
         text-align: right; }
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 0 15px;
+  background: #303030;
+  color: #fff; }
+  .footer address {
+    margin-top: 10px;
+    font-style: normal; }
+    .footer address a {
+      color: #fff; }
 
 /*# sourceMappingURL=app.css.map */
