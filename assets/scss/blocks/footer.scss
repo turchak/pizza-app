@@ -1,17 +1,22 @@
 .footer {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    padding: 0 15px;
     background: $grey-dark;
-    color: $white;
 
-    & address {
-        margin-top: 10px;
-        font-style: normal;
+    & .container {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        padding: 15px;
+        color: $white;
+        @include tablet-min {
+            justify-content: space-between;
+        }
 
-        & a {
-            color: $white;
+        & address {
+            font-style: normal;
+
+            & a {
+                color: $white;
+            }
         }
     }
 }

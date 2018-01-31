@@ -1,6 +1,5 @@
 .header {
     width: 100%;
-    padding: 0 15px;
     background: $orange-pink;
 }
 
@@ -8,6 +7,10 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    @include tablet-min {
+        flex-wrap: nowrap;
+        padding: 15px 0;
+    }
 
     & .current-time {
         display: flex;
@@ -16,6 +19,19 @@
         order: 3;
         margin: 15px auto 15px 0;
         color: $white;
+        @include tablet-min {
+            justify-content: flex-start;
+            align-self: center;
+            order: 1;
+            width: 25%;
+            margin: 0;
+        }
+        @include tablet-landscape-min {
+            width: 30%;
+        }
+        @include desktop-min {
+            width: 25%;
+        }
 
         & svg {
             width: 25px;
@@ -31,9 +47,20 @@
         order: 1;
         width: 100%;
         padding: 15px 0;
+        @include tablet-min {
+            order: 2;
+            width: 50%;
+            padding: 0;
+        }
+        @include tablet-landscape-min {
+            width: 40%;
+        }
+        @include desktop-min {
+            width: 50%;
+        }
 
         & svg {
-            width: 290px;
+            width: 100%;
             fill: $yellow;
         }
     }
@@ -43,6 +70,20 @@
         order: 2;
         width: 100%;
         text-transform: uppercase;
+        @include tablet-min {
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-end;
+            width: 25%;
+        }
+        @include tablet-landscape-min {
+            flex-direction: row;
+            align-items: center;
+            width: 30%;
+        }
+        @include desktop-min {
+            width: 25%;
+        }
 
         &__button {
             width: 140px;

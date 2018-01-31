@@ -30,144 +30,177 @@
         </symbol>
     </svg>
     <header class="header">
-        <nav class="nav">
-            <aside class="current-time">
-                <svg width="50" height="50">
-                    <use xlink:href="#clock"></use>
-                </svg>
-                <time datetime="">12:01:48</time>
-            </aside>
-            <a class="logo" href="#">
-                <svg width="100" height="100">
-                    <use xlink:href="#logo"></use>
-                </svg>
-            </a>
-            <aside class="login">
-                <button class="login__button login__button--sing-in">sing in</button>
-                <button class="login__button login__button--sing-up">sing up</button>
-            </aside>
-        </nav>
+        <div class="container">
+            <nav class="nav">
+                <aside class="current-time">
+                    <svg width="50" height="50">
+                        <use xlink:href="#clock"></use>
+                    </svg>
+                    <time datetime="">12:01:48</time>
+                </aside>
+                <a class="logo" href="#">
+                    <svg width="100" height="100">
+                        <use xlink:href="#logo"></use>
+                    </svg>
+                </a>
+                <aside class="login">
+                    <button class="login__button login__button--sing-in">sing in</button>
+                    <button class="login__button login__button--sing-up">sing up</button>
+                </aside>
+            </nav>
+        </div>
     </header>
     <main class="main">
-        <button class="add-button" type="button">add new pizza</button>
-        <section>
-            <article class="pizza">
-                <img class="pizza__img" src="./assets/img/pizza-bavarian.png" alt="">
-                <time class="pizza__time" datetime="">12:01:48</time>
-                <span class="pizza__queue-number">#1</span>
-                <div class="pizza__eta">
-                    <span>eta</span>
-                    <time>4
-                        <span>min</span>
-                    </time>
-                </div>
-                <div class="pizza__price"><span>$</span><span>10</span></div>
-            </article>
-            <article class="pizza">
-                <img class="pizza__img" src="./assets/img/pizza-chicken-with-mushrooms.png" alt="">
-                <time class="pizza__time" datetime="">12:01:48</time>
-                <span class="pizza__queue-number">#2</span>
-                <div class="pizza__eta">
-                    <span>eta</span>
-                    <time>4
-                        <span>min</span>
-                    </time>
-                </div>
-                <div class="pizza__price"><span>$</span><span>10</span></div>
-            </article>
-            <article class="pizza">
-                <img class="pizza__img" src="./assets/img/pizza-chicken-with-pineapple.png" alt="">
-                <time class="pizza__time" datetime="">12:01:48</time>
-                <span class="pizza__queue-number">#3</span>
-                <div class="pizza__eta">
-                    <span>eta</span>
-                    <time>4
-                        <span>min</span>
-                    </time>
-                </div>
-                <div class="pizza__price"><span>$</span><span>10</span></div>
-            </article>
-            <article class="pizza">
-                <img class="pizza__img" src="./assets/img/pizza-fruit.png" alt="">
-                <time class="pizza__time" datetime="">12:01:48</time>
-                <span class="pizza__queue-number">#4</span>
-                <div class="pizza__eta">
-                    <span>eta</span>
-                    <time>4
-                        <span>min</span>
-                    </time>
-                </div>
-                <div class="pizza__price"><span>$</span><span>10</span></div>
-            </article>
-            <article class="pizza">
-                <img class="pizza__img" src="./assets/img/pizza-margarita.png" alt="">
-                <time class="pizza__time" datetime="">12:01:48</time>
-                <span class="pizza__queue-number">#5</span>
-                <div class="pizza__eta">
-                    <span>eta</span>
-                    <time>4
-                        <span>min</span>
-                    </time>
-                </div>
-                <div class="pizza__price"><span>$</span><span>10</span></div>
-            </article>
-            <article class="pizza">
-                <img class="pizza__img" src="./assets/img/pizza-turkey.png" alt="">
-                <time class="pizza__time" datetime="">12:01:48</time>
-                <span class="pizza__queue-number">#6</span>
-                <div class="pizza__eta">
-                    <span>eta</span>
-                    <time>4
-                        <span>min</span>
-                    </time>
-                </div>
-                <div class="pizza__price"><span>$</span><span>10</span></div>
-            </article>
-            <article class="pizza">
-                <img class="pizza__img" src="./assets/img/pizza-pepperoni.png" alt="">
-                <time class="pizza__time" datetime="">12:01:48</time>
-                <span class="pizza__queue-number">#7</span>
-                <div class="pizza__eta">
+        <div class="container">
+            <button class="add-button" type="button">add new pizza</button>
+            <section>
+                <article class="pizza">
+                    <img class="pizza__img" src="./assets/img/pizza-bavarian.png" alt="">
+                    <time class="pizza__time" datetime="">12:01:48</time>
+                    <span class="pizza__queue-number">#1</span>
+                    <div class="pizza__eta">
                         <span>eta</span>
                         <time>4
                             <span>min</span>
                         </time>
                     </div>
-                <div class="pizza__price"><span>$</span><span>10</span></div>
-            </article>
-            <article class="pizza">
-                <img class="pizza__img" src="./assets/img/pizza-prosciutto.png" alt="">
-                <time class="pizza__time" datetime="">12:01:48</time>
-                <span class="pizza__queue-number">#8</span>
-                <div class="pizza__eta">
-                    <span>eta</span>
-                    <time>4
-                        <span>min</span>
-                    </time>
-                </div>
-                <div class="pizza__price"><span>$</span><span>10</span></div>
-            </article>
-            <article class="pizza">
-                <img class="pizza__img" src="./assets/img/pizza-tsukini.png" alt="">
-                <time class="pizza__time" datetime="">12:01:48</time>
-                <span class="pizza__queue-number">#9</span>
-                <div class="pizza__eta">
-                    <span>eta</span>
-                    <time>4
-                        <span>min</span>
-                    </time>
-                </div>
-                <div class="pizza__price"><span>$</span><span>10</span></div>
-            </article>
-        </section>
+                    <div class="pizza__price">
+                        <span>$</span>
+                        <span>10</span>
+                    </div>
+                </article>
+                <article class="pizza">
+                    <img class="pizza__img" src="./assets/img/pizza-chicken-with-mushrooms.png" alt="">
+                    <time class="pizza__time" datetime="">12:01:48</time>
+                    <span class="pizza__queue-number">#2</span>
+                    <div class="pizza__eta">
+                        <span>eta</span>
+                        <time>4
+                            <span>min</span>
+                        </time>
+                    </div>
+                    <div class="pizza__price">
+                        <span>$</span>
+                        <span>10</span>
+                    </div>
+                </article>
+                <article class="pizza">
+                    <img class="pizza__img" src="./assets/img/pizza-chicken-with-pineapple.png" alt="">
+                    <time class="pizza__time" datetime="">12:01:48</time>
+                    <span class="pizza__queue-number">#3</span>
+                    <div class="pizza__eta">
+                        <span>eta</span>
+                        <time>4
+                            <span>min</span>
+                        </time>
+                    </div>
+                    <div class="pizza__price">
+                        <span>$</span>
+                        <span>10</span>
+                    </div>
+                </article>
+                <article class="pizza">
+                    <img class="pizza__img" src="./assets/img/pizza-fruit.png" alt="">
+                    <time class="pizza__time" datetime="">12:01:48</time>
+                    <span class="pizza__queue-number">#4</span>
+                    <div class="pizza__eta">
+                        <span>eta</span>
+                        <time>4
+                            <span>min</span>
+                        </time>
+                    </div>
+                    <div class="pizza__price">
+                        <span>$</span>
+                        <span>10</span>
+                    </div>
+                </article>
+                <article class="pizza">
+                    <img class="pizza__img" src="./assets/img/pizza-margarita.png" alt="">
+                    <time class="pizza__time" datetime="">12:01:48</time>
+                    <span class="pizza__queue-number">#5</span>
+                    <div class="pizza__eta">
+                        <span>eta</span>
+                        <time>4
+                            <span>min</span>
+                        </time>
+                    </div>
+                    <div class="pizza__price">
+                        <span>$</span>
+                        <span>10</span>
+                    </div>
+                </article>
+                <article class="pizza">
+                    <img class="pizza__img" src="./assets/img/pizza-turkey.png" alt="">
+                    <time class="pizza__time" datetime="">12:01:48</time>
+                    <span class="pizza__queue-number">#6</span>
+                    <div class="pizza__eta">
+                        <span>eta</span>
+                        <time>4
+                            <span>min</span>
+                        </time>
+                    </div>
+                    <div class="pizza__price">
+                        <span>$</span>
+                        <span>10</span>
+                    </div>
+                </article>
+                <article class="pizza">
+                    <img class="pizza__img" src="./assets/img/pizza-pepperoni.png" alt="">
+                    <time class="pizza__time" datetime="">12:01:48</time>
+                    <span class="pizza__queue-number">#7</span>
+                    <div class="pizza__eta">
+                        <span>eta</span>
+                        <time>4
+                            <span>min</span>
+                        </time>
+                    </div>
+                    <div class="pizza__price">
+                        <span>$</span>
+                        <span>10</span>
+                    </div>
+                </article>
+                <article class="pizza">
+                    <img class="pizza__img" src="./assets/img/pizza-prosciutto.png" alt="">
+                    <time class="pizza__time" datetime="">12:01:48</time>
+                    <span class="pizza__queue-number">#8</span>
+                    <div class="pizza__eta">
+                        <span>eta</span>
+                        <time>4
+                            <span>min</span>
+                        </time>
+                    </div>
+                    <div class="pizza__price">
+                        <span>$</span>
+                        <span>10</span>
+                    </div>
+                </article>
+                <article class="pizza">
+                    <img class="pizza__img" src="./assets/img/pizza-tsukini.png" alt="">
+                    <time class="pizza__time" datetime="">12:01:48</time>
+                    <span class="pizza__queue-number">#9</span>
+                    <div class="pizza__eta">
+                        <span>eta</span>
+                        <time>4
+                            <span>min</span>
+                        </time>
+                    </div>
+                    <div class="pizza__price">
+                        <span>$</span>
+                        <span>10</span>
+                    </div>
+                </article>
+            </section>
+        </div>
     </main>
     <footer class="footer">
-        <address>Kottans, Kottans Srt. 1,
-            <a href="tel:+57778887">tel. 577-788-87</a>
-        </address>
-        <small>Pizza Manager &copy;
-            <time datetime="2018-01-01">2018</time>
-        </small>
+        <div class="container">
+            <address>Kottans, Kottans Srt. 1,
+                <a href="tel:+57778887">tel. 577-788-87</a>
+            </address>
+            <small>Pizza Manager &copy;
+                <time datetime="2018-01-01">2018</time>
+            </small>
+        </div>
     </footer>
 </body>
 
