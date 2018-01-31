@@ -79,4 +79,39 @@ body {
       .nav .login__button:hover {
         background: #e5354b; }
 
+main {
+  padding: 15px;
+  background: #ff8b17; }
+  main .add-button {
+    margin: 10px auto;
+    background: #ffc822; }
+    main .add-button:hover {
+      background: #ffd31a; }
+  main section {
+    display: flex;
+    flex-wrap: wrap; }
+    main section .pizza {
+      display: flex;
+      flex-wrap: wrap;
+      margin: 20px;
+      padding: 15px;
+      background: #fffde5;
+      border-radius: 0.375rem;
+      box-shadow: 5px 5px 25px 0px rgba(46, 61, 73, 0.2);
+      transition: all 0.3s ease; }
+      main section .pizza:hover {
+        box-shadow: 2px 4px 8px 0px rgba(46, 61, 73, 0.2); }
+      main section .pizza__time {
+        width: 50%; }
+      main section .pizza__queue-number {
+        width: 50%;
+        text-align: right; }
+      main section .pizza__eta {
+        width: 50%; }
+        main section .pizza__eta > span {
+          text-transform: uppercase; }
+      main section .pizza__price {
+        width: 50%;
+        text-align: right; }
+
 /*# sourceMappingURL=app.css.map */
