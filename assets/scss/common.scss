@@ -6,6 +6,13 @@ img {
     width: 100%;
 }
 
+h2 {
+  margin: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
 button {
     display: block;
     appearance: none;
@@ -18,7 +25,6 @@ button {
     border: 0.125rem solid transparent;
     font-family: "Open Sans", sans-serif;
     text-transform: uppercase;
-    font-size: 16px;
     font-weight: 600;
     font-size: 0.8125rem;
     line-height: 2.625rem;
@@ -26,11 +32,11 @@ button {
     border-radius: 0.25rem;
     letter-spacing: 0.09375rem;
     transition: all 0.3s ease;
-    box-shadow: 8px 10px 20px 0px rgba(46,61,73,0.15);
+    box-shadow: 8px 10px 20px 0 rgba(46,61,73,0.15);
     cursor: pointer;
 
     &:hover {
-        box-shadow: 2px 4px 8px 0px rgba(46,61,73,0.2);
+        box-shadow: 2px 4px 8px 0 rgba(46,61,73,0.2);
     }
 }
 
