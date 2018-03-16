@@ -1,0 +1,22 @@
+.footer {
+    background: $grey-dark;
+
+    & .container {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        padding: 15px;
+        color: $white;
+        @include tablet-min {
+            justify-content: space-between;
+        }
+
+        & address {
+            font-style: normal;
+
+            & a {
+                color: $white;
+            }
+        }
+    }
+}

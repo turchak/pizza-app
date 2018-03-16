@@ -1,2 +1,5 @@
 *.config
 .sass-cache
+/node_modules
+.vscode
+.eslintrc.js
