@@ -40,12 +40,18 @@ button {
     }
 }
 
+html {
+    height: 100%;
+    overflow-y:scroll;
+}
+
 body {
     margin: 0;
     color: $grey;
     font-size: 16px;
     font-family: "Open Sans", sans-serif;
     line-height: 1.5rem;
+    height: 100%;
     -webkit-font-smoothing: antialiased;
 }
 
@@ -53,4 +59,26 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 15px;
+}
+
+#root {
+    height: 100%;
+}
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.registration-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.user-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }

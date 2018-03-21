@@ -8,7 +8,7 @@ class Registration extends Component {
         super(props);
 
         this.host = document.createElement('div');
-        this.host.classList.add('login-container');
+        this.host.classList.add('registration-container');
         this.handleSubmit = this.handleSubmit.bind(this);
         this.host.addEventListener('submit', this.handleSubmit);
 

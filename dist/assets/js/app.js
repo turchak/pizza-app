@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -237,13 +237,118 @@ exports.default = Header;
 "use strict";
 
 
-__webpack_require__(4);
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var toHtml = function toHtml(string) {
+    var template = document.createElement('template');
+    template.innerHTML = string;
+    return template.content;
+};
 
-var _router = __webpack_require__(9);
+exports.default = toHtml;
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var AuthService = function () {
+    function AuthService() {
+        _classCallCheck(this, AuthService);
+
+        this._token = null;
+        this._claims = null;
+        this.loginUrl = 'https://pizza-tele.ga/api/v1/user/login';
+        this.storeUrl = 'https://pizza-tele.ga/api/v1/store/list';
+        this.createUrl = 'https://pizza-tele.ga/api/v1/user/create';
+    }
+
+    // get token() {
+
+    // }
+
+    // set token() {
+
+    // }
+
+    _createClass(AuthService, [{
+        key: 'isAuthorized',
+        value: function isAuthorized() {}
+    }, {
+        key: 'tokenIsNotExpired',
+        value: function tokenIsNotExpired() {}
+    }, {
+        key: 'storeInfo',
+        value: function storeInfo() {
+            return fetch(this.storeUrl).then(function (res) {
+                return res.json();
+            });
+        }
+    }, {
+        key: 'loginUser',
+        value: function loginUser(data) {
+            var options = {
+                method: 'POST',
+                body: JSON.stringify(data)
+            };
+
+            return fetch(this.loginUrl, options).then(function (res) {
+                return res.json();
+            });
+        }
+    }, {
+        key: 'registerUser',
+        value: function registerUser(data) {
+            var options = {
+                method: 'POST',
+                body: JSON.stringify(data)
+            };
+            return fetch(this.createUrl, options).then(function (res) {
+                return res.json();
+            });
+        }
+    }, {
+        key: 'parseJwtClaims',
+        value: function parseJwtClaims(jwtToken) {
+            if (jwtToken) {
+                var base64Url = jwtToken.split('.')[1];
+                var base64 = base64Url.replace('-', '+').replace('_', '/');
+                return JSON.parse(window.atob(base64));
+            }
+            return {};
+        }
+    }]);
+
+    return AuthService;
+}();
+
+var AUTH_SERVICE = exports.AUTH_SERVICE = new AuthService();
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+__webpack_require__(6);
+
+var _router = __webpack_require__(11);
 
 var _router2 = _interopRequireDefault(_router);
 
-var _routes = __webpack_require__(10);
+var _routes = __webpack_require__(12);
 
 var _routes2 = _interopRequireDefault(_routes);
 
@@ -252,11 +357,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var router = new _router2.default({ host: document.querySelector('#root'), routes: _routes2.default });
 
 /***/ }),
-/* 4 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(5);
+var content = __webpack_require__(7);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -270,7 +375,7 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(7)(content, options);
+var update = __webpack_require__(9)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
@@ -302,21 +407,21 @@ if(false) {
 }
 
 /***/ }),
-/* 5 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(6)(true);
+exports = module.exports = __webpack_require__(8)(true);
 // imports
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&subset=cyrillic);", ""]);
 
 // module
-exports.push([module.i, "* {\n  box-sizing: border-box; }\n\nimg {\n  width: 100%; }\n\nh2 {\n  margin: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline; }\n\nbutton {\n  display: block;\n  appearance: none;\n  user-select: none;\n  text-align: center;\n  white-space: nowrap;\n  text-decoration: none;\n  height: 3rem;\n  padding: 0 0.5rem;\n  border: 0.125rem solid transparent;\n  font-family: \"Open Sans\", sans-serif;\n  text-transform: uppercase;\n  font-weight: 600;\n  font-size: 0.8125rem;\n  line-height: 2.625rem;\n  -webkit-font-smoothing: antialiased;\n  border-radius: 0.25rem;\n  letter-spacing: 0.09375rem;\n  transition: all 0.3s ease;\n  box-shadow: 8px 10px 20px 0 rgba(46, 61, 73, 0.15);\n  cursor: pointer; }\n  button:hover {\n    box-shadow: 2px 4px 8px 0 rgba(46, 61, 73, 0.2); }\n\nbody {\n  margin: 0;\n  color: #525c65;\n  font-size: 16px;\n  font-family: \"Open Sans\", sans-serif;\n  line-height: 1.5rem;\n  -webkit-font-smoothing: antialiased; }\n\n.container {\n  max-width: 1200px;\n  margin: 0 auto;\n  padding: 0 15px; }\n\n.header {\n  width: 100%;\n  background: #cc3354; }\n\n.nav {\n  display: flex;\n  justify-content: center;\n  flex-wrap: wrap; }\n  @media (min-width: 768px) {\n    .nav {\n      flex-wrap: nowrap;\n      padding: 15px 0; } }\n  .nav .current-time {\n    display: flex;\n    justify-content: space-between;\n    align-self: flex-start;\n    order: 3;\n    margin: 15px auto 15px 0;\n    color: #fff; }\n    @media (min-width: 768px) {\n      .nav .current-time {\n        justify-content: flex-start;\n        align-self: center;\n        order: 1;\n        width: 25%;\n        margin: 0; } }\n    @media (min-width: 1024px) {\n      .nav .current-time {\n        width: 30%; } }\n    @media (min-width: 1200px) {\n      .nav .current-time {\n        width: 25%; } }\n    .nav .current-time svg {\n      width: 25px;\n      height: 25px;\n      fill: #ffd31a; }\n    .nav .current-time time {\n      margin-left: 5px; }\n  .nav .logo {\n    order: 1;\n    width: 100%;\n    padding: 15px 0; }\n    @media (min-width: 768px) {\n      .nav .logo {\n        order: 2;\n        width: 50%;\n        padding: 0; } }\n    @media (min-width: 1024px) {\n      .nav .logo {\n        width: 40%; } }\n    @media (min-width: 1200px) {\n      .nav .logo {\n        width: 50%; } }\n    .nav .logo svg {\n      width: 100%;\n      fill: #ffd31a; }\n  .nav .auth {\n    display: flex;\n    justify-content: space-between;\n    order: 2;\n    width: 100%;\n    text-transform: uppercase; }\n    @media (min-width: 768px) {\n      .nav .auth {\n        flex-direction: column;\n        justify-content: space-between;\n        align-items: flex-end;\n        width: 25%; } }\n    @media (min-width: 1024px) {\n      .nav .auth {\n        flex-direction: row;\n        align-items: center;\n        width: 30%; } }\n    @media (min-width: 1200px) {\n      .nav .auth {\n        width: 25%; } }\n    .nav .auth__button {\n      width: 140px;\n      color: #fff;\n      background: #f43745; }\n      .nav .auth__button:hover {\n        background: #e5354b; }\n      .nav .auth__button-link {\n        display: inline-block;\n        text-decoration: none;\n        color: #fff;\n        width: 100%;\n        height: 100%; }\n\n.login {\n  padding: 60px 0;\n  height: 100vh;\n  background: #ff8b17; }\n  .login__form {\n    max-width: 620px;\n    margin: 0 auto;\n    padding: 60px;\n    border: 1px solid #dbe2e8;\n    background: #fff;\n    box-shadow: 2px 2px 3px 0 rgba(117, 124, 129, 0.12); }\n  .login__input {\n    width: 100%;\n    height: 44px;\n    margin-top: 20px;\n    padding-left: 15px;\n    padding-right: 15px;\n    border: 1px solid #dbe2e8;\n    box-shadow: 0 2px 2px 0 rgba(46, 60, 73, 0.05);\n    border-radius: 2px;\n    color: #2e3d49; }\n    .login__input:active {\n      outline: none;\n      border-color: #f7a75a; }\n    .login__input:focus {\n      outline: none;\n      border-color: #f7a75a; }\n  .login__button {\n    min-width: 207px;\n    margin-top: 20px;\n    color: #fff;\n    background: #f7a75a; }\n\n.main {\n  padding-top: 10px;\n  background: #ff8b17; }\n  .main .add-button {\n    margin: 10px auto;\n    background: #ffc822; }\n    .main .add-button:hover {\n      background: #ffd31a; }\n  .main section {\n    display: flex;\n    flex-wrap: wrap; }\n    .main section .pizza {\n      display: flex;\n      flex-wrap: wrap;\n      margin: 20px;\n      padding: 15px;\n      background: #fffde5;\n      border-radius: 0.375rem;\n      box-shadow: 5px 5px 25px 0 rgba(46, 61, 73, 0.2);\n      transition: all 0.3s ease; }\n      @media (min-width: 768px) {\n        .main section .pizza {\n          width: calc(50% - 40px); } }\n      @media (min-width: 1200px) {\n        .main section .pizza {\n          width: calc(100% / 3 - 40px); } }\n      .main section .pizza__img {\n        align-self: center; }\n      .main section .pizza__name {\n        width: 100%;\n        margin: 15px 0;\n        font-size: 18px;\n        font-weight: 600;\n        white-space: nowrap;\n        text-align: center; }\n      .main section .pizza:hover {\n        box-shadow: 2px 4px 8px 0 rgba(46, 61, 73, 0.2); }\n      .main section .pizza__time {\n        width: 50%; }\n      .main section .pizza__queue-number {\n        width: 50%;\n        text-align: right;\n        color: #e5354b; }\n      .main section .pizza__eta {\n        width: 50%; }\n        .main section .pizza__eta time {\n          color: #cc3354; }\n        .main section .pizza__eta span:first-child {\n          text-transform: uppercase; }\n      .main section .pizza__price {\n        width: 50%;\n        text-align: right; }\n\n.footer {\n  background: #303030; }\n  .footer .container {\n    display: flex;\n    flex-wrap: wrap;\n    align-items: center;\n    padding: 15px;\n    color: #fff; }\n    @media (min-width: 768px) {\n      .footer .container {\n        justify-content: space-between; } }\n    .footer .container address {\n      font-style: normal; }\n      .footer .container address a {\n        color: #fff; }\n", "", {"version":3,"sources":["C:/home/kottans/task_12/src/assets/scss/src/assets/scss/common.scss","C:/home/kottans/task_12/src/assets/scss/src/assets/scss/variables.scss","C:/home/kottans/task_12/src/assets/scss/src/assets/scss/blocks/header.scss","C:/home/kottans/task_12/src/assets/scss/src/assets/scss/helpers/media-queries.scss","C:/home/kottans/task_12/src/assets/scss/src/assets/scss/blocks/login.scss","C:/home/kottans/task_12/src/assets/scss/src/assets/scss/blocks/main.scss","C:/home/kottans/task_12/src/assets/scss/src/assets/scss/blocks/footer.scss"],"names":[],"mappings":"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","file":"app.scss","sourcesContent":["* {\r\n    box-sizing: border-box;\r\n}\r\n\r\nimg {\r\n    width: 100%;\r\n}\r\n\r\nh2 {\r\n    margin: 0;\r\n\tfont-size: 100%;\r\n\tfont: inherit;\r\n\tvertical-align: baseline;\r\n}\r\n\r\nbutton {\r\n    display: block;\r\n    appearance: none;\r\n    user-select: none;\r\n    text-align: center;\r\n    white-space: nowrap;\r\n    text-decoration: none;\r\n    height: 3rem;\r\n    padding: 0 0.5rem;\r\n    border: 0.125rem solid transparent;\r\n    font-family: \"Open Sans\", sans-serif;\r\n    text-transform: uppercase;\r\n    font-weight: 600;\r\n    font-size: 0.8125rem;\r\n    line-height: 2.625rem;\r\n    -webkit-font-smoothing: antialiased;\r\n    border-radius: 0.25rem;\r\n    letter-spacing: 0.09375rem;\r\n    transition: all 0.3s ease;\r\n    box-shadow: 8px 10px 20px 0 rgba(46,61,73,0.15);\r\n    cursor: pointer;\r\n\r\n    &:hover {\r\n        box-shadow: 2px 4px 8px 0 rgba(46,61,73,0.2);\r\n    }\r\n}\r\n\r\nbody {\r\n    margin: 0;\r\n    color: $grey;\r\n    font-size: 16px;\r\n    font-family: \"Open Sans\", sans-serif;\r\n    line-height: 1.5rem;\r\n    -webkit-font-smoothing: antialiased;\r\n}\r\n\r\n.container {\r\n    max-width: 1200px;\r\n    margin: 0 auto;\r\n    padding: 0 15px;\r\n}\r\n","// colors\r\n$wheat:       #fffde5;\r\n$yellow:      #ffd31a;\r\n$yellow-plus: #ffc822;\r\n$grey:        #525c65;\r\n$orange:      #ff8b17;\r\n$black:       #000;\r\n$white:       #fff;\r\n\r\n//sub-colors\r\n$grey-dark:        #303030;\r\n$light-orange:     #f7a75a;\r\n$orange-red-light: #f43745;\r\n$orange-red:       #e5354b;\r\n$orange-pink-light:#d83550;\r\n$orange-pink:      #cc3354;",".header {\r\n    width: 100%;\r\n    background: $orange-pink;\r\n}\r\n\r\n.nav {\r\n    display: flex;\r\n    justify-content: center;\r\n    flex-wrap: wrap;\r\n    @include tablet-min {\r\n        flex-wrap: nowrap;\r\n        padding: 15px 0;\r\n    }\r\n\r\n    & .current-time {\r\n        display: flex;\r\n        justify-content: space-between;\r\n        align-self: flex-start;\r\n        order: 3;\r\n        margin: 15px auto 15px 0;\r\n        color: $white;\r\n        @include tablet-min {\r\n            justify-content: flex-start;\r\n            align-self: center;\r\n            order: 1;\r\n            width: 25%;\r\n            margin: 0;\r\n        }\r\n        @include tablet-landscape-min {\r\n            width: 30%;\r\n        }\r\n        @include desktop-min {\r\n            width: 25%;\r\n        }\r\n\r\n        & svg {\r\n            width: 25px;\r\n            height: 25px;\r\n            fill: $yellow;\r\n        }\r\n\r\n        & time {\r\n            margin-left: 5px;\r\n        }\r\n    }\r\n\r\n    & .logo {\r\n        order: 1;\r\n        width: 100%;\r\n        padding: 15px 0;\r\n        @include tablet-min {\r\n            order: 2;\r\n            width: 50%;\r\n            padding: 0;\r\n        }\r\n        @include tablet-landscape-min {\r\n            width: 40%;\r\n        }\r\n        @include desktop-min {\r\n            width: 50%;\r\n        }\r\n\r\n        & svg {\r\n            width: 100%;\r\n            fill: $yellow;\r\n        }\r\n    }\r\n\r\n    & .auth {\r\n        display: flex;\r\n        justify-content: space-between;\r\n        order: 2;\r\n        width: 100%;\r\n        text-transform: uppercase;\r\n        @include tablet-min {\r\n            flex-direction: column;\r\n            justify-content: space-between;\r\n            align-items: flex-end;\r\n            width: 25%;\r\n        }\r\n        @include tablet-landscape-min {\r\n            flex-direction: row;\r\n            align-items: center;\r\n            width: 30%;\r\n        }\r\n        @include desktop-min {\r\n            width: 25%;\r\n        }\r\n\r\n        &__button {\r\n            width: 140px;\r\n            color: $white;\r\n            background: $orange-red-light;\r\n\r\n            &:hover {\r\n                background: $orange-red;\r\n            }\r\n            //TODO: fix this class\r\n            &-link {\r\n                display: inline-block;\r\n                text-decoration: none;\r\n                color:#fff;\r\n                width: 100%;\r\n                height: 100%;\r\n            }\r\n        }\r\n    }\r\n}","// Settings\r\n$mobile-s-width:   320px;\r\n$mobile-m-width:   375px;\r\n$mobile-l-width:   425px;\r\n$tablet-p-width:   768px;\r\n$tablet-l-width:   1024px;\r\n$desktop-width:    1200px;\r\n$desktop-l-width:  1440px;\r\n$desktop-4k-width: 2560px;\r\n\r\n// Mixins\r\n@mixin mobile-small-min {\r\n\t@media (min-width: #{$mobile-s-width}){\r\n\t\t@content;\r\n\t}\r\n}\r\n\r\n@mixin mobile-medium-min {\r\n\t@media (min-width: #{$mobile-m-width}){\r\n\t\t@content;\r\n\t}\r\n}\r\n\r\n@mixin mobile-large-min {\r\n\t@media (min-width: #{$mobile-l-width}){\r\n\t\t@content;\r\n\t}\r\n}\r\n\r\n@mixin tablet-min {\r\n\t@media (min-width: #{$tablet-p-width}){\r\n\t\t@content;\r\n\t}\r\n}\r\n\r\n@mixin tablet-landscape-min {\r\n\t@media (min-width: #{$tablet-l-width}){\r\n\t\t@content;\r\n\t}\r\n}\r\n\r\n@mixin desktop-min {\r\n\t@media (min-width: #{$desktop-width}){\r\n\t\t@content;\r\n\t}\r\n}\r\n\r\n@mixin desktop-l-min {\r\n\t@media (min-width: #{$desktop-l-width}){\r\n\t\t@content;\r\n\t}\r\n}\r\n\r\n@mixin desktop-4k {\r\n\t@media (min-width: #{$desktop-4k-width}){\r\n\t\t@content;\r\n\t}\r\n}\r\n\r\n@mixin retina {\r\n  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi){\r\n    @content;\r\n  }\r\n}\r\n",".login {\r\n    padding: 60px 0;\r\n    height: 100vh;\r\n    background: $orange;\r\n    &__form {\r\n        max-width: 620px;\r\n        margin: 0 auto;\r\n        padding: 60px;\r\n        border: 1px solid #dbe2e8;\r\n        background: #fff;\r\n        box-shadow: 2px 2px 3px 0 rgba(117, 124, 129, 0.12);\r\n    }\r\n\r\n    &__input {\r\n        width: 100%;\r\n        height: 44px;\r\n        margin-top: 20px;\r\n        padding-left: 15px;\r\n        padding-right: 15px;\r\n        border: 1px solid #dbe2e8;\r\n        box-shadow: 0 2px 2px 0 rgba(46, 60, 73, 0.05);\r\n        border-radius: 2px;\r\n        color: #2e3d49;\r\n\r\n        &:active {\r\n            outline: none;\r\n            border-color: $light-orange;\r\n        }\r\n\r\n        &:focus {\r\n            outline: none;\r\n            border-color: $light-orange;\r\n        }\r\n    }\r\n\r\n    &__button {\r\n        min-width: 207px;\r\n        margin-top: 20px;\r\n        color: #fff;\r\n        background: $light-orange;\r\n    }\r\n}",".main {\r\n  padding-top: 10px;\r\n  background: $orange;\r\n\r\n  & .add-button {\r\n    margin: 10px auto;\r\n    background: $yellow-plus;\r\n\r\n    &:hover {\r\n      background: $yellow;\r\n    }\r\n  }\r\n\r\n  & section {\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n\r\n    & .pizza {\r\n      display: flex;\r\n      flex-wrap: wrap;\r\n      margin: 20px;\r\n      padding: 15px;\r\n      background: $wheat;\r\n      border-radius: 0.375rem;\r\n      box-shadow: 5px 5px 25px 0 rgba(46,61,73,0.2);\r\n      transition: all 0.3s ease;\r\n      @include tablet-min {\r\n        width: calc(50% - 40px);\r\n      }\r\n      @include desktop-min {\r\n        width: calc(100% / 3 - 40px);\r\n      }\r\n\r\n      &__img {\r\n        align-self: center;\r\n      }\r\n\r\n      &__name {\r\n        width: 100%;\r\n        margin: 15px 0;\r\n        font-size: 18px;\r\n        font-weight: 600;\r\n        white-space: nowrap;\r\n        text-align: center;\r\n      }\r\n\r\n      &:hover {\r\n        box-shadow: 2px 4px 8px 0 rgba(46,61,73,0.2);\r\n      }\r\n\r\n      &__time {\r\n        width: 50%;\r\n      }\r\n\r\n      &__queue-number {\r\n        width: 50%;\r\n        text-align: right;\r\n        color: $orange-red;\r\n      }\r\n\r\n      &__eta {\r\n        width: 50%;\r\n\r\n        & time {\r\n          color: $orange-pink;\r\n        }\r\n\r\n        & span:first-child {\r\n          text-transform: uppercase;\r\n        }\r\n      }\r\n\r\n      &__price {\r\n        width: 50%;\r\n        text-align: right;\r\n      }\r\n    }\r\n  }\r\n}",".footer {\r\n    background: $grey-dark;\r\n\r\n    & .container {\r\n        display: flex;\r\n        flex-wrap: wrap;\r\n        align-items: center;\r\n        padding: 15px;\r\n        color: $white;\r\n        @include tablet-min {\r\n            justify-content: space-between;\r\n        }\r\n\r\n        & address {\r\n            font-style: normal;\r\n\r\n            & a {\r\n                color: $white;\r\n            }\r\n        }\r\n    }\r\n}"],"sourceRoot":""}]);
+exports.push([module.i, "* {\n  box-sizing: border-box; }\n\nimg {\n  width: 100%; }\n\nh2 {\n  margin: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline; }\n\nbutton {\n  display: block;\n  appearance: none;\n  user-select: none;\n  text-align: center;\n  white-space: nowrap;\n  text-decoration: none;\n  height: 3rem;\n  padding: 0 0.5rem;\n  border: 0.125rem solid transparent;\n  font-family: \"Open Sans\", sans-serif;\n  text-transform: uppercase;\n  font-weight: 600;\n  font-size: 0.8125rem;\n  line-height: 2.625rem;\n  -webkit-font-smoothing: antialiased;\n  border-radius: 0.25rem;\n  letter-spacing: 0.09375rem;\n  transition: all 0.3s ease;\n  box-shadow: 8px 10px 20px 0 rgba(46, 61, 73, 0.15);\n  cursor: pointer; }\n  button:hover {\n    box-shadow: 2px 4px 8px 0 rgba(46, 61, 73, 0.2); }\n\nhtml {\n  height: 100%; }\n\nbody {\n  margin: 0;\n  color: #525c65;\n  font-size: 16px;\n  font-family: \"Open Sans\", sans-serif;\n  line-height: 1.5rem;\n  height: 100%;\n  -webkit-font-smoothing: antialiased; }\n\n.container {\n  max-width: 1200px;\n  margin: 0 auto;\n  padding: 0 15px; }\n\n#root {\n  height: 100%; }\n\n.login-container {\n  display: flex;\n  flex-direction: column;\n  min-height: 100vh; }\n\n.registration-container {\n  display: flex;\n  flex-direction: column;\n  min-height: 100vh; }\n\n.header {\n  width: 100%;\n  background: #cc3354; }\n\n.nav {\n  display: flex;\n  justify-content: center;\n  flex-wrap: wrap; }\n  @media (min-width: 768px) {\n    .nav {\n      flex-wrap: nowrap;\n      padding: 15px 0; } }\n  .nav .current-time {\n    display: flex;\n    justify-content: space-between;\n    align-self: flex-start;\n    order: 3;\n    margin: 15px auto 15px 0;\n    color: #fff; }\n    @media (min-width: 768px) {\n      .nav .current-time {\n        justify-content: flex-start;\n        align-self: center;\n        order: 1;\n        width: 25%;\n        margin: 0; } }\n    @media (min-width: 1024px) {\n      .nav .current-time {\n        width: 30%; } }\n    @media (min-width: 1200px) {\n      .nav .current-time {\n        width: 25%; } }\n    .nav .current-time svg {\n      width: 25px;\n      height: 25px;\n      fill: #ffd31a; }\n    .nav .current-time time {\n      margin-left: 5px; }\n  .nav .logo {\n    order: 1;\n    width: 100%;\n    padding: 15px 0; }\n    @media (min-width: 768px) {\n      .nav .logo {\n        order: 2;\n        width: 50%;\n        padding: 0; } }\n    @media (min-width: 1024px) {\n      .nav .logo {\n        width: 40%; } }\n    @media (min-width: 1200px) {\n      .nav .logo {\n        width: 50%; } }\n    .nav .logo svg {\n      width: 100%;\n      fill: #ffd31a; }\n  .nav .auth {\n    display: flex;\n    justify-content: space-between;\n    order: 2;\n    width: 100%;\n    text-transform: uppercase; }\n    @media (min-width: 768px) {\n      .nav .auth {\n        flex-direction: column;\n        justify-content: space-between;\n        align-items: flex-end;\n        width: 25%; } }\n    @media (min-width: 1024px) {\n      .nav .auth {\n        flex-direction: row;\n        align-items: center;\n        width: 30%; } }\n    @media (min-width: 1200px) {\n      .nav .auth {\n        width: 25%; } }\n    .nav .auth__button {\n      width: 140px;\n      color: #fff;\n      background: #f43745; }\n      .nav .auth__button:hover {\n        background: #e5354b; }\n      .nav .auth__button-link {\n        display: inline-block;\n        text-decoration: none;\n        color: #fff;\n        width: 100%;\n        height: 100%; }\n\n.login {\n  flex: 1 0 auto;\n  padding: 60px 0;\n  background: #ff8b17; }\n  .login__title {\n    margin-bottom: 15px;\n    text-transform: uppercase; }\n  .login__form {\n    max-width: 620px;\n    margin: 0 auto;\n    padding: 60px;\n    border: 1px solid #dbe2e8;\n    background: #fff;\n    box-shadow: 2px 2px 3px 0 rgba(117, 124, 129, 0.12); }\n  .login__input {\n    width: 100%;\n    height: 44px;\n    margin-bottom: 20px;\n    padding-left: 15px;\n    padding-right: 15px;\n    border: 1px solid #dbe2e8;\n    box-shadow: 0 2px 2px 0 rgba(46, 60, 73, 0.05);\n    border-radius: 2px;\n    color: #2e3d49; }\n    .login__input:active {\n      outline: none;\n      border-color: #f7a75a; }\n    .login__input:focus {\n      outline: none;\n      border-color: #f7a75a; }\n    .login__input::placeholder {\n      opacity: .5; }\n  .login__button {\n    min-width: 207px;\n    width: 100%;\n    margin-top: 20px;\n    color: #fff;\n    background: #f7a75a; }\n\n.registration {\n  flex: 1 0 auto;\n  padding: 60px 0;\n  background: #ff8b17; }\n  .registration__title {\n    margin-bottom: 15px;\n    text-transform: uppercase; }\n  .registration__form {\n    max-width: 620px;\n    margin: 0 auto;\n    padding: 60px;\n    border: 1px solid #dbe2e8;\n    background: #fff;\n    box-shadow: 2px 2px 3px 0 rgba(117, 124, 129, 0.12); }\n  .registration__input {\n    width: 100%;\n    height: 44px;\n    margin-bottom: 20px;\n    padding-left: 15px;\n    padding-right: 15px;\n    border: 1px solid #dbe2e8;\n    box-shadow: 0 2px 2px 0 rgba(46, 60, 73, 0.05);\n    border-radius: 2px;\n    color: #2e3d49; }\n    .registration__input:active {\n      outline: none;\n      border-color: #f7a75a; }\n    .registration__input:focus {\n      outline: none;\n      border-color: #f7a75a; }\n    .registration__input::placeholder {\n      opacity: .5; }\n  .registration__button {\n    min-width: 207px;\n    width: 100%;\n    margin-top: 20px;\n    color: #fff;\n    background: #f7a75a; }\n  .registration__select {\n    width: 100%;\n    height: 44px;\n    margin-bottom: 20px;\n    padding-left: 15px;\n    padding-right: 15px;\n    border: 1px solid #dbe2e8;\n    box-shadow: 0 2px 2px 0 rgba(46, 60, 73, 0.05);\n    border-radius: 2px;\n    color: #2e3d49; }\n\n.main {\n  padding-top: 10px;\n  background: #ff8b17; }\n  .main .add-button {\n    margin: 10px auto;\n    background: #ffc822; }\n    .main .add-button:hover {\n      background: #ffd31a; }\n  .main section {\n    display: flex;\n    flex-wrap: wrap; }\n    .main section .pizza {\n      display: flex;\n      flex-wrap: wrap;\n      margin: 20px;\n      padding: 15px;\n      background: #fffde5;\n      border-radius: 0.375rem;\n      box-shadow: 5px 5px 25px 0 rgba(46, 61, 73, 0.2);\n      transition: all 0.3s ease; }\n      @media (min-width: 768px) {\n        .main section .pizza {\n          width: calc(50% - 40px); } }\n      @media (min-width: 1200px) {\n        .main section .pizza {\n          width: calc(100% / 3 - 40px); } }\n      .main section .pizza__img {\n        align-self: center; }\n      .main section .pizza__name {\n        width: 100%;\n        margin: 15px 0;\n        font-size: 18px;\n        font-weight: 600;\n        white-space: nowrap;\n        text-align: center; }\n      .main section .pizza:hover {\n        box-shadow: 2px 4px 8px 0 rgba(46, 61, 73, 0.2); }\n      .main section .pizza__time {\n        width: 50%; }\n      .main section .pizza__queue-number {\n        width: 50%;\n        text-align: right;\n        color: #e5354b; }\n      .main section .pizza__eta {\n        width: 50%; }\n        .main section .pizza__eta time {\n          color: #cc3354; }\n        .main section .pizza__eta span:first-child {\n          text-transform: uppercase; }\n      .main section .pizza__price {\n        width: 50%;\n        text-align: right; }\n\n.footer {\n  flex-shrink: 0;\n  background: #303030; }\n  .footer .container {\n    display: flex;\n    flex-wrap: wrap;\n    align-items: center;\n    padding: 15px;\n    color: #fff; }\n    @media (min-width: 768px) {\n      .footer .container {\n        justify-content: space-between; } }\n    .footer .container address {\n      font-style: normal; }\n      .footer .container address a {\n        color: #fff; }\n", "", {"version":3,"sources":["C:/home/kottans/task_12/src/assets/scss/src/assets/scss/common.scss","C:/home/kottans/task_12/src/assets/scss/src/assets/scss/variables.scss","C:/home/kottans/task_12/src/assets/scss/src/assets/scss/blocks/header.scss","C:/home/kottans/task_12/src/assets/scss/src/assets/scss/helpers/media-queries.scss","C:/home/kottans/task_12/src/assets/scss/src/assets/scss/blocks/login.scss","C:/home/kottans/task_12/src/assets/scss/src/assets/scss/blocks/registration.scss","C:/home/kottans/task_12/src/assets/scss/src/assets/scss/blocks/main.scss","C:/home/kottans/task_12/src/assets/scss/src/assets/scss/blocks/footer.scss"],"names":[],"mappings":"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","file":"app.scss","sourcesContent":["* {\r\n    box-sizing: border-box;\r\n}\r\n\r\nimg {\r\n    width: 100%;\r\n}\r\n\r\nh2 {\r\n    margin: 0;\r\n\tfont-size: 100%;\r\n\tfont: inherit;\r\n\tvertical-align: baseline;\r\n}\r\n\r\nbutton {\r\n    display: block;\r\n    appearance: none;\r\n    user-select: none;\r\n    text-align: center;\r\n    white-space: nowrap;\r\n    text-decoration: none;\r\n    height: 3rem;\r\n    padding: 0 0.5rem;\r\n    border: 0.125rem solid transparent;\r\n    font-family: \"Open Sans\", sans-serif;\r\n    text-transform: uppercase;\r\n    font-weight: 600;\r\n    font-size: 0.8125rem;\r\n    line-height: 2.625rem;\r\n    -webkit-font-smoothing: antialiased;\r\n    border-radius: 0.25rem;\r\n    letter-spacing: 0.09375rem;\r\n    transition: all 0.3s ease;\r\n    box-shadow: 8px 10px 20px 0 rgba(46,61,73,0.15);\r\n    cursor: pointer;\r\n\r\n    &:hover {\r\n        box-shadow: 2px 4px 8px 0 rgba(46,61,73,0.2);\r\n    }\r\n}\r\n\r\nhtml {\r\n    height: 100%;\r\n}\r\n\r\nbody {\r\n    margin: 0;\r\n    color: $grey;\r\n    font-size: 16px;\r\n    font-family: \"Open Sans\", sans-serif;\r\n    line-height: 1.5rem;\r\n    height: 100%;\r\n    -webkit-font-smoothing: antialiased;\r\n}\r\n\r\n.container {\r\n    max-width: 1200px;\r\n    margin: 0 auto;\r\n    padding: 0 15px;\r\n}\r\n\r\n#root {\r\n    height: 100%;\r\n}\r\n\r\n.login-container {\r\n    display: flex;\r\n    flex-direction: column;\r\n    min-height: 100vh;\r\n}\r\n\r\n.registration-container {\r\n    display: flex;\r\n    flex-direction: column;\r\n    min-height: 100vh;\r\n}","// colors\r\n$wheat:       #fffde5;\r\n$yellow:      #ffd31a;\r\n$yellow-plus: #ffc822;\r\n$grey:        #525c65;\r\n$orange:      #ff8b17;\r\n$black:       #000;\r\n$white:       #fff;\r\n\r\n//sub-colors\r\n$grey-dark:        #303030;\r\n$light-orange:     #f7a75a;\r\n$orange-red-light: #f43745;\r\n$orange-red:       #e5354b;\r\n$orange-pink-light:#d83550;\r\n$orange-pink:      #cc3354;",".header {\r\n    width: 100%;\r\n    background: $orange-pink;\r\n}\r\n\r\n.nav {\r\n    display: flex;\r\n    justify-content: center;\r\n    flex-wrap: wrap;\r\n    @include tablet-min {\r\n        flex-wrap: nowrap;\r\n        padding: 15px 0;\r\n    }\r\n\r\n    & .current-time {\r\n        display: flex;\r\n        justify-content: space-between;\r\n        align-self: flex-start;\r\n        order: 3;\r\n        margin: 15px auto 15px 0;\r\n        color: $white;\r\n        @include tablet-min {\r\n            justify-content: flex-start;\r\n            align-self: center;\r\n            order: 1;\r\n            width: 25%;\r\n            margin: 0;\r\n        }\r\n        @include tablet-landscape-min {\r\n            width: 30%;\r\n        }\r\n        @include desktop-min {\r\n            width: 25%;\r\n        }\r\n\r\n        & svg {\r\n            width: 25px;\r\n            height: 25px;\r\n            fill: $yellow;\r\n        }\r\n\r\n        & time {\r\n            margin-left: 5px;\r\n        }\r\n    }\r\n\r\n    & .logo {\r\n        order: 1;\r\n        width: 100%;\r\n        padding: 15px 0;\r\n        @include tablet-min {\r\n            order: 2;\r\n            width: 50%;\r\n            padding: 0;\r\n        }\r\n        @include tablet-landscape-min {\r\n            width: 40%;\r\n        }\r\n        @include desktop-min {\r\n            width: 50%;\r\n        }\r\n\r\n        & svg {\r\n            width: 100%;\r\n            fill: $yellow;\r\n        }\r\n    }\r\n\r\n    & .auth {\r\n        display: flex;\r\n        justify-content: space-between;\r\n        order: 2;\r\n        width: 100%;\r\n        text-transform: uppercase;\r\n        @include tablet-min {\r\n            flex-direction: column;\r\n            justify-content: space-between;\r\n            align-items: flex-end;\r\n            width: 25%;\r\n        }\r\n        @include tablet-landscape-min {\r\n            flex-direction: row;\r\n            align-items: center;\r\n            width: 30%;\r\n        }\r\n        @include desktop-min {\r\n            width: 25%;\r\n        }\r\n\r\n        &__button {\r\n            width: 140px;\r\n            color: $white;\r\n            background: $orange-red-light;\r\n\r\n            &:hover {\r\n                background: $orange-red;\r\n            }\r\n            //TODO: fix this class\r\n            &-link {\r\n                display: inline-block;\r\n                text-decoration: none;\r\n                color:#fff;\r\n                width: 100%;\r\n                height: 100%;\r\n            }\r\n        }\r\n    }\r\n}","// Settings\r\n$mobile-s-width:   320px;\r\n$mobile-m-width:   375px;\r\n$mobile-l-width:   425px;\r\n$tablet-p-width:   768px;\r\n$tablet-l-width:   1024px;\r\n$desktop-width:    1200px;\r\n$desktop-l-width:  1440px;\r\n$desktop-4k-width: 2560px;\r\n\r\n// Mixins\r\n@mixin mobile-small-min {\r\n\t@media (min-width: #{$mobile-s-width}){\r\n\t\t@content;\r\n\t}\r\n}\r\n\r\n@mixin mobile-medium-min {\r\n\t@media (min-width: #{$mobile-m-width}){\r\n\t\t@content;\r\n\t}\r\n}\r\n\r\n@mixin mobile-large-min {\r\n\t@media (min-width: #{$mobile-l-width}){\r\n\t\t@content;\r\n\t}\r\n}\r\n\r\n@mixin tablet-min {\r\n\t@media (min-width: #{$tablet-p-width}){\r\n\t\t@content;\r\n\t}\r\n}\r\n\r\n@mixin tablet-landscape-min {\r\n\t@media (min-width: #{$tablet-l-width}){\r\n\t\t@content;\r\n\t}\r\n}\r\n\r\n@mixin desktop-min {\r\n\t@media (min-width: #{$desktop-width}){\r\n\t\t@content;\r\n\t}\r\n}\r\n\r\n@mixin desktop-l-min {\r\n\t@media (min-width: #{$desktop-l-width}){\r\n\t\t@content;\r\n\t}\r\n}\r\n\r\n@mixin desktop-4k {\r\n\t@media (min-width: #{$desktop-4k-width}){\r\n\t\t@content;\r\n\t}\r\n}\r\n\r\n@mixin retina {\r\n  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi){\r\n    @content;\r\n  }\r\n}\r\n",".login {\r\n    flex: 1 0 auto;\r\n    padding: 60px 0;\r\n    background: $orange;\r\n\r\n    &__title {\r\n        margin-bottom: 15px;\r\n        text-transform: uppercase;\r\n    }\r\n\r\n    &__form {\r\n        max-width: 620px;\r\n        margin: 0 auto;\r\n        padding: 60px;\r\n        border: 1px solid #dbe2e8;\r\n        background: #fff;\r\n        box-shadow: 2px 2px 3px 0 rgba(117, 124, 129, 0.12);\r\n    }\r\n\r\n    &__input {\r\n        width: 100%;\r\n        height: 44px;\r\n        margin-bottom: 20px;\r\n        padding-left: 15px;\r\n        padding-right: 15px;\r\n        border: 1px solid #dbe2e8;\r\n        box-shadow: 0 2px 2px 0 rgba(46, 60, 73, 0.05);\r\n        border-radius: 2px;\r\n        color: #2e3d49;\r\n\r\n        &:active {\r\n            outline: none;\r\n            border-color: $light-orange;\r\n        }\r\n\r\n        &:focus {\r\n            outline: none;\r\n            border-color: $light-orange;\r\n        }\r\n\r\n        &::placeholder {\r\n            opacity: .5;\r\n        }\r\n    }\r\n\r\n    &__button {\r\n        min-width: 207px;\r\n        width: 100%;\r\n        margin-top: 20px;\r\n        color: #fff;\r\n        background: $light-orange;\r\n    }\r\n}",".registration {\r\n    flex: 1 0 auto;\r\n    padding: 60px 0;\r\n    background: $orange;\r\n\r\n    &__title {\r\n        margin-bottom: 15px;\r\n        text-transform: uppercase;\r\n    }\r\n\r\n    &__form {\r\n        max-width: 620px;\r\n        margin: 0 auto;\r\n        padding: 60px;\r\n        border: 1px solid #dbe2e8;\r\n        background: #fff;\r\n        box-shadow: 2px 2px 3px 0 rgba(117, 124, 129, 0.12);\r\n    }\r\n\r\n    &__input {\r\n        width: 100%;\r\n        height: 44px;\r\n        margin-bottom: 20px;\r\n        padding-left: 15px;\r\n        padding-right: 15px;\r\n        border: 1px solid #dbe2e8;\r\n        box-shadow: 0 2px 2px 0 rgba(46, 60, 73, 0.05);\r\n        border-radius: 2px;\r\n        color: #2e3d49;\r\n\r\n        &:active {\r\n            outline: none;\r\n            border-color: $light-orange;\r\n        }\r\n\r\n        &:focus {\r\n            outline: none;\r\n            border-color: $light-orange;\r\n        }\r\n\r\n        &::placeholder {\r\n            opacity: .5;\r\n        }\r\n    }\r\n\r\n    &__button {\r\n        min-width: 207px;\r\n        width: 100%;\r\n        margin-top: 20px;\r\n        color: #fff;\r\n        background: $light-orange;\r\n    }\r\n\r\n    &__select {\r\n        width: 100%;\r\n        height: 44px;\r\n        margin-bottom: 20px;\r\n        padding-left: 15px;\r\n        padding-right: 15px;\r\n        border: 1px solid #dbe2e8;\r\n        box-shadow: 0 2px 2px 0 rgba(46, 60, 73, 0.05);\r\n        border-radius: 2px;\r\n        color: #2e3d49;\r\n    }\r\n}",".main {\r\n  padding-top: 10px;\r\n  background: $orange;\r\n\r\n  & .add-button {\r\n    margin: 10px auto;\r\n    background: $yellow-plus;\r\n\r\n    &:hover {\r\n      background: $yellow;\r\n    }\r\n  }\r\n\r\n  & section {\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n\r\n    & .pizza {\r\n      display: flex;\r\n      flex-wrap: wrap;\r\n      margin: 20px;\r\n      padding: 15px;\r\n      background: $wheat;\r\n      border-radius: 0.375rem;\r\n      box-shadow: 5px 5px 25px 0 rgba(46,61,73,0.2);\r\n      transition: all 0.3s ease;\r\n      @include tablet-min {\r\n        width: calc(50% - 40px);\r\n      }\r\n      @include desktop-min {\r\n        width: calc(100% / 3 - 40px);\r\n      }\r\n\r\n      &__img {\r\n        align-self: center;\r\n      }\r\n\r\n      &__name {\r\n        width: 100%;\r\n        margin: 15px 0;\r\n        font-size: 18px;\r\n        font-weight: 600;\r\n        white-space: nowrap;\r\n        text-align: center;\r\n      }\r\n\r\n      &:hover {\r\n        box-shadow: 2px 4px 8px 0 rgba(46,61,73,0.2);\r\n      }\r\n\r\n      &__time {\r\n        width: 50%;\r\n      }\r\n\r\n      &__queue-number {\r\n        width: 50%;\r\n        text-align: right;\r\n        color: $orange-red;\r\n      }\r\n\r\n      &__eta {\r\n        width: 50%;\r\n\r\n        & time {\r\n          color: $orange-pink;\r\n        }\r\n\r\n        & span:first-child {\r\n          text-transform: uppercase;\r\n        }\r\n      }\r\n\r\n      &__price {\r\n        width: 50%;\r\n        text-align: right;\r\n      }\r\n    }\r\n  }\r\n}",".footer {\r\n    flex-shrink: 0;\r\n    background: $grey-dark;\r\n\r\n    & .container {\r\n        display: flex;\r\n        flex-wrap: wrap;\r\n        align-items: center;\r\n        padding: 15px;\r\n        color: $white;\r\n        @include tablet-min {\r\n            justify-content: space-between;\r\n        }\r\n\r\n        & address {\r\n            font-style: normal;\r\n\r\n            & a {\r\n                color: $white;\r\n            }\r\n        }\r\n    }\r\n}"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 6 */
+/* 8 */
 /***/ (function(module, exports) {
 
 /*
@@ -398,7 +503,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 7 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -464,7 +569,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(8);
+var	fixUrls = __webpack_require__(10);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -780,7 +885,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 8 */
+/* 10 */
 /***/ (function(module, exports) {
 
 
@@ -875,7 +980,7 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 9 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -947,14 +1052,25 @@ var Router = function (_Component) {
             });
 
             if (nextRoute && nextRoute !== currentRoute) {
+
+                if (!!nextRoute.redirectTo) {
+                    return this.handleRedirect(nextRoute.redirectTo);
+                }
+
                 if (nextRoute.onEnter) {
                     this.handleOnEnter(nextRoute);
                 }
+
                 this.updateState({
                     activeComponent: new nextRoute.component(),
                     currentRoute: nextRoute
                 });
             }
+        }
+    }, {
+        key: 'handleRedirect',
+        value: function handleRedirect(url) {
+            window.location.hash = url;
         }
     }, {
         key: 'handleOnEnter',
@@ -984,7 +1100,7 @@ var Router = function (_Component) {
 exports.default = Router;
 
 /***/ }),
-/* 10 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -994,21 +1110,25 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _login = __webpack_require__(11);
+var _login = __webpack_require__(13);
 
 var _login2 = _interopRequireDefault(_login);
 
-var _app = __webpack_require__(13);
+var _app = __webpack_require__(15);
 
 var _app2 = _interopRequireDefault(_app);
 
-var _registration = __webpack_require__(15);
+var _registration = __webpack_require__(17);
 
 var _registration2 = _interopRequireDefault(_registration);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var routes = [{
+    component: _app2.default,
+    href: '',
+    redirectTo: '/'
+}, {
     component: _app2.default,
     href: '/'
 }, {
@@ -1022,7 +1142,7 @@ var routes = [{
 exports.default = routes;
 
 /***/ }),
-/* 11 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1046,7 +1166,7 @@ var _header = __webpack_require__(2);
 
 var _header2 = _interopRequireDefault(_header);
 
-var _login = __webpack_require__(12);
+var _login = __webpack_require__(14);
 
 var _login2 = _interopRequireDefault(_login);
 
@@ -1096,7 +1216,7 @@ var Login = function (_Component) {
 exports.default = Login;
 
 /***/ }),
-/* 12 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1111,6 +1231,14 @@ var _createClass = function () { function defineProperties(target, props) { for 
 var _component = __webpack_require__(0);
 
 var _component2 = _interopRequireDefault(_component);
+
+var _utils = __webpack_require__(3);
+
+var _utils2 = _interopRequireDefault(_utils);
+
+var _auth = __webpack_require__(4);
+
+var _auth2 = _interopRequireDefault(_auth);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1128,15 +1256,31 @@ var LoginForm = function (_Component) {
 
         var _this = _possibleConstructorReturn(this, (LoginForm.__proto__ || Object.getPrototypeOf(LoginForm)).call(this, props));
 
+        _this.handleSubmit = _this.handleSubmit.bind(_this);
+
         _this.host = document.createElement('main');
         _this.host.classList.add('login');
         return _this;
     }
 
     _createClass(LoginForm, [{
+        key: 'handleSubmit',
+        value: function handleSubmit(ev) {
+            ev.preventDefault();
+            var host = ev.target;
+            var data = {
+                username: host.username.value.trim(),
+                password: host.password.value.trim()
+            };
+        }
+    }, {
         key: 'render',
         value: function render() {
-            return '\n        <div class="container">\n            <form class="login__form">\n                <h2>Login</h2>\n                <input class="login__input" type="text" name="username" placeholder="username">\n                <input class="login__input" type="password" name="password" placeholder="password">\n                <button class="login__button" type="submit">sing in</button>\n            </form>\n        </div>\n        ';
+            var login = '\n        <div class="container">\n            <form class="login__form">\n                <h2 class="login__title">Login</h2>\n                <label for="login-username">Username</label>\n                <input class="login__input" id="login-username" type="text" name="username" placeholder="username">\n                <label for="login-password">Password</label>\n                <input class="login__input" id="login-password" type="password" name="password" placeholder="password">\n                <button class="login__button" type="submit">sing in</button>\n            </form>\n        </div>\n        ';
+            var fragment = (0, _utils2.default)(login);
+
+            fragment.querySelector('.login__form').addEventListener('submit', this.handleSubmit);
+            return fragment;
         }
     }]);
 
@@ -1146,7 +1290,7 @@ var LoginForm = function (_Component) {
 exports.default = LoginForm;
 
 /***/ }),
-/* 13 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1170,7 +1314,7 @@ var _header = __webpack_require__(2);
 
 var _header2 = _interopRequireDefault(_header);
 
-var _main = __webpack_require__(14);
+var _main = __webpack_require__(16);
 
 var _main2 = _interopRequireDefault(_main);
 
@@ -1211,7 +1355,7 @@ var App = function (_Component) {
 exports.default = App;
 
 /***/ }),
-/* 14 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1313,7 +1457,7 @@ var Main = function (_Component) {
 exports.default = Main;
 
 /***/ }),
-/* 15 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1337,7 +1481,7 @@ var _header = __webpack_require__(2);
 
 var _header2 = _interopRequireDefault(_header);
 
-var _registration = __webpack_require__(16);
+var _registration = __webpack_require__(18);
 
 var _registration2 = _interopRequireDefault(_registration);
 
@@ -1358,7 +1502,7 @@ var Registration = function (_Component) {
         var _this = _possibleConstructorReturn(this, (Registration.__proto__ || Object.getPrototypeOf(Registration)).call(this, props));
 
         _this.host = document.createElement('div');
-        _this.host.classList.add('login-container');
+        _this.host.classList.add('registration-container');
         _this.handleSubmit = _this.handleSubmit.bind(_this);
         _this.host.addEventListener('submit', _this.handleSubmit);
 
@@ -1387,7 +1531,7 @@ var Registration = function (_Component) {
 exports.default = Registration;
 
 /***/ }),
-/* 16 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1402,6 +1546,14 @@ var _createClass = function () { function defineProperties(target, props) { for 
 var _component = __webpack_require__(0);
 
 var _component2 = _interopRequireDefault(_component);
+
+var _utils = __webpack_require__(3);
+
+var _utils2 = _interopRequireDefault(_utils);
+
+var _auth = __webpack_require__(4);
+
+var _auth2 = _interopRequireDefault(_auth);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1419,15 +1571,71 @@ var RegistrationForm = function (_Component) {
 
         var _this = _possibleConstructorReturn(this, (RegistrationForm.__proto__ || Object.getPrototypeOf(RegistrationForm)).call(this, props));
 
+        _this.state = {
+            stores: null
+        };
+
+        _this.handleSubmit = _this.handleSubmit.bind(_this);
+
         _this.host = document.createElement('main');
-        _this.host.classList.add('login');
+        _this.host.classList.add('registration');
+        _this.getStores();
         return _this;
     }
 
     _createClass(RegistrationForm, [{
+        key: 'getStores',
+        value: function getStores() {
+            var _this2 = this;
+
+            _auth2.default.storeInfo().then(function (result) {
+                _this2.state.stores = result;
+                _this2.updateState();
+            });
+        }
+    }, {
+        key: 'handleSubmit',
+        value: function handleSubmit(ev) {
+            ev.preventDefault();
+            var data = {
+                username: ev.target.username.value.trim(),
+                password: ev.target.password.value.trim(),
+                password_repeat: ev.target.password_repeat.value.trim(),
+                email: ev.target.email.value.trim(),
+                store_id: parseInt(ev.target.store.options[ev.target.store.selectedIndex].dataset.id),
+                store_password: ev.target.store_password.value.trim()
+            };
+            _auth2.default.registerUser(data).then(function (result) {
+                console.log(result);
+            });
+        }
+    }, {
         key: 'render',
         value: function render() {
-            return '\n        <div class="container">\n            <form class="registration__form">\n                <input class="registration__input" type="text" name="username" placeholder="username">\n                <input class="registration__input" type="email" name="email" placeholder="e-mail">\n                <input class="registration__input" type="password" name="password" placeholder="password">\n                <button class="registration__button" type="submit">login</button>\n            </form>\n        </div>\n        ';
+            var stores = this.state.stores;
+
+
+            var registration = '\n        <div class="container">\n            <form class="registration__form">\n                <h2 class="registration__title">registration form</h2>\n                <label for="registration-username">Username</label>\n                <input class="registration__input" id="registration-username" type="text" name="username" placeholder="Unique. Min length 2 chars, max - 24">\n                <label for="registration-password">Password</label>\n                <input class="registration__input" id="registration-password" type="password" name="password" placeholder="Min length 8 chars">\n                <label for="registration-re-password">Re-enter password</label>\n                <input class="registration__input" id="registration-re-password" type="password" name="password_repeat" placeholder="Should match with password">\n                <label for="registration-email">Email</label>\n                <input class="registration__input" id="registration-email" type="email" name="email" placeholder="Should be valid email">\n                <label for="registration-store">Store</label>\n                <select hidden id="registration-store" name="store"></select>\n                <label for="registration-store-password">Store password</label>\n                <input class="registration__input" for="registration-store-password" type="password" name="store_password" placeholder="Should be valid store password. Min length 8 chars">\n                <button class="registration__button" type="submit">sing up</button>\n            </form>\n        </div>\n        ';
+
+            var fragment = (0, _utils2.default)(registration);
+
+            var select = fragment.querySelector('select');
+            select.classList.add('registration__select');
+
+            if (!!stores) {
+                select.hidden = false;
+                stores.forEach(function (element) {
+                    var option = document.createElement('option');
+                    option.text = element.name;
+                    option.dataset.id = element.id;
+                    select.add(option);
+                });
+            }
+
+            var form = fragment.querySelector('form');
+            form.addEventListener('submit', this.handleSubmit);
+
+            return fragment;
         }
     }]);
 

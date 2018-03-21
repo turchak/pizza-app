@@ -18,6 +18,7 @@ class Router extends Component {
         this.handleUrlChange = this.handleUrlChange.bind(this);
 
         window.addEventListener('hashchange', () => 
+
             this.handleUrlChange(this.path)
         );
 
@@ -34,14 +35,25 @@ class Router extends Component {
         const nextRoute = routes.find(({ href }) => href === this.path);
 
         if (nextRoute && nextRoute !== currentRoute) {
+            
+            if (!!nextRoute.redirectTo) {
+                return this.handleRedirect(nextRoute.redirectTo);
+            }
+
             if (nextRoute.onEnter) {
                 this.handleOnEnter(nextRoute);
             }
+
             this.updateState({
                 activeComponent: new nextRoute.component(),
                 currentRoute: nextRoute
             });
         }
+
+    }
+
+    handleRedirect(url) {
+        window.location.hash = url;
     }
 
     handleOnEnter({ onEnter }) {
