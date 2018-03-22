@@ -1,4 +1,5 @@
 import Component from '../framework/component';
+import { toHtml } from '../utils/utils';
 
 class Header extends Component {
     constructor(props) {
@@ -10,7 +11,7 @@ class Header extends Component {
 
     render() {
         //TODO: need delete <a href="#/login" class="login__button-link">sing in</a>
-        return `
+        const header = `
         <div class="container">
             <nav class="nav">
                 <aside class="current-time">
@@ -35,6 +36,9 @@ class Header extends Component {
             </nav>
         </div>
         `;
+
+        const fragment = toHtml(header);
+        return fragment;
     }
 }
 

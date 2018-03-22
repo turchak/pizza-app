@@ -2,6 +2,7 @@ import Component from '../framework/component';
 import { toHtml } from '../utils/utils';
 import ErrorMessage from './error.message';
 import { AUTH_SERVICE } from '../utils/auth';
+import { APP_ROUTER } from '../index';
 
 class LoginForm extends Component {
     constructor(props) {
@@ -35,8 +36,7 @@ class LoginForm extends Component {
                         message: null
                     };
                     this.updateState(state);
-                    console.log(AUTH_SERVICE.token);
-                    console.log(AUTH_SERVICE.isAuthorized());
+                    APP_ROUTER.handleRedirect('/user');
                 },
                 status => {
                     const text = status.answer.error;
@@ -48,10 +48,7 @@ class LoginForm extends Component {
                     this.updateState(state);
                 }
 
-            )
-            .catch(err => {
-                if (err === '400') {};
-            });
+            );
     }
 
 
@@ -63,9 +60,9 @@ class LoginForm extends Component {
             <form class="login__form">
                 <h2 class="login__title">Login</h2>
                 <label for="login-username">Username</label>
-                <input class="login__input" id="login-username" type="text" name="username" placeholder="username" value=${ !!username ? username : '' }>
+                <input class="login__input" id="login-username" type="text" name="username" placeholder="Your name" value=${ !!username ? username : '' }>
                 <label for="login-password">Password</label>
-                <input class="login__input" id="login-password" type="password" name="password" placeholder="password" value=${ !!password ? password : '' }>
+                <input class="login__input" id="login-password" type="password" name="password" placeholder="Your password" value=${ !!password ? password : '' }>
                 <button class="login__button" type="submit">sing in</button>
             </form>
         </div>

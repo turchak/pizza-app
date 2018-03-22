@@ -1,4 +1,8 @@
 import Component from './component';
+import { isUrlParam, isEqualPaths, extractUrlParams } from '../utils/utils';
+import { authGuard } from '../utils/auth.guard';
+
+const ANY_PATH = '*';
 
 class Router extends Component {
     constructor(props) {
@@ -8,13 +12,11 @@ class Router extends Component {
 
         this.state = {
             routes,
-            currentRoute: null,
-            currentComponent: null
+            activeRoute: null,
+            activeComponent: null
         };
 
         this.host = host;
-
-        console.log(props);
         this.handleUrlChange = this.handleUrlChange.bind(this);
 
         window.addEventListener('hashchange', () => 
@@ -29,25 +31,27 @@ class Router extends Component {
         return window.location.hash.slice(1);
     }
 
-    handleUrlChange(path) {
-        const { routes, currentRoute } = this.state;
+    handleUrlChange(url) {
+        const { routes, activeRoute } = this.state;
 
-        const nextRoute = routes.find(({ href }) => href === this.path);
+        let nextRoute = routes.find(({ href }) => isEqualPaths(href, url));
 
-        if (nextRoute && nextRoute !== currentRoute) {
+        if (!nextRoute) {
+            nextRoute = routes.find(({ href }) => href === ANY_PATH); //looking for any route
+        }
+
+        if (nextRoute && nextRoute !== activeRoute) {
             
             if (!!nextRoute.redirectTo) {
                 return this.handleRedirect(nextRoute.redirectTo);
             }
 
-            if (nextRoute.onEnter) {
-                this.handleOnEnter(nextRoute);
+            if (!!nextRoute.onEnter) {
+                this.handleOnEnter(nextRoute, url);
             }
 
-            this.updateState({
-                activeComponent: new nextRoute.component(),
-                currentRoute: nextRoute
-            });
+
+            this.applyRoute(nextRoute, url);
         }
 
     }
@@ -56,8 +60,37 @@ class Router extends Component {
         window.location.hash = url;
     }
 
-    handleOnEnter({ onEnter }) {
-        onEnter();
+    handleOnEnter(nextRoute, url) {
+        const { href } = nextRoute;
+        const params = extractUrlParams(href, url);
+
+        authGuard().then(res => {
+            if (res.success) {
+                this.handleRedirect('#/');
+            }
+            else {
+                this.handleRedirect(res.redirect);
+            }
+        });
+    }
+
+    applyRoute(route, url) {
+        const { href, component: Component } = route;
+        const { activeComponent } = this.state;
+    
+        const componentInstance = new Component({
+            params: extractUrlParams(href, this.path),
+            replace: this.handleRedirect,
+        });
+    
+        if (activeComponent) {
+            activeComponent.unmount();
+        }
+    
+        this.updateState({
+            activeRoute: route,
+            activeComponent: componentInstance,
+        });
     }
 
     render() {

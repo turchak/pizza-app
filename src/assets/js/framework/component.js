@@ -14,6 +14,14 @@ class Component {
         this.props = nextProps;
         return this._render();
     }
+    unmount() {
+        this.onBeforeUnmount(); 
+    }
+    onBeforeUnmount() {}
+    onBeforeUpdate(nextProps) {}
+    get name() {
+        return this.constructor.name;
+    }
 
     _render() {
         const children = this.render();

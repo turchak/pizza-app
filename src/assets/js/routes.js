@@ -12,7 +12,8 @@ const routes = [
     },
     {
         component: App,
-        href: '/'
+        href: '/',
+        onEnter: authGuard
     },
     {
         component: Login,
@@ -25,7 +26,7 @@ const routes = [
     {
         component: User,
         href: '/user',
-        canActivate: authGuard
+        onEnter: authGuard
     }
 ];
 
