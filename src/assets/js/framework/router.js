@@ -46,6 +46,10 @@ class Router extends Component {
                 return this.handleRedirect(nextRoute.redirectTo);
             }
 
+            if(!!nextRoute.logout) {
+                this.handleLogout(nextRoute)
+            }
+
             if (!!nextRoute.onEnter) {
                 this.handleOnEnter(nextRoute, url);
             }
@@ -56,20 +60,27 @@ class Router extends Component {
 
     }
 
+    handleLogout(nextRoute) {
+        return nextRoute.logout();
+    }
+
     handleRedirect(url) {
         window.location.hash = url;
     }
 
     handleOnEnter(nextRoute, url) {
+        console.log('onEnter');
         const { href } = nextRoute;
         const params = extractUrlParams(href, url);
+        console.log(nextRoute);
 
         authGuard().then(res => {
             if (res.success) {
-                this.handleRedirect('#/');
+                if (nextRoute.component === 'App') return this.handleRedirect('#/');
+                if (nextRoute.component === 'User') return this.handleRedirect('#user/');
             }
             else {
-                this.handleRedirect(res.redirect);
+                return this.handleRedirect(res.redirect);
             }
         });
     }
@@ -77,7 +88,6 @@ class Router extends Component {
     applyRoute(route, url) {
         const { href, component: Component } = route;
         const { activeComponent } = this.state;
-    
         const componentInstance = new Component({
             params: extractUrlParams(href, this.path),
             replace: this.handleRedirect,

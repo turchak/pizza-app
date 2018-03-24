@@ -14,7 +14,6 @@ class LoginForm extends Component {
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
-        console.log(AUTH_SERVICE.isAuthorized());
         this.host = document.createElement('main');
         this.host.classList.add('login');
         this.message = new ErrorMessage();
@@ -36,7 +35,7 @@ class LoginForm extends Component {
                         message: null
                     };
                     this.updateState(state);
-                    APP_ROUTER.handleRedirect('/user');
+                    APP_ROUTER.handleRedirect('/');
                 },
                 status => {
                     const text = status.answer.error;
@@ -63,7 +62,7 @@ class LoginForm extends Component {
                 <input class="login__input" id="login-username" type="text" name="username" placeholder="Your name" value=${ !!username ? username : '' }>
                 <label for="login-password">Password</label>
                 <input class="login__input" id="login-password" type="password" name="password" placeholder="Your password" value=${ !!password ? password : '' }>
-                <button class="login__button" type="submit">sing in</button>
+                <button class="login__button" type="submit">sign in</button>
             </form>
         </div>
         `;

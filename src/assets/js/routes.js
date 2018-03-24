@@ -3,6 +3,7 @@ import App from './components/app';
 import Registration from './components/registration';
 import User from './components/user';
 import { authGuard } from './utils/auth.guard';
+import { AUTH_SERVICE } from './utils/auth';
 
 const routes = [
     {
@@ -26,6 +27,12 @@ const routes = [
     {
         component: User,
         href: '/user',
+        onEnter: authGuard
+    },
+    {
+        component: App,
+        href: '/logout',
+        logout: AUTH_SERVICE.clearStorage,
         onEnter: authGuard
     }
 ];
