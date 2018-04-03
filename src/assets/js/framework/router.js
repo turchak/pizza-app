@@ -69,10 +69,8 @@ class Router extends Component {
     }
 
     handleOnEnter(nextRoute, url) {
-        console.log('onEnter');
         const { href } = nextRoute;
         const params = extractUrlParams(href, url);
-        console.log(nextRoute);
 
         authGuard().then(res => {
             if (res.success) {

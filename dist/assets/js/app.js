@@ -414,14 +414,14 @@ var Header = function (_Component) {
     _createClass(Header, [{
         key: 'render',
         value: function render() {
-            //TODO: need delete <a href="#/login" class="login__button-link">sing in</a>
+            //TODO: need delete <a href="#/login" class="login__button-link">sign in</a>
             var isAuthorized = _auth.AUTH_SERVICE.isAuthorized();
-            var loginButton = '\n        <button class="auth__button auth__button--in">\n            <a href="#/login" class="auth__button-link">sing in</a>\n        </button>\n        ';
+            var loginButton = '\n        <button class="auth__button auth__button--in">\n            <a href="#/login" class="auth__button-link">sign in</a>\n        </button>\n        ';
 
-            var logoutButton = '\n        <button class="auth__button auth__button--out">\n            <a href="#/logout" class="auth__button-link">sing out</a>\n        </button>\n        ';
+            var logoutButton = '\n        <button class="auth__button auth__button--out">\n            <a href="#/logout" class="auth__button-link">sign out</a>\n        </button>\n        ';
 
             var userButton = '\n        <button class="auth__button auth__button--info">\n            <a href="#/user" class="auth__button-link">user info</a>\n        </button>\n        ';
-            var registrationButton = '\n        <button class="auth__button auth__button--up">\n            <a href="#/registration" class="auth__button-link">sing up</a>\n        </button>\n        ';
+            var registrationButton = '\n        <button class="auth__button auth__button--up">\n            <a href="#/registration" class="auth__button-link">sign up</a>\n        </button>\n        ';
 
             var header = '\n        <div class="container">\n            <nav class="nav">\n                <aside class="current-time">\n                    <svg width="50" height="50">\n                      <use xlink:href="#clock"></use>\n                    </svg>\n                    <time datetime="2018-02-03 12:01:48">12:01:48</time>\n                </aside>\n                <a class="logo" href="#/">\n                    <svg width="100" height="100">\n                      <use xlink:href="#logo"></use>\n                    </svg>\n                </a>\n                <aside class="auth">\n                    ' + (isAuthorized ? logoutButton : loginButton) + '\n                    ' + (isAuthorized ? userButton : registrationButton) + ' \n                </aside>\n            </nav>\n        </div>\n        ';
 
@@ -1216,11 +1216,9 @@ var Router = function (_Component) {
         value: function handleOnEnter(nextRoute, url) {
             var _this2 = this;
 
-            console.log('onEnter');
             var href = nextRoute.href;
 
             var params = (0, _utils.extractUrlParams)(href, url);
-            console.log(nextRoute);
 
             (0, _auth.authGuard)().then(function (res) {
                 if (res.success) {
@@ -1500,7 +1498,7 @@ var LoginForm = function (_Component) {
                 message = _state.message;
 
 
-            var login = '\n        <div class="container">\n            <form class="login__form">\n                <h2 class="login__title">Login</h2>\n                <label for="login-username">Username</label>\n                <input class="login__input" id="login-username" type="text" name="username" placeholder="Your name" value=' + (!!username ? username : '') + '>\n                <label for="login-password">Password</label>\n                <input class="login__input" id="login-password" type="password" name="password" placeholder="Your password" value=' + (!!password ? password : '') + '>\n                <button class="login__button" type="submit">sing in</button>\n            </form>\n        </div>\n        ';
+            var login = '\n        <div class="container">\n            <form class="login__form">\n                <h2 class="login__title">Login</h2>\n                <label for="login-username">Username</label>\n                <input class="login__input" id="login-username" type="text" name="username" placeholder="Your name" value=' + (!!username ? username : '') + '>\n                <label for="login-password">Password</label>\n                <input class="login__input" id="login-password" type="password" name="password" placeholder="Your password" value=' + (!!password ? password : '') + '>\n                <button class="login__button" type="submit">sign in</button>\n            </form>\n        </div>\n        ';
 
             var fragment = (0, _utils.toHtml)(login);
 
@@ -1897,7 +1895,7 @@ var RegistrationForm = function (_Component) {
             var stores = this.state.stores;
 
 
-            var registration = '\n        <div class="container">\n            <form class="registration__form">\n                <h2 class="registration__title">registration form</h2>\n                <label for="registration-username">Username</label>\n                <input class="registration__input" id="registration-username" type="text" name="username" placeholder="Unique. Min length 2 chars, max - 24">\n                <label for="registration-password">Password</label>\n                <input class="registration__input" id="registration-password" type="password" name="password" placeholder="Min length 8 chars">\n                <label for="registration-re-password">Re-enter password</label>\n                <input class="registration__input" id="registration-re-password" type="password" name="password_repeat" placeholder="Should match with password">\n                <label for="registration-email">Email</label>\n                <input class="registration__input" id="registration-email" type="email" name="email" placeholder="Should be valid email">\n                <label for="registration-store">Store</label>\n                <select hidden id="registration-store" name="store"></select>\n                <label for="registration-store-password">Store password</label>\n                <input class="registration__input" for="registration-store-password" type="password" name="store_password" placeholder="Should be valid store password. Min length 8 chars">\n                <button class="registration__button" type="submit">sing up</button>\n            </form>\n        </div>\n        ';
+            var registration = '\n        <div class="container">\n            <form class="registration__form">\n                <h2 class="registration__title">registration form</h2>\n                <label for="registration-username">Username</label>\n                <input class="registration__input" id="registration-username" type="text" name="username" placeholder="Unique. Min length 2 chars, max - 24">\n                <label for="registration-password">Password</label>\n                <input class="registration__input" id="registration-password" type="password" name="password" placeholder="Min length 8 chars">\n                <label for="registration-re-password">Re-enter password</label>\n                <input class="registration__input" id="registration-re-password" type="password" name="password_repeat" placeholder="Should match with password">\n                <label for="registration-email">Email</label>\n                <input class="registration__input" id="registration-email" type="email" name="email" placeholder="Should be valid email">\n                <label for="registration-store">Store</label>\n                <select hidden id="registration-store" name="store"></select>\n                <label for="registration-store-password">Store password</label>\n                <input class="registration__input" for="registration-store-password" type="password" name="store_password" placeholder="Should be valid store password. Min length 8 chars">\n                <button class="registration__button" type="submit">sign up</button>\n            </form>\n        </div>\n        ';
 
             var fragment = (0, _utils.toHtml)(registration);
 
