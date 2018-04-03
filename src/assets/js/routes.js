@@ -2,6 +2,7 @@ import Login from './components/login';
 import App from './components/app';
 import Registration from './components/registration';
 import User from './components/user';
+import NewPizza from './components/create'
 import { authGuard } from './utils/auth.guard';
 import { AUTH_SERVICE } from './utils/auth';
 
@@ -33,6 +34,11 @@ const routes = [
         component: App,
         href: '/logout',
         logout: AUTH_SERVICE.clearStorage,
+        onEnter: authGuard
+    },
+    {
+        component: NewPizza,
+        href: '/create',
         onEnter: authGuard
     }
 ];

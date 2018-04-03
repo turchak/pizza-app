@@ -155,6 +155,52 @@ exports.default = Component;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+var toHtml = exports.toHtml = function toHtml(string) {
+    var template = document.createElement('template');
+    template.innerHTML = string;
+    return template.content;
+};
+
+var URL_PARAM_REGEXP = /:\w+/g;
+var isUrlParam = function isUrlParam(path) {
+    return URL_PARAM_REGEXP.test(path);
+};
+var urlToRegExp = function urlToRegExp(url) {
+    return RegExp('^' + url.replace(URL_PARAM_REGEXP, '(.*)') + '$');
+};
+var isEqualPaths = exports.isEqualPaths = function isEqualPaths(template, url) {
+    return urlToRegExp(template).test(url);
+};
+
+var extractUrlParams = exports.extractUrlParams = function extractUrlParams(template, url) {
+    var values = url.split('/');
+    var params = {};
+
+    if (!values) {
+        return params;
+    }
+
+    return template.split('/').reduce(function (acc, param, index) {
+        if (!isUrlParam(param)) {
+            return acc;
+        }
+        //We need to remove ':' from param name
+        acc[param.slice(1)] = values[index];
+
+        return acc;
+    }, params);
+};
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -274,52 +320,6 @@ var AuthService = function () {
 var AUTH_SERVICE = exports.AUTH_SERVICE = new AuthService();
 
 /***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-var toHtml = exports.toHtml = function toHtml(string) {
-    var template = document.createElement('template');
-    template.innerHTML = string;
-    return template.content;
-};
-
-var URL_PARAM_REGEXP = /:\w+/g;
-var isUrlParam = function isUrlParam(path) {
-    return URL_PARAM_REGEXP.test(path);
-};
-var urlToRegExp = function urlToRegExp(url) {
-    return RegExp('^' + url.replace(URL_PARAM_REGEXP, '(.*)') + '$');
-};
-var isEqualPaths = exports.isEqualPaths = function isEqualPaths(template, url) {
-    return urlToRegExp(template).test(url);
-};
-
-var extractUrlParams = exports.extractUrlParams = function extractUrlParams(template, url) {
-    var values = url.split('/');
-    var params = {};
-
-    if (!values) {
-        return params;
-    }
-
-    return template.split('/').reduce(function (acc, param, index) {
-        if (!isUrlParam(param)) {
-            return acc;
-        }
-        //We need to remove ':' from param name
-        acc[param.slice(1)] = values[index];
-
-        return acc;
-    }, params);
-};
-
-/***/ }),
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -386,9 +386,9 @@ var _component = __webpack_require__(0);
 
 var _component2 = _interopRequireDefault(_component);
 
-var _utils = __webpack_require__(2);
+var _utils = __webpack_require__(1);
 
-var _auth = __webpack_require__(1);
+var _auth = __webpack_require__(2);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -447,13 +447,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.APP_ROUTER = undefined;
 
-__webpack_require__(7);
+__webpack_require__(8);
 
-var _router = __webpack_require__(12);
+var _router = __webpack_require__(13);
 
 var _router2 = _interopRequireDefault(_router);
 
-var _routes = __webpack_require__(13);
+var _routes = __webpack_require__(14);
 
 var _routes2 = _interopRequireDefault(_routes);
 
@@ -473,7 +473,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.authGuard = undefined;
 
-var _auth = __webpack_require__(1);
+var _auth = __webpack_require__(2);
 
 var authGuard = exports.authGuard = function authGuard(params) {
     var result = _auth.AUTH_SERVICE.isAuthorized() ? Promise.resolve({ success: true }) : Promise.resolve({ success: false, redirect: '/login' });
@@ -484,8 +484,77 @@ var authGuard = exports.authGuard = function authGuard(params) {
 /* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
 
-var content = __webpack_require__(8);
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.AUTH_HTTP_SERVICE = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _auth = __webpack_require__(2);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var AuthHttpService = function () {
+    function AuthHttpService() {
+        _classCallCheck(this, AuthHttpService);
+    }
+
+    _createClass(AuthHttpService, [{
+        key: 'get',
+        value: function get(url) {
+            if (!_auth.AUTH_SERVICE.isAuthorized) {
+                throw new Error("Non-authorized request");
+            }
+            return fetch(url, {
+                method: 'GET',
+                headers: new Headers({
+                    'Authorization': 'Bearer ' + _auth.AUTH_SERVICE.token,
+                    'content-type': 'application/json'
+                })
+            }).then(function (response) {
+                return Promise.resolve(response.json());
+            }, function (response) {
+                return Promise.reject(response.statusCode);
+            });
+        }
+    }, {
+        key: 'getUserInfo',
+        value: function getUserInfo() {
+            var headers = new Headers();
+            headers.append('Authorization', 'Bearer ' + _auth.AUTH_SERVICE.token);
+            headers.append('content-type', 'application/json');
+            var url = 'https://pizza-tele.ga/api/v1/user/my_info';
+            var options = {
+                method: 'GET',
+                headers: headers
+            };
+            return this.get(url, options).then(function (res) {
+                return res.json();
+            });
+        }
+    }, {
+        key: 'post',
+        value: function post() {}
+    }, {
+        key: 'patch',
+        value: function patch() {}
+    }]);
+
+    return AuthHttpService;
+}();
+
+var AUTH_HTTP_SERVICE = exports.AUTH_HTTP_SERVICE = new AuthHttpService();
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(9);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -499,7 +568,7 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(10)(content, options);
+var update = __webpack_require__(11)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
@@ -531,10 +600,10 @@ if(false) {
 }
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(9)(true);
+exports = module.exports = __webpack_require__(10)(true);
 // imports
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&subset=cyrillic);", ""]);
 
@@ -545,7 +614,7 @@ exports.push([module.i, "* {\n  box-sizing: border-box; }\n\nimg {\n  width: 100
 
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports) {
 
 /*
@@ -627,7 +696,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -693,7 +762,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(11);
+var	fixUrls = __webpack_require__(12);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -1009,7 +1078,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports) {
 
 
@@ -1104,7 +1173,7 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1120,7 +1189,7 @@ var _component = __webpack_require__(0);
 
 var _component2 = _interopRequireDefault(_component);
 
-var _utils = __webpack_require__(2);
+var _utils = __webpack_require__(1);
 
 var _auth = __webpack_require__(6);
 
@@ -1271,7 +1340,7 @@ var Router = function (_Component) {
 exports.default = Router;
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1281,25 +1350,29 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _login = __webpack_require__(14);
+var _login = __webpack_require__(15);
 
 var _login2 = _interopRequireDefault(_login);
 
-var _app = __webpack_require__(17);
+var _app = __webpack_require__(18);
 
 var _app2 = _interopRequireDefault(_app);
 
-var _registration = __webpack_require__(19);
+var _registration = __webpack_require__(20);
 
 var _registration2 = _interopRequireDefault(_registration);
 
-var _user = __webpack_require__(21);
+var _user = __webpack_require__(22);
 
 var _user2 = _interopRequireDefault(_user);
 
+var _create = __webpack_require__(23);
+
+var _create2 = _interopRequireDefault(_create);
+
 var _auth = __webpack_require__(6);
 
-var _auth2 = __webpack_require__(1);
+var _auth2 = __webpack_require__(2);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1326,12 +1399,16 @@ var routes = [{
     href: '/logout',
     logout: _auth2.AUTH_SERVICE.clearStorage,
     onEnter: _auth.authGuard
+}, {
+    component: _create2.default,
+    href: '/create',
+    onEnter: _auth.authGuard
 }];
 
 exports.default = routes;
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1355,7 +1432,7 @@ var _header = __webpack_require__(4);
 
 var _header2 = _interopRequireDefault(_header);
 
-var _login = __webpack_require__(15);
+var _login = __webpack_require__(16);
 
 var _login2 = _interopRequireDefault(_login);
 
@@ -1405,7 +1482,7 @@ var Login = function (_Component) {
 exports.default = Login;
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1421,13 +1498,13 @@ var _component = __webpack_require__(0);
 
 var _component2 = _interopRequireDefault(_component);
 
-var _utils = __webpack_require__(2);
+var _utils = __webpack_require__(1);
 
-var _error = __webpack_require__(16);
+var _error = __webpack_require__(17);
 
 var _error2 = _interopRequireDefault(_error);
 
-var _auth = __webpack_require__(1);
+var _auth = __webpack_require__(2);
 
 var _index = __webpack_require__(5);
 
@@ -1518,7 +1595,7 @@ var LoginForm = function (_Component) {
 exports.default = LoginForm;
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1574,7 +1651,7 @@ var ErrorMessage = function (_Component) {
 exports.default = ErrorMessage;
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1598,7 +1675,7 @@ var _header = __webpack_require__(4);
 
 var _header2 = _interopRequireDefault(_header);
 
-var _main = __webpack_require__(18);
+var _main = __webpack_require__(19);
 
 var _main2 = _interopRequireDefault(_main);
 
@@ -1639,7 +1716,7 @@ var App = function (_Component) {
 exports.default = App;
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1741,7 +1818,7 @@ var Main = function (_Component) {
 exports.default = Main;
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1765,7 +1842,7 @@ var _header = __webpack_require__(4);
 
 var _header2 = _interopRequireDefault(_header);
 
-var _registration = __webpack_require__(20);
+var _registration = __webpack_require__(21);
 
 var _registration2 = _interopRequireDefault(_registration);
 
@@ -1815,7 +1892,7 @@ var Registration = function (_Component) {
 exports.default = Registration;
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1831,9 +1908,9 @@ var _component = __webpack_require__(0);
 
 var _component2 = _interopRequireDefault(_component);
 
-var _utils = __webpack_require__(2);
+var _utils = __webpack_require__(1);
 
-var _auth = __webpack_require__(1);
+var _auth = __webpack_require__(2);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1925,7 +2002,7 @@ var RegistrationForm = function (_Component) {
 exports.default = RegistrationForm;
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1949,9 +2026,9 @@ var _footer = __webpack_require__(3);
 
 var _footer2 = _interopRequireDefault(_footer);
 
-var _utils = __webpack_require__(2);
+var _utils = __webpack_require__(1);
 
-var _authHttp = __webpack_require__(22);
+var _authHttp = __webpack_require__(7);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2019,7 +2096,7 @@ var User = function (_Component) {
 exports.default = User;
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2028,56 +2105,144 @@ exports.default = User;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.AUTH_HTTP_SERVICE = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _auth = __webpack_require__(1);
+var _component = __webpack_require__(0);
+
+var _component2 = _interopRequireDefault(_component);
+
+var _header = __webpack_require__(4);
+
+var _header2 = _interopRequireDefault(_header);
+
+var _footer = __webpack_require__(3);
+
+var _footer2 = _interopRequireDefault(_footer);
+
+var _create = __webpack_require__(24);
+
+var _utils = __webpack_require__(1);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var AuthHttpService = function () {
-    function AuthHttpService() {
-        _classCallCheck(this, AuthHttpService);
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var NewPizza = function (_Component) {
+    _inherits(NewPizza, _Component);
+
+    function NewPizza(props) {
+        _classCallCheck(this, NewPizza);
+
+        var _this = _possibleConstructorReturn(this, (NewPizza.__proto__ || Object.getPrototypeOf(NewPizza)).call(this, props));
+
+        _this.host = document.createElement('div');
+        _this.host.classList.add('create-container');
+        _this.header = new _header2.default();
+        _this.footer = new _footer2.default();
+        _this.showForm();
+        return _this;
     }
 
-    _createClass(AuthHttpService, [{
-        key: 'get',
-        value: function get(url, options) {
-            if (!_auth.AUTH_SERVICE.isAuthorized) {
-                throw new Error("Non-authorized request");
-            }
-
-            return fetch(url, options);
-        }
-    }, {
-        key: 'getUserInfo',
-        value: function getUserInfo() {
-            var headers = new Headers();
-            headers.append('Authorization', 'Bearer ' + _auth.AUTH_SERVICE.token);
-            headers.append('content-type', 'application/json');
-            var url = 'https://pizza-tele.ga/api/v1/user/my_info';
-            var options = {
-                method: 'GET',
-                headers: headers
-            };
-            console.log(this.headers);
-            return this.get(url, options).then(function (res) {
-                return res.json();
+    _createClass(NewPizza, [{
+        key: 'showForm',
+        value: function showForm() {
+            Promise.all([_create.CREATE_DATA.getIngredients(), _create.CREATE_DATA.getTags()]).then(function () {
+                _create.CREATE_DATA.ingredients;
             });
         }
     }, {
-        key: 'post',
-        value: function post() {}
+        key: 'showIngredients',
+        value: function showIngredients(data) {
+            var ingredientsString = '\n\n        ';
+        }
     }, {
-        key: 'patch',
-        value: function patch() {}
+        key: 'render',
+        value: function render() {
+            var containerString = '\n            <main class=\'create\'>\n                <section class=\'create__canvas\'></section>\n                <section class=\'create__options></section>\n            </main>\n        ';
+            var fragment = (0, _utils.toHtml)(containerString);
+
+            return [this.header.update(), fragment, this.footer.update()];
+        }
     }]);
 
-    return AuthHttpService;
+    return NewPizza;
+}(_component2.default);
+
+exports.default = NewPizza;
+
+/***/ }),
+/* 24 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.CREATE_DATA = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _authHttp = __webpack_require__(7);
+
+var _constants = __webpack_require__(25);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var PizzaDataService = function () {
+    function PizzaDataService() {
+        _classCallCheck(this, PizzaDataService);
+
+        this.ingredients = [];
+        this.tags = [];
+    }
+
+    _createClass(PizzaDataService, [{
+        key: "getIngredients",
+        value: function getIngredients() {
+            var _this = this;
+
+            return _authHttp.AUTH_HTTP_SERVICE.get(_constants.INGREDIENTS_URL).then(function (data) {
+                _this.ingredients = data.results;
+                return data.results;
+            });
+        }
+    }, {
+        key: "getTags",
+        value: function getTags() {
+            var _this2 = this;
+
+            return _authHttp.AUTH_HTTP_SERVICE.get(_constants.TAG_URL).then(function (data) {
+                _this2.tags = data.results;
+                return data.results;
+            });
+        }
+    }]);
+
+    return PizzaDataService;
 }();
 
-var AUTH_HTTP_SERVICE = exports.AUTH_HTTP_SERVICE = new AuthHttpService();
+var CREATE_DATA = exports.CREATE_DATA = new PizzaDataService();
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var DOMAIN = exports.DOMAIN = 'https://pizza-tele.ga';
+var INGREDIENTS_URL = exports.INGREDIENTS_URL = DOMAIN + '/api/v1/ingredient/list';
+var TAG_URL = exports.TAG_URL = DOMAIN + '/api/v1/tag/list';
 
 /***/ })
 /******/ ]);

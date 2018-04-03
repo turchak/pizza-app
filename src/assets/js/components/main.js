@@ -53,8 +53,8 @@ class Main extends Component {
         const list = (title, url) => {
             return `
             <article class="pizza">
-                <img class="pizza__img" src="./assets/img/pizza-${ url }.png" alt="pizza-photo">
-                <h2 class="pizza__name">${ title }</h2>
+                <img class="pizza__img" src="./assets/img/pizza-${url}.png" alt="pizza-photo">
+                <h2 class="pizza__name">${title}</h2>
                 <time class="pizza__time" datetime="2018-01-31T19:00">12:01:48</time>
                 <span class="pizza__queue-number">#1</span>
                 <div class="pizza__eta">
@@ -67,7 +67,8 @@ class Main extends Component {
                     <span>10</span>
                 </div>
             </article> 
-        `};    
+        `;
+        };    
 
         pizzas.forEach(el => {
             container.innerHTML += list(el.title, el.url);
@@ -82,7 +83,10 @@ class Main extends Component {
 
         const button = document.createElement('button');
         button.classList.add('add-button');
-        button.innerText = 'add new pizza';
+        const a = document.createElement('a');
+        a.href = '#/create';
+        a.innerText = 'add new pizza';
+        button.appendChild(a);
 
         container.append(button, this.createPizza(pizzas));
         return [

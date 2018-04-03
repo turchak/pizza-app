@@ -3,6 +3,7 @@ import Header from '../components/header';
 import Footer from '../components/footer';
 import { toHtml } from '../utils/utils';
 import { AUTH_HTTP_SERVICE } from '../utils/auth-http';
+import { USER_URL } from '../utils/constants';
 
 class User extends Component {
     constructor(props) {
@@ -21,7 +22,7 @@ class User extends Component {
     }
 
     getUserInfo() {
-        AUTH_HTTP_SERVICE.getUserInfo().then(result => {
+        AUTH_HTTP_SERVICE.get(USER_URL).then(result => {
             this.updateState({
                 username: result.username,
                 email: result.email,
