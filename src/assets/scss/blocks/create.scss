@@ -1,5 +1,65 @@
 .create {
     flex: 1 0 auto;
     padding: 60px 0;
+    
     background: $orange;
+
+    &__container {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    &__title {
+        width: 100%;
+        text-align: center;
+    }
+
+    &__canvas {
+        width: 50%;
+        height: 100px;
+    }
+
+    &__options {
+        width: 50%;
+    }
+
+    & form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__ingredients {
+        display: flex;
+        flex-wrap: wrap;
+        width: 50%;
+
+        &-item {
+            position: relative;
+            display: flex;
+            padding: 5px;
+            width: calc(100% / 7);
+        }
+
+        &-input {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            pointer-events: none;
+
+            &:checked ~ img {
+                box-shadow: 0 0 0 2px #ffffff;
+            }
+        }
+
+        & img {
+            width: 100%;
+        }
+    }
+
+    &__tags {
+        display: flex;
+        justify-content: space-between;
+    }
 }

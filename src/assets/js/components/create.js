@@ -3,6 +3,7 @@ import Header from './header';
 import Footer from './footer';
 import { CREATE_DATA } from '../utils/create.data';
 import { toHtml } from '../utils/utils';
+import { DOMAIN } from '../utils/constants';
 
 class NewPizza extends Component {
     constructor(props) {
@@ -17,32 +18,80 @@ class NewPizza extends Component {
     showForm() {
         Promise.all([CREATE_DATA.getIngredients(), CREATE_DATA.getTags()])
             .then(() => {
+                console.log(CREATE_DATA)
 
                 const container = document.querySelector('.create__options');
-                container.appendChild(this.showIngredients(CREATE_DATA.ingredients));
+                const form  = document.createElement('form');
+                container.appendChild(form);
+                form.appendChild(this.showIngredients(CREATE_DATA.ingredients));
+                form.appendChild(this.showTags(CREATE_DATA.tags));
                 
             });    
     }
 
     showIngredients(data) {
-        console.log(data[0])
         const ingredientsString = `
-            <form>
                 <label>
+                    <span class='create__title'>Pizza Name</span>
                     <input type='text' name='name' required min='3' max='24'>
-                    <span>${data[0].name}</span>
                 </label>
-            </form>
+                <label>
+                    <span>Description</span>
+                    <input type='text' name='description'>
+                </label>
+                <label>
+                    <span>Size<span>
+                    <label>
+                        <span>30</span>
+                        <input type='radio' name='size' value='30'>
+                    </label>
+                    <label>
+                        <span>45</span>
+                        <input type='radio' name='size' value='30'>
+                    </label>
+                    <label>
+                        <span>60</span>
+                        <input type='radio' name='size' value='30'>
+                    </label>    
+                </label>
+                <div class='create__ingredients'>${data.reduce((html, data) => {
+                    html += `
+                        <label class='create__ingredients-item'>
+                            <input class='create__ingredients-input' type='checkbox'>
+                            <img src='${DOMAIN}/${data.image_url}' class='create__ingredients' title='${data.description}'>
+                        </label>
+                        `;
+                    return html;
+                },'')}
+                </div>
         `;
         const fragment = toHtml(ingredientsString);
+        return fragment;
+    }
+
+    showTags(data) {
+        const tagsString = `
+                <div class='create__tags'>${data.reduce((html, data) => {
+                    html += `
+                        <label class='create__tags-item'>
+                            <span>${data.name}</span>
+                            <input type='checkbox'>
+                        </label>
+                        `;
+                    return html;
+                },'')}
+                </div>
+
+        `;
+        const fragment = toHtml(tagsString);
         return fragment;
     }
 
     render() {
         const containerString = `
             <main class='create'>
-                <div class='container'>
-                    <h1>Create Pizza</h1>
+                <div class='container create__container'>
+                    <h1 class='create__title'>Create Pizza</h1>
                     <section class='create__canvas'></section>
                     <section class='create__options'></section>
                 </div>

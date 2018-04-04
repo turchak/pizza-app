@@ -6,6 +6,11 @@
     margin: 10px auto;
     background: $yellow-plus;
 
+    & .add-link {
+      text-decoration: none;
+      color: $grey;
+    }
+
     &:hover {
       background: $yellow;
     }
@@ -77,3 +82,4 @@
     }
   }
 }
+

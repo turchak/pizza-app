@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -445,15 +445,30 @@ exports.default = Header;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+var DOMAIN = exports.DOMAIN = 'https://pizza-tele.ga';
+var INGREDIENTS_URL = exports.INGREDIENTS_URL = DOMAIN + '/api/v1/ingredient/list';
+var TAG_URL = exports.TAG_URL = DOMAIN + '/api/v1/tag/list';
+var USER_URL = exports.USER_URL = DOMAIN + '/api/v1/user/my_info';
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 exports.APP_ROUTER = undefined;
 
-__webpack_require__(8);
+__webpack_require__(9);
 
-var _router = __webpack_require__(13);
+var _router = __webpack_require__(14);
 
 var _router2 = _interopRequireDefault(_router);
 
-var _routes = __webpack_require__(14);
+var _routes = __webpack_require__(15);
 
 var _routes2 = _interopRequireDefault(_routes);
 
@@ -462,7 +477,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var APP_ROUTER = exports.APP_ROUTER = new _router2.default({ host: document.querySelector('#root'), routes: _routes2.default });
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -481,7 +496,7 @@ var authGuard = exports.authGuard = function authGuard(params) {
 };
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -521,21 +536,21 @@ var AuthHttpService = function () {
                 return Promise.reject(response.statusCode);
             });
         }
-    }, {
-        key: 'getUserInfo',
-        value: function getUserInfo() {
-            var headers = new Headers();
-            headers.append('Authorization', 'Bearer ' + _auth.AUTH_SERVICE.token);
-            headers.append('content-type', 'application/json');
-            var url = 'https://pizza-tele.ga/api/v1/user/my_info';
-            var options = {
-                method: 'GET',
-                headers: headers
-            };
-            return this.get(url, options).then(function (res) {
-                return res.json();
-            });
-        }
+
+        // getUserInfo() {
+        //     const headers = new Headers();
+        //     headers.append('Authorization', `Bearer ${AUTH_SERVICE.token}`);
+        //     headers.append('content-type', 'application/json');
+        //     const url = 'https://pizza-tele.ga/api/v1/user/my_info';
+        //     const options = {
+        //         method: 'GET',
+        //         headers: headers
+        //     };
+        //     return this.get(url).then(res => {
+        //         return res.json();
+        //     });
+        // }
+
     }, {
         key: 'post',
         value: function post() {}
@@ -550,11 +565,11 @@ var AuthHttpService = function () {
 var AUTH_HTTP_SERVICE = exports.AUTH_HTTP_SERVICE = new AuthHttpService();
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(9);
+var content = __webpack_require__(10);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -568,7 +583,7 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(11)(content, options);
+var update = __webpack_require__(12)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
@@ -600,21 +615,21 @@ if(false) {
 }
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(10)(true);
+exports = module.exports = __webpack_require__(11)(true);
 // imports
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&subset=cyrillic);", ""]);
 
 // module
-exports.push([module.i, "* {\n  box-sizing: border-box; }\n\nimg {\n  width: 100%; }\n\nh2 {\n  margin: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline; }\n\nbutton {\n  display: block;\n  appearance: none;\n  user-select: none;\n  text-align: center;\n  white-space: nowrap;\n  text-decoration: none;\n  height: 3rem;\n  padding: 0 0.5rem;\n  border: 0.125rem solid transparent;\n  font-family: \"Open Sans\", sans-serif;\n  text-transform: uppercase;\n  font-weight: 600;\n  font-size: 0.8125rem;\n  line-height: 2.625rem;\n  -webkit-font-smoothing: antialiased;\n  border-radius: 0.25rem;\n  letter-spacing: 0.09375rem;\n  transition: all 0.3s ease;\n  box-shadow: 8px 10px 20px 0 rgba(46, 61, 73, 0.15);\n  cursor: pointer; }\n  button:hover {\n    box-shadow: 2px 4px 8px 0 rgba(46, 61, 73, 0.2); }\n\nhtml {\n  height: 100%;\n  overflow-y: scroll; }\n\nbody {\n  margin: 0;\n  color: #525c65;\n  font-size: 16px;\n  font-family: \"Open Sans\", sans-serif;\n  line-height: 1.5rem;\n  height: 100%;\n  -webkit-font-smoothing: antialiased; }\n\n.container {\n  max-width: 1200px;\n  margin: 0 auto;\n  padding: 0 15px; }\n\n#root {\n  height: 100%; }\n\n.login-container {\n  display: flex;\n  flex-direction: column;\n  min-height: 100vh; }\n\n.registration-container {\n  display: flex;\n  flex-direction: column;\n  min-height: 100vh; }\n\n.user-container {\n  display: flex;\n  flex-direction: column;\n  min-height: 100vh; }\n\n.header {\n  width: 100%;\n  background: #cc3354; }\n\n.nav {\n  display: flex;\n  justify-content: center;\n  flex-wrap: wrap; }\n  @media (min-width: 768px) {\n    .nav {\n      flex-wrap: nowrap;\n      padding: 15px 0; } }\n  .nav .current-time {\n    display: flex;\n    justify-content: space-between;\n    align-self: flex-start;\n    order: 3;\n    margin: 15px auto 15px 0;\n    color: #fff; }\n    @media (min-width: 768px) {\n      .nav .current-time {\n        justify-content: flex-start;\n        align-self: center;\n        order: 1;\n        width: 25%;\n        margin: 0; } }\n    @media (min-width: 1024px) {\n      .nav .current-time {\n        width: 30%; } }\n    @media (min-width: 1200px) {\n      .nav .current-time {\n        width: 25%; } }\n    .nav .current-time svg {\n      width: 25px;\n      height: 25px;\n      fill: #ffd31a; }\n    .nav .current-time time {\n      margin-left: 5px; }\n  .nav .logo {\n    order: 1;\n    width: 100%;\n    padding: 15px 0; }\n    @media (min-width: 768px) {\n      .nav .logo {\n        order: 2;\n        width: 50%;\n        padding: 0; } }\n    @media (min-width: 1024px) {\n      .nav .logo {\n        width: 40%; } }\n    @media (min-width: 1200px) {\n      .nav .logo {\n        width: 50%; } }\n    .nav .logo svg {\n      width: 100%;\n      fill: #ffd31a; }\n  .nav .auth {\n    display: flex;\n    justify-content: space-between;\n    order: 2;\n    width: 100%;\n    text-transform: uppercase; }\n    @media (min-width: 768px) {\n      .nav .auth {\n        flex-direction: column;\n        justify-content: space-between;\n        align-items: flex-end;\n        width: 25%; } }\n    @media (min-width: 1024px) {\n      .nav .auth {\n        flex-direction: row;\n        align-items: center;\n        width: 30%; } }\n    @media (min-width: 1200px) {\n      .nav .auth {\n        width: 25%; } }\n    .nav .auth__button {\n      width: 140px;\n      color: #fff;\n      background: #f43745; }\n      .nav .auth__button:hover {\n        background: #e5354b; }\n      .nav .auth__button-link {\n        display: inline-block;\n        text-decoration: none;\n        color: #fff;\n        width: 100%;\n        height: 100%; }\n\n.login {\n  flex: 1 0 auto;\n  padding: 60px 0;\n  background: #ff8b17; }\n  .login__title {\n    margin-bottom: 15px;\n    text-transform: uppercase; }\n  .login__form {\n    max-width: 620px;\n    margin: 0 auto;\n    padding: 60px;\n    border: 1px solid #dbe2e8;\n    background: #fff;\n    box-shadow: 2px 2px 3px 0 rgba(117, 124, 129, 0.12); }\n  .login__input {\n    width: 100%;\n    height: 44px;\n    margin-bottom: 20px;\n    padding-left: 15px;\n    padding-right: 15px;\n    border: 1px solid #dbe2e8;\n    box-shadow: 0 2px 2px 0 rgba(46, 60, 73, 0.05);\n    border-radius: 2px;\n    color: #2e3d49; }\n    .login__input:active {\n      outline: none;\n      border-color: #f7a75a; }\n    .login__input:focus {\n      outline: none;\n      border-color: #f7a75a; }\n    .login__input::placeholder {\n      opacity: .5; }\n  .login__button {\n    min-width: 207px;\n    width: 100%;\n    margin-top: 20px;\n    color: #fff;\n    background: #f7a75a; }\n\n.error__text {\n  color: #909070; }\n\n.registration {\n  flex: 1 0 auto;\n  padding: 60px 0;\n  background: #ff8b17; }\n  .registration__title {\n    margin-bottom: 15px;\n    text-transform: uppercase; }\n  .registration__form {\n    max-width: 620px;\n    margin: 0 auto;\n    padding: 60px;\n    border: 1px solid #dbe2e8;\n    background: #fff;\n    box-shadow: 2px 2px 3px 0 rgba(117, 124, 129, 0.12); }\n  .registration__input {\n    width: 100%;\n    height: 44px;\n    margin-bottom: 20px;\n    padding-left: 15px;\n    padding-right: 15px;\n    border: 1px solid #dbe2e8;\n    box-shadow: 0 2px 2px 0 rgba(46, 60, 73, 0.05);\n    border-radius: 2px;\n    color: #2e3d49; }\n    .registration__input:active {\n      outline: none;\n      border-color: #f7a75a; }\n    .registration__input:focus {\n      outline: none;\n      border-color: #f7a75a; }\n    .registration__input::placeholder {\n      opacity: .5; }\n  .registration__button {\n    min-width: 207px;\n    width: 100%;\n    margin-top: 20px;\n    color: #fff;\n    background: #f7a75a; }\n  .registration__select {\n    width: 100%;\n    height: 44px;\n    margin-bottom: 20px;\n    padding-left: 15px;\n    padding-right: 15px;\n    border: 1px solid #dbe2e8;\n    box-shadow: 0 2px 2px 0 rgba(46, 60, 73, 0.05);\n    border-radius: 2px;\n    color: #2e3d49; }\n\n.user {\n  flex: 1 0 auto;\n  padding: 60px 0;\n  background: #ff8b17; }\n\n.main {\n  padding-top: 10px;\n  background: #ff8b17; }\n  .main .add-button {\n    margin: 10px auto;\n    background: #ffc822; }\n    .main .add-button:hover {\n      background: #ffd31a; }\n  .main section {\n    display: flex;\n    flex-wrap: wrap; }\n    .main section .pizza {\n      display: flex;\n      flex-wrap: wrap;\n      margin: 20px;\n      padding: 15px;\n      background: #fffde5;\n      border-radius: 0.375rem;\n      box-shadow: 5px 5px 25px 0 rgba(46, 61, 73, 0.2);\n      transition: all 0.3s ease; }\n      @media (min-width: 768px) {\n        .main section .pizza {\n          width: calc(50% - 40px); } }\n      @media (min-width: 1200px) {\n        .main section .pizza {\n          width: calc(100% / 3 - 40px); } }\n      .main section .pizza__img {\n        align-self: center; }\n      .main section .pizza__name {\n        width: 100%;\n        margin: 15px 0;\n        font-size: 18px;\n        font-weight: 600;\n        white-space: nowrap;\n        text-align: center; }\n      .main section .pizza:hover {\n        box-shadow: 2px 4px 8px 0 rgba(46, 61, 73, 0.2); }\n      .main section .pizza__time {\n        width: 50%; }\n      .main section .pizza__queue-number {\n        width: 50%;\n        text-align: right;\n        color: #e5354b; }\n      .main section .pizza__eta {\n        width: 50%; }\n        .main section .pizza__eta time {\n          color: #cc3354; }\n        .main section .pizza__eta span:first-child {\n          text-transform: uppercase; }\n      .main section .pizza__price {\n        width: 50%;\n        text-align: right; }\n\n.footer {\n  flex-shrink: 0;\n  background: #303030; }\n  .footer .container {\n    display: flex;\n    flex-wrap: wrap;\n    align-items: center;\n    padding: 15px;\n    color: #fff; }\n    @media (min-width: 768px) {\n      .footer .container {\n        justify-content: space-between; } }\n    .footer .container address {\n      font-style: normal; }\n      .footer .container address a {\n        color: #fff; }\n", "", {"version":3,"sources":["C:/home/kottans/task_12/src/assets/scss/src/assets/scss/common.scss","C:/home/kottans/task_12/src/assets/scss/src/assets/scss/variables.scss","C:/home/kottans/task_12/src/assets/scss/src/assets/scss/blocks/header.scss","C:/home/kottans/task_12/src/assets/scss/src/assets/scss/helpers/media-queries.scss","C:/home/kottans/task_12/src/assets/scss/src/assets/scss/blocks/login.scss","C:/home/kottans/task_12/src/assets/scss/src/assets/scss/blocks/registration.scss","C:/home/kottans/task_12/src/assets/scss/src/assets/scss/blocks/user.scss","C:/home/kottans/task_12/src/assets/scss/src/assets/scss/blocks/main.scss","C:/home/kottans/task_12/src/assets/scss/src/assets/scss/blocks/footer.scss"],"names":[],"mappings":"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","file":"app.scss","sourcesContent":["* {\r\n    box-sizing: border-box;\r\n}\r\n\r\nimg {\r\n    width: 100%;\r\n}\r\n\r\nh2 {\r\n    margin: 0;\r\n\tfont-size: 100%;\r\n\tfont: inherit;\r\n\tvertical-align: baseline;\r\n}\r\n\r\nbutton {\r\n    display: block;\r\n    appearance: none;\r\n    user-select: none;\r\n    text-align: center;\r\n    white-space: nowrap;\r\n    text-decoration: none;\r\n    height: 3rem;\r\n    padding: 0 0.5rem;\r\n    border: 0.125rem solid transparent;\r\n    font-family: \"Open Sans\", sans-serif;\r\n    text-transform: uppercase;\r\n    font-weight: 600;\r\n    font-size: 0.8125rem;\r\n    line-height: 2.625rem;\r\n    -webkit-font-smoothing: antialiased;\r\n    border-radius: 0.25rem;\r\n    letter-spacing: 0.09375rem;\r\n    transition: all 0.3s ease;\r\n    box-shadow: 8px 10px 20px 0 rgba(46,61,73,0.15);\r\n    cursor: pointer;\r\n\r\n    &:hover {\r\n        box-shadow: 2px 4px 8px 0 rgba(46,61,73,0.2);\r\n    }\r\n}\r\n\r\nhtml {\r\n    height: 100%;\r\n    overflow-y:scroll;\r\n}\r\n\r\nbody {\r\n    margin: 0;\r\n    color: $grey;\r\n    font-size: 16px;\r\n    font-family: \"Open Sans\", sans-serif;\r\n    line-height: 1.5rem;\r\n    height: 100%;\r\n    -webkit-font-smoothing: antialiased;\r\n}\r\n\r\n.container {\r\n    max-width: 1200px;\r\n    margin: 0 auto;\r\n    padding: 0 15px;\r\n}\r\n\r\n#root {\r\n    height: 100%;\r\n}\r\n\r\n.login-container {\r\n    display: flex;\r\n    flex-direction: column;\r\n    min-height: 100vh;\r\n}\r\n\r\n.registration-container {\r\n    display: flex;\r\n    flex-direction: column;\r\n    min-height: 100vh;\r\n}\r\n\r\n.user-container {\r\n    display: flex;\r\n    flex-direction: column;\r\n    min-height: 100vh;\r\n}","// colors\r\n$wheat:       #fffde5;\r\n$yellow:      #ffd31a;\r\n$yellow-plus: #ffc822;\r\n$grey:        #525c65;\r\n$orange:      #ff8b17;\r\n$black:       #000;\r\n$white:       #fff;\r\n\r\n//sub-colors\r\n$grey-dark:        #303030;\r\n$light-orange:     #f7a75a;\r\n$orange-red-light: #f43745;\r\n$orange-red:       #e5354b;\r\n$orange-pink-light:#d83550;\r\n$orange-pink:      #cc3354;",".header {\r\n    width: 100%;\r\n    background: $orange-pink;\r\n}\r\n\r\n.nav {\r\n    display: flex;\r\n    justify-content: center;\r\n    flex-wrap: wrap;\r\n    @include tablet-min {\r\n        flex-wrap: nowrap;\r\n        padding: 15px 0;\r\n    }\r\n\r\n    & .current-time {\r\n        display: flex;\r\n        justify-content: space-between;\r\n        align-self: flex-start;\r\n        order: 3;\r\n        margin: 15px auto 15px 0;\r\n        color: $white;\r\n        @include tablet-min {\r\n            justify-content: flex-start;\r\n            align-self: center;\r\n            order: 1;\r\n            width: 25%;\r\n            margin: 0;\r\n        }\r\n        @include tablet-landscape-min {\r\n            width: 30%;\r\n        }\r\n        @include desktop-min {\r\n            width: 25%;\r\n        }\r\n\r\n        & svg {\r\n            width: 25px;\r\n            height: 25px;\r\n            fill: $yellow;\r\n        }\r\n\r\n        & time {\r\n            margin-left: 5px;\r\n        }\r\n    }\r\n\r\n    & .logo {\r\n        order: 1;\r\n        width: 100%;\r\n        padding: 15px 0;\r\n        @include tablet-min {\r\n            order: 2;\r\n            width: 50%;\r\n            padding: 0;\r\n        }\r\n        @include tablet-landscape-min {\r\n            width: 40%;\r\n        }\r\n        @include desktop-min {\r\n            width: 50%;\r\n        }\r\n\r\n        & svg {\r\n            width: 100%;\r\n            fill: $yellow;\r\n        }\r\n    }\r\n\r\n    & .auth {\r\n        display: flex;\r\n        justify-content: space-between;\r\n        order: 2;\r\n        width: 100%;\r\n        text-transform: uppercase;\r\n        @include tablet-min {\r\n            flex-direction: column;\r\n            justify-content: space-between;\r\n            align-items: flex-end;\r\n            width: 25%;\r\n        }\r\n        @include tablet-landscape-min {\r\n            flex-direction: row;\r\n            align-items: center;\r\n            width: 30%;\r\n        }\r\n        @include desktop-min {\r\n            width: 25%;\r\n        }\r\n\r\n        &__button {\r\n            width: 140px;\r\n            color: $white;\r\n            background: $orange-red-light;\r\n\r\n            &:hover {\r\n                background: $orange-red;\r\n            }\r\n            //TODO: fix this class\r\n            &-link {\r\n                display: inline-block;\r\n                text-decoration: none;\r\n                color:#fff;\r\n                width: 100%;\r\n                height: 100%;\r\n            }\r\n        }\r\n    }\r\n}","// Settings\r\n$mobile-s-width:   320px;\r\n$mobile-m-width:   375px;\r\n$mobile-l-width:   425px;\r\n$tablet-p-width:   768px;\r\n$tablet-l-width:   1024px;\r\n$desktop-width:    1200px;\r\n$desktop-l-width:  1440px;\r\n$desktop-4k-width: 2560px;\r\n\r\n// Mixins\r\n@mixin mobile-small-min {\r\n\t@media (min-width: #{$mobile-s-width}){\r\n\t\t@content;\r\n\t}\r\n}\r\n\r\n@mixin mobile-medium-min {\r\n\t@media (min-width: #{$mobile-m-width}){\r\n\t\t@content;\r\n\t}\r\n}\r\n\r\n@mixin mobile-large-min {\r\n\t@media (min-width: #{$mobile-l-width}){\r\n\t\t@content;\r\n\t}\r\n}\r\n\r\n@mixin tablet-min {\r\n\t@media (min-width: #{$tablet-p-width}){\r\n\t\t@content;\r\n\t}\r\n}\r\n\r\n@mixin tablet-landscape-min {\r\n\t@media (min-width: #{$tablet-l-width}){\r\n\t\t@content;\r\n\t}\r\n}\r\n\r\n@mixin desktop-min {\r\n\t@media (min-width: #{$desktop-width}){\r\n\t\t@content;\r\n\t}\r\n}\r\n\r\n@mixin desktop-l-min {\r\n\t@media (min-width: #{$desktop-l-width}){\r\n\t\t@content;\r\n\t}\r\n}\r\n\r\n@mixin desktop-4k {\r\n\t@media (min-width: #{$desktop-4k-width}){\r\n\t\t@content;\r\n\t}\r\n}\r\n\r\n@mixin retina {\r\n  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi){\r\n    @content;\r\n  }\r\n}\r\n",".login {\r\n    flex: 1 0 auto;\r\n    padding: 60px 0;\r\n    background: $orange;\r\n\r\n    &__title {\r\n        margin-bottom: 15px;\r\n        text-transform: uppercase;\r\n    }\r\n\r\n    &__form {\r\n        max-width: 620px;\r\n        margin: 0 auto;\r\n        padding: 60px;\r\n        border: 1px solid #dbe2e8;\r\n        background: #fff;\r\n        box-shadow: 2px 2px 3px 0 rgba(117, 124, 129, 0.12);\r\n    }\r\n\r\n    &__input {\r\n        width: 100%;\r\n        height: 44px;\r\n        margin-bottom: 20px;\r\n        padding-left: 15px;\r\n        padding-right: 15px;\r\n        border: 1px solid #dbe2e8;\r\n        box-shadow: 0 2px 2px 0 rgba(46, 60, 73, 0.05);\r\n        border-radius: 2px;\r\n        color: #2e3d49;\r\n\r\n        &:active {\r\n            outline: none;\r\n            border-color: $light-orange;\r\n        }\r\n\r\n        &:focus {\r\n            outline: none;\r\n            border-color: $light-orange;\r\n        }\r\n\r\n        &::placeholder {\r\n            opacity: .5;\r\n        }\r\n    }\r\n\r\n    &__button {\r\n        min-width: 207px;\r\n        width: 100%;\r\n        margin-top: 20px;\r\n        color: #fff;\r\n        background: $light-orange;\r\n    }\r\n}\r\n\r\n.error {\r\n    &__container {\r\n\r\n    }\r\n\r\n    &__text {\r\n        color: #909070;\r\n    }\r\n}",".registration {\r\n    flex: 1 0 auto;\r\n    padding: 60px 0;\r\n    background: $orange;\r\n\r\n    &__title {\r\n        margin-bottom: 15px;\r\n        text-transform: uppercase;\r\n    }\r\n\r\n    &__form {\r\n        max-width: 620px;\r\n        margin: 0 auto;\r\n        padding: 60px;\r\n        border: 1px solid #dbe2e8;\r\n        background: #fff;\r\n        box-shadow: 2px 2px 3px 0 rgba(117, 124, 129, 0.12);\r\n    }\r\n\r\n    &__input {\r\n        width: 100%;\r\n        height: 44px;\r\n        margin-bottom: 20px;\r\n        padding-left: 15px;\r\n        padding-right: 15px;\r\n        border: 1px solid #dbe2e8;\r\n        box-shadow: 0 2px 2px 0 rgba(46, 60, 73, 0.05);\r\n        border-radius: 2px;\r\n        color: #2e3d49;\r\n\r\n        &:active {\r\n            outline: none;\r\n            border-color: $light-orange;\r\n        }\r\n\r\n        &:focus {\r\n            outline: none;\r\n            border-color: $light-orange;\r\n        }\r\n\r\n        &::placeholder {\r\n            opacity: .5;\r\n        }\r\n    }\r\n\r\n    &__button {\r\n        min-width: 207px;\r\n        width: 100%;\r\n        margin-top: 20px;\r\n        color: #fff;\r\n        background: $light-orange;\r\n    }\r\n\r\n    &__select {\r\n        width: 100%;\r\n        height: 44px;\r\n        margin-bottom: 20px;\r\n        padding-left: 15px;\r\n        padding-right: 15px;\r\n        border: 1px solid #dbe2e8;\r\n        box-shadow: 0 2px 2px 0 rgba(46, 60, 73, 0.05);\r\n        border-radius: 2px;\r\n        color: #2e3d49;\r\n    }\r\n}",".user {\r\n    flex: 1 0 auto;\r\n    padding: 60px 0;\r\n    background: $orange;\r\n}",".main {\r\n  padding-top: 10px;\r\n  background: $orange;\r\n\r\n  & .add-button {\r\n    margin: 10px auto;\r\n    background: $yellow-plus;\r\n\r\n    &:hover {\r\n      background: $yellow;\r\n    }\r\n  }\r\n\r\n  & section {\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n\r\n    & .pizza {\r\n      display: flex;\r\n      flex-wrap: wrap;\r\n      margin: 20px;\r\n      padding: 15px;\r\n      background: $wheat;\r\n      border-radius: 0.375rem;\r\n      box-shadow: 5px 5px 25px 0 rgba(46,61,73,0.2);\r\n      transition: all 0.3s ease;\r\n      @include tablet-min {\r\n        width: calc(50% - 40px);\r\n      }\r\n      @include desktop-min {\r\n        width: calc(100% / 3 - 40px);\r\n      }\r\n\r\n      &__img {\r\n        align-self: center;\r\n      }\r\n\r\n      &__name {\r\n        width: 100%;\r\n        margin: 15px 0;\r\n        font-size: 18px;\r\n        font-weight: 600;\r\n        white-space: nowrap;\r\n        text-align: center;\r\n      }\r\n\r\n      &:hover {\r\n        box-shadow: 2px 4px 8px 0 rgba(46,61,73,0.2);\r\n      }\r\n\r\n      &__time {\r\n        width: 50%;\r\n      }\r\n\r\n      &__queue-number {\r\n        width: 50%;\r\n        text-align: right;\r\n        color: $orange-red;\r\n      }\r\n\r\n      &__eta {\r\n        width: 50%;\r\n\r\n        & time {\r\n          color: $orange-pink;\r\n        }\r\n\r\n        & span:first-child {\r\n          text-transform: uppercase;\r\n        }\r\n      }\r\n\r\n      &__price {\r\n        width: 50%;\r\n        text-align: right;\r\n      }\r\n    }\r\n  }\r\n}",".footer {\r\n    flex-shrink: 0;\r\n    background: $grey-dark;\r\n\r\n    & .container {\r\n        display: flex;\r\n        flex-wrap: wrap;\r\n        align-items: center;\r\n        padding: 15px;\r\n        color: $white;\r\n        @include tablet-min {\r\n            justify-content: space-between;\r\n        }\r\n\r\n        & address {\r\n            font-style: normal;\r\n\r\n            & a {\r\n                color: $white;\r\n            }\r\n        }\r\n    }\r\n}\r\n"],"sourceRoot":""}]);
+exports.push([module.i, "* {\n  box-sizing: border-box; }\n\nimg {\n  width: 100%; }\n\nh1, h2 {\n  margin: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline; }\n\nbutton {\n  display: block;\n  appearance: none;\n  user-select: none;\n  text-align: center;\n  white-space: nowrap;\n  text-decoration: none;\n  height: 3rem;\n  padding: 0 0.5rem;\n  border: 0.125rem solid transparent;\n  font-family: \"Open Sans\", sans-serif;\n  text-transform: uppercase;\n  font-weight: 600;\n  font-size: 0.8125rem;\n  line-height: 2.625rem;\n  -webkit-font-smoothing: antialiased;\n  border-radius: 0.25rem;\n  letter-spacing: 0.09375rem;\n  transition: all 0.3s ease;\n  box-shadow: 8px 10px 20px 0 rgba(46, 61, 73, 0.15);\n  cursor: pointer; }\n  button:hover {\n    box-shadow: 2px 4px 8px 0 rgba(46, 61, 73, 0.2); }\n\nhtml {\n  height: 100%;\n  overflow-y: scroll; }\n\nbody {\n  margin: 0;\n  color: #525c65;\n  font-size: 16px;\n  font-family: \"Open Sans\", sans-serif;\n  line-height: 1.5rem;\n  height: 100%;\n  -webkit-font-smoothing: antialiased; }\n\n.container {\n  max-width: 1200px;\n  margin: 0 auto;\n  padding: 0 15px; }\n\n#root {\n  height: 100%; }\n\n.login-container {\n  display: flex;\n  flex-direction: column;\n  min-height: 100vh; }\n\n.registration-container {\n  display: flex;\n  flex-direction: column;\n  min-height: 100vh; }\n\n.user-container {\n  display: flex;\n  flex-direction: column;\n  min-height: 100vh; }\n\n.create-container {\n  display: flex;\n  flex-direction: column;\n  min-height: 100vh; }\n\n.header {\n  width: 100%;\n  background: #cc3354; }\n\n.nav {\n  display: flex;\n  justify-content: center;\n  flex-wrap: wrap; }\n  @media (min-width: 768px) {\n    .nav {\n      flex-wrap: nowrap;\n      padding: 15px 0; } }\n  .nav .current-time {\n    display: flex;\n    justify-content: space-between;\n    align-self: flex-start;\n    order: 3;\n    margin: 15px auto 15px 0;\n    color: #fff; }\n    @media (min-width: 768px) {\n      .nav .current-time {\n        justify-content: flex-start;\n        align-self: center;\n        order: 1;\n        width: 25%;\n        margin: 0; } }\n    @media (min-width: 1024px) {\n      .nav .current-time {\n        width: 30%; } }\n    @media (min-width: 1200px) {\n      .nav .current-time {\n        width: 25%; } }\n    .nav .current-time svg {\n      width: 25px;\n      height: 25px;\n      fill: #ffd31a; }\n    .nav .current-time time {\n      margin-left: 5px; }\n  .nav .logo {\n    order: 1;\n    width: 100%;\n    padding: 15px 0; }\n    @media (min-width: 768px) {\n      .nav .logo {\n        order: 2;\n        width: 50%;\n        padding: 0; } }\n    @media (min-width: 1024px) {\n      .nav .logo {\n        width: 40%; } }\n    @media (min-width: 1200px) {\n      .nav .logo {\n        width: 50%; } }\n    .nav .logo svg {\n      width: 100%;\n      fill: #ffd31a; }\n  .nav .auth {\n    display: flex;\n    justify-content: space-between;\n    order: 2;\n    width: 100%;\n    text-transform: uppercase; }\n    @media (min-width: 768px) {\n      .nav .auth {\n        flex-direction: column;\n        justify-content: space-between;\n        align-items: flex-end;\n        width: 25%; } }\n    @media (min-width: 1024px) {\n      .nav .auth {\n        flex-direction: row;\n        align-items: center;\n        width: 30%; } }\n    @media (min-width: 1200px) {\n      .nav .auth {\n        width: 25%; } }\n    .nav .auth__button {\n      width: 140px;\n      color: #fff;\n      background: #f43745; }\n      .nav .auth__button:hover {\n        background: #e5354b; }\n      .nav .auth__button-link {\n        display: inline-block;\n        text-decoration: none;\n        color: #fff;\n        width: 100%;\n        height: 100%; }\n\n.login {\n  flex: 1 0 auto;\n  padding: 60px 0;\n  background: #ff8b17; }\n  .login__title {\n    margin-bottom: 15px;\n    text-transform: uppercase; }\n  .login__form {\n    max-width: 620px;\n    margin: 0 auto;\n    padding: 60px;\n    border: 1px solid #dbe2e8;\n    background: #fff;\n    box-shadow: 2px 2px 3px 0 rgba(117, 124, 129, 0.12); }\n  .login__input {\n    width: 100%;\n    height: 44px;\n    margin-bottom: 20px;\n    padding-left: 15px;\n    padding-right: 15px;\n    border: 1px solid #dbe2e8;\n    box-shadow: 0 2px 2px 0 rgba(46, 60, 73, 0.05);\n    border-radius: 2px;\n    color: #2e3d49; }\n    .login__input:active {\n      outline: none;\n      border-color: #f7a75a; }\n    .login__input:focus {\n      outline: none;\n      border-color: #f7a75a; }\n    .login__input::placeholder {\n      opacity: .5; }\n  .login__button {\n    min-width: 207px;\n    width: 100%;\n    margin-top: 20px;\n    color: #fff;\n    background: #f7a75a; }\n\n.error__text {\n  color: #909070; }\n\n.registration {\n  flex: 1 0 auto;\n  padding: 60px 0;\n  background: #ff8b17; }\n  .registration__title {\n    margin-bottom: 15px;\n    text-transform: uppercase; }\n  .registration__form {\n    max-width: 620px;\n    margin: 0 auto;\n    padding: 60px;\n    border: 1px solid #dbe2e8;\n    background: #fff;\n    box-shadow: 2px 2px 3px 0 rgba(117, 124, 129, 0.12); }\n  .registration__input {\n    width: 100%;\n    height: 44px;\n    margin-bottom: 20px;\n    padding-left: 15px;\n    padding-right: 15px;\n    border: 1px solid #dbe2e8;\n    box-shadow: 0 2px 2px 0 rgba(46, 60, 73, 0.05);\n    border-radius: 2px;\n    color: #2e3d49; }\n    .registration__input:active {\n      outline: none;\n      border-color: #f7a75a; }\n    .registration__input:focus {\n      outline: none;\n      border-color: #f7a75a; }\n    .registration__input::placeholder {\n      opacity: .5; }\n  .registration__button {\n    min-width: 207px;\n    width: 100%;\n    margin-top: 20px;\n    color: #fff;\n    background: #f7a75a; }\n  .registration__select {\n    width: 100%;\n    height: 44px;\n    margin-bottom: 20px;\n    padding-left: 15px;\n    padding-right: 15px;\n    border: 1px solid #dbe2e8;\n    box-shadow: 0 2px 2px 0 rgba(46, 60, 73, 0.05);\n    border-radius: 2px;\n    color: #2e3d49; }\n\n.user {\n  flex: 1 0 auto;\n  padding: 60px 0;\n  background: #ff8b17; }\n\n.main {\n  padding-top: 10px;\n  background: #ff8b17; }\n  .main .add-button {\n    margin: 10px auto;\n    background: #ffc822; }\n    .main .add-button .add-link {\n      text-decoration: none;\n      color: #525c65; }\n    .main .add-button:hover {\n      background: #ffd31a; }\n  .main section {\n    display: flex;\n    flex-wrap: wrap; }\n    .main section .pizza {\n      display: flex;\n      flex-wrap: wrap;\n      margin: 20px;\n      padding: 15px;\n      background: #fffde5;\n      border-radius: 0.375rem;\n      box-shadow: 5px 5px 25px 0 rgba(46, 61, 73, 0.2);\n      transition: all 0.3s ease; }\n      @media (min-width: 768px) {\n        .main section .pizza {\n          width: calc(50% - 40px); } }\n      @media (min-width: 1200px) {\n        .main section .pizza {\n          width: calc(100% / 3 - 40px); } }\n      .main section .pizza__img {\n        align-self: center; }\n      .main section .pizza__name {\n        width: 100%;\n        margin: 15px 0;\n        font-size: 18px;\n        font-weight: 600;\n        white-space: nowrap;\n        text-align: center; }\n      .main section .pizza:hover {\n        box-shadow: 2px 4px 8px 0 rgba(46, 61, 73, 0.2); }\n      .main section .pizza__time {\n        width: 50%; }\n      .main section .pizza__queue-number {\n        width: 50%;\n        text-align: right;\n        color: #e5354b; }\n      .main section .pizza__eta {\n        width: 50%; }\n        .main section .pizza__eta time {\n          color: #cc3354; }\n        .main section .pizza__eta span:first-child {\n          text-transform: uppercase; }\n      .main section .pizza__price {\n        width: 50%;\n        text-align: right; }\n\n.footer {\n  flex-shrink: 0;\n  background: #303030; }\n  .footer .container {\n    display: flex;\n    flex-wrap: wrap;\n    align-items: center;\n    padding: 15px;\n    color: #fff; }\n    @media (min-width: 768px) {\n      .footer .container {\n        justify-content: space-between; } }\n    .footer .container address {\n      font-style: normal; }\n      .footer .container address a {\n        color: #fff; }\n\n.create {\n  flex: 1 0 auto;\n  padding: 60px 0;\n  background: #ff8b17; }\n  .create__container {\n    display: flex;\n    flex-wrap: wrap; }\n  .create__title {\n    width: 100%;\n    text-align: center; }\n  .create__canvas {\n    width: 50%;\n    height: 100px; }\n  .create__options {\n    width: 50%; }\n  .create form {\n    display: flex;\n    flex-direction: column; }\n  .create__ingredients {\n    width: 25px; }\n", "", {"version":3,"sources":["C:/home/kottans/task_12/src/assets/scss/src/assets/scss/common.scss","C:/home/kottans/task_12/src/assets/scss/src/assets/scss/variables.scss","C:/home/kottans/task_12/src/assets/scss/src/assets/scss/blocks/header.scss","C:/home/kottans/task_12/src/assets/scss/src/assets/scss/helpers/media-queries.scss","C:/home/kottans/task_12/src/assets/scss/src/assets/scss/blocks/login.scss","C:/home/kottans/task_12/src/assets/scss/src/assets/scss/blocks/registration.scss","C:/home/kottans/task_12/src/assets/scss/src/assets/scss/blocks/user.scss","C:/home/kottans/task_12/src/assets/scss/src/assets/scss/blocks/main.scss","C:/home/kottans/task_12/src/assets/scss/src/assets/scss/blocks/footer.scss","C:/home/kottans/task_12/src/assets/scss/src/assets/scss/blocks/create.scss"],"names":[],"mappings":"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","file":"app.scss","sourcesContent":["* {\r\n    box-sizing: border-box;\r\n}\r\n\r\nimg {\r\n    width: 100%;\r\n}\r\n\r\n\r\n\r\nh1, h2 {\r\n    margin: 0;\r\n\tfont-size: 100%;\r\n\tfont: inherit;\r\n\tvertical-align: baseline;\r\n}\r\n\r\nbutton {\r\n    display: block;\r\n    appearance: none;\r\n    user-select: none;\r\n    text-align: center;\r\n    white-space: nowrap;\r\n    text-decoration: none;\r\n    height: 3rem;\r\n    padding: 0 0.5rem;\r\n    border: 0.125rem solid transparent;\r\n    font-family: \"Open Sans\", sans-serif;\r\n    text-transform: uppercase;\r\n    font-weight: 600;\r\n    font-size: 0.8125rem;\r\n    line-height: 2.625rem;\r\n    -webkit-font-smoothing: antialiased;\r\n    border-radius: 0.25rem;\r\n    letter-spacing: 0.09375rem;\r\n    transition: all 0.3s ease;\r\n    box-shadow: 8px 10px 20px 0 rgba(46,61,73,0.15);\r\n    cursor: pointer;\r\n\r\n    &:hover {\r\n        box-shadow: 2px 4px 8px 0 rgba(46,61,73,0.2);\r\n    }\r\n}\r\n\r\nhtml {\r\n    height: 100%;\r\n    overflow-y:scroll;\r\n}\r\n\r\nbody {\r\n    margin: 0;\r\n    color: $grey;\r\n    font-size: 16px;\r\n    font-family: \"Open Sans\", sans-serif;\r\n    line-height: 1.5rem;\r\n    height: 100%;\r\n    -webkit-font-smoothing: antialiased;\r\n}\r\n\r\n.container {\r\n    max-width: 1200px;\r\n    margin: 0 auto;\r\n    padding: 0 15px;\r\n}\r\n\r\n#root {\r\n    height: 100%;\r\n}\r\n\r\n.login-container {\r\n    display: flex;\r\n    flex-direction: column;\r\n    min-height: 100vh;\r\n}\r\n\r\n.registration-container {\r\n    display: flex;\r\n    flex-direction: column;\r\n    min-height: 100vh;\r\n}\r\n\r\n.user-container {\r\n    display: flex;\r\n    flex-direction: column;\r\n    min-height: 100vh;\r\n}\r\n\r\n.create-container {\r\n    display: flex;\r\n    flex-direction: column;\r\n    min-height: 100vh;\r\n}","// colors\r\n$wheat:       #fffde5;\r\n$yellow:      #ffd31a;\r\n$yellow-plus: #ffc822;\r\n$grey:        #525c65;\r\n$orange:      #ff8b17;\r\n$black:       #000;\r\n$white:       #fff;\r\n\r\n//sub-colors\r\n$grey-dark:        #303030;\r\n$light-orange:     #f7a75a;\r\n$orange-red-light: #f43745;\r\n$orange-red:       #e5354b;\r\n$orange-pink-light:#d83550;\r\n$orange-pink:      #cc3354;",".header {\r\n    width: 100%;\r\n    background: $orange-pink;\r\n}\r\n\r\n.nav {\r\n    display: flex;\r\n    justify-content: center;\r\n    flex-wrap: wrap;\r\n    @include tablet-min {\r\n        flex-wrap: nowrap;\r\n        padding: 15px 0;\r\n    }\r\n\r\n    & .current-time {\r\n        display: flex;\r\n        justify-content: space-between;\r\n        align-self: flex-start;\r\n        order: 3;\r\n        margin: 15px auto 15px 0;\r\n        color: $white;\r\n        @include tablet-min {\r\n            justify-content: flex-start;\r\n            align-self: center;\r\n            order: 1;\r\n            width: 25%;\r\n            margin: 0;\r\n        }\r\n        @include tablet-landscape-min {\r\n            width: 30%;\r\n        }\r\n        @include desktop-min {\r\n            width: 25%;\r\n        }\r\n\r\n        & svg {\r\n            width: 25px;\r\n            height: 25px;\r\n            fill: $yellow;\r\n        }\r\n\r\n        & time {\r\n            margin-left: 5px;\r\n        }\r\n    }\r\n\r\n    & .logo {\r\n        order: 1;\r\n        width: 100%;\r\n        padding: 15px 0;\r\n        @include tablet-min {\r\n            order: 2;\r\n            width: 50%;\r\n            padding: 0;\r\n        }\r\n        @include tablet-landscape-min {\r\n            width: 40%;\r\n        }\r\n        @include desktop-min {\r\n            width: 50%;\r\n        }\r\n\r\n        & svg {\r\n            width: 100%;\r\n            fill: $yellow;\r\n        }\r\n    }\r\n\r\n    & .auth {\r\n        display: flex;\r\n        justify-content: space-between;\r\n        order: 2;\r\n        width: 100%;\r\n        text-transform: uppercase;\r\n        @include tablet-min {\r\n            flex-direction: column;\r\n            justify-content: space-between;\r\n            align-items: flex-end;\r\n            width: 25%;\r\n        }\r\n        @include tablet-landscape-min {\r\n            flex-direction: row;\r\n            align-items: center;\r\n            width: 30%;\r\n        }\r\n        @include desktop-min {\r\n            width: 25%;\r\n        }\r\n\r\n        &__button {\r\n            width: 140px;\r\n            color: $white;\r\n            background: $orange-red-light;\r\n\r\n            &:hover {\r\n                background: $orange-red;\r\n            }\r\n            //TODO: fix this class\r\n            &-link {\r\n                display: inline-block;\r\n                text-decoration: none;\r\n                color:#fff;\r\n                width: 100%;\r\n                height: 100%;\r\n            }\r\n        }\r\n    }\r\n}","// Settings\r\n$mobile-s-width:   320px;\r\n$mobile-m-width:   375px;\r\n$mobile-l-width:   425px;\r\n$tablet-p-width:   768px;\r\n$tablet-l-width:   1024px;\r\n$desktop-width:    1200px;\r\n$desktop-l-width:  1440px;\r\n$desktop-4k-width: 2560px;\r\n\r\n// Mixins\r\n@mixin mobile-small-min {\r\n\t@media (min-width: #{$mobile-s-width}){\r\n\t\t@content;\r\n\t}\r\n}\r\n\r\n@mixin mobile-medium-min {\r\n\t@media (min-width: #{$mobile-m-width}){\r\n\t\t@content;\r\n\t}\r\n}\r\n\r\n@mixin mobile-large-min {\r\n\t@media (min-width: #{$mobile-l-width}){\r\n\t\t@content;\r\n\t}\r\n}\r\n\r\n@mixin tablet-min {\r\n\t@media (min-width: #{$tablet-p-width}){\r\n\t\t@content;\r\n\t}\r\n}\r\n\r\n@mixin tablet-landscape-min {\r\n\t@media (min-width: #{$tablet-l-width}){\r\n\t\t@content;\r\n\t}\r\n}\r\n\r\n@mixin desktop-min {\r\n\t@media (min-width: #{$desktop-width}){\r\n\t\t@content;\r\n\t}\r\n}\r\n\r\n@mixin desktop-l-min {\r\n\t@media (min-width: #{$desktop-l-width}){\r\n\t\t@content;\r\n\t}\r\n}\r\n\r\n@mixin desktop-4k {\r\n\t@media (min-width: #{$desktop-4k-width}){\r\n\t\t@content;\r\n\t}\r\n}\r\n\r\n@mixin retina {\r\n  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi){\r\n    @content;\r\n  }\r\n}\r\n",".login {\r\n    flex: 1 0 auto;\r\n    padding: 60px 0;\r\n    background: $orange;\r\n\r\n    &__title {\r\n        margin-bottom: 15px;\r\n        text-transform: uppercase;\r\n    }\r\n\r\n    &__form {\r\n        max-width: 620px;\r\n        margin: 0 auto;\r\n        padding: 60px;\r\n        border: 1px solid #dbe2e8;\r\n        background: #fff;\r\n        box-shadow: 2px 2px 3px 0 rgba(117, 124, 129, 0.12);\r\n    }\r\n\r\n    &__input {\r\n        width: 100%;\r\n        height: 44px;\r\n        margin-bottom: 20px;\r\n        padding-left: 15px;\r\n        padding-right: 15px;\r\n        border: 1px solid #dbe2e8;\r\n        box-shadow: 0 2px 2px 0 rgba(46, 60, 73, 0.05);\r\n        border-radius: 2px;\r\n        color: #2e3d49;\r\n\r\n        &:active {\r\n            outline: none;\r\n            border-color: $light-orange;\r\n        }\r\n\r\n        &:focus {\r\n            outline: none;\r\n            border-color: $light-orange;\r\n        }\r\n\r\n        &::placeholder {\r\n            opacity: .5;\r\n        }\r\n    }\r\n\r\n    &__button {\r\n        min-width: 207px;\r\n        width: 100%;\r\n        margin-top: 20px;\r\n        color: #fff;\r\n        background: $light-orange;\r\n    }\r\n}\r\n\r\n.error {\r\n    &__container {\r\n\r\n    }\r\n\r\n    &__text {\r\n        color: #909070;\r\n    }\r\n}",".registration {\r\n    flex: 1 0 auto;\r\n    padding: 60px 0;\r\n    background: $orange;\r\n\r\n    &__title {\r\n        margin-bottom: 15px;\r\n        text-transform: uppercase;\r\n    }\r\n\r\n    &__form {\r\n        max-width: 620px;\r\n        margin: 0 auto;\r\n        padding: 60px;\r\n        border: 1px solid #dbe2e8;\r\n        background: #fff;\r\n        box-shadow: 2px 2px 3px 0 rgba(117, 124, 129, 0.12);\r\n    }\r\n\r\n    &__input {\r\n        width: 100%;\r\n        height: 44px;\r\n        margin-bottom: 20px;\r\n        padding-left: 15px;\r\n        padding-right: 15px;\r\n        border: 1px solid #dbe2e8;\r\n        box-shadow: 0 2px 2px 0 rgba(46, 60, 73, 0.05);\r\n        border-radius: 2px;\r\n        color: #2e3d49;\r\n\r\n        &:active {\r\n            outline: none;\r\n            border-color: $light-orange;\r\n        }\r\n\r\n        &:focus {\r\n            outline: none;\r\n            border-color: $light-orange;\r\n        }\r\n\r\n        &::placeholder {\r\n            opacity: .5;\r\n        }\r\n    }\r\n\r\n    &__button {\r\n        min-width: 207px;\r\n        width: 100%;\r\n        margin-top: 20px;\r\n        color: #fff;\r\n        background: $light-orange;\r\n    }\r\n\r\n    &__select {\r\n        width: 100%;\r\n        height: 44px;\r\n        margin-bottom: 20px;\r\n        padding-left: 15px;\r\n        padding-right: 15px;\r\n        border: 1px solid #dbe2e8;\r\n        box-shadow: 0 2px 2px 0 rgba(46, 60, 73, 0.05);\r\n        border-radius: 2px;\r\n        color: #2e3d49;\r\n    }\r\n}",".user {\r\n    flex: 1 0 auto;\r\n    padding: 60px 0;\r\n    background: $orange;\r\n}",".main {\r\n  padding-top: 10px;\r\n  background: $orange;\r\n\r\n  & .add-button {\r\n    margin: 10px auto;\r\n    background: $yellow-plus;\r\n\r\n    & .add-link {\r\n      text-decoration: none;\r\n      color: $grey;\r\n    }\r\n\r\n    &:hover {\r\n      background: $yellow;\r\n    }\r\n  }\r\n\r\n  & section {\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n\r\n    & .pizza {\r\n      display: flex;\r\n      flex-wrap: wrap;\r\n      margin: 20px;\r\n      padding: 15px;\r\n      background: $wheat;\r\n      border-radius: 0.375rem;\r\n      box-shadow: 5px 5px 25px 0 rgba(46,61,73,0.2);\r\n      transition: all 0.3s ease;\r\n      @include tablet-min {\r\n        width: calc(50% - 40px);\r\n      }\r\n      @include desktop-min {\r\n        width: calc(100% / 3 - 40px);\r\n      }\r\n\r\n      &__img {\r\n        align-self: center;\r\n      }\r\n\r\n      &__name {\r\n        width: 100%;\r\n        margin: 15px 0;\r\n        font-size: 18px;\r\n        font-weight: 600;\r\n        white-space: nowrap;\r\n        text-align: center;\r\n      }\r\n\r\n      &:hover {\r\n        box-shadow: 2px 4px 8px 0 rgba(46,61,73,0.2);\r\n      }\r\n\r\n      &__time {\r\n        width: 50%;\r\n      }\r\n\r\n      &__queue-number {\r\n        width: 50%;\r\n        text-align: right;\r\n        color: $orange-red;\r\n      }\r\n\r\n      &__eta {\r\n        width: 50%;\r\n\r\n        & time {\r\n          color: $orange-pink;\r\n        }\r\n\r\n        & span:first-child {\r\n          text-transform: uppercase;\r\n        }\r\n      }\r\n\r\n      &__price {\r\n        width: 50%;\r\n        text-align: right;\r\n      }\r\n    }\r\n  }\r\n}\r\n\r\n",".footer {\r\n    flex-shrink: 0;\r\n    background: $grey-dark;\r\n\r\n    & .container {\r\n        display: flex;\r\n        flex-wrap: wrap;\r\n        align-items: center;\r\n        padding: 15px;\r\n        color: $white;\r\n        @include tablet-min {\r\n            justify-content: space-between;\r\n        }\r\n\r\n        & address {\r\n            font-style: normal;\r\n\r\n            & a {\r\n                color: $white;\r\n            }\r\n        }\r\n    }\r\n}\r\n",".create {\r\n    flex: 1 0 auto;\r\n    padding: 60px 0;\r\n    \r\n    background: $orange;\r\n\r\n    &__container {\r\n        display: flex;\r\n        flex-wrap: wrap;\r\n    }\r\n\r\n    &__title {\r\n        width: 100%;\r\n        text-align: center;\r\n    }\r\n\r\n    &__canvas {\r\n        width: 50%;\r\n        height: 100px;\r\n    }\r\n\r\n    &__options {\r\n        width: 50%;\r\n    }\r\n\r\n    & form {\r\n        display: flex;\r\n        flex-direction: column;\r\n    }\r\n\r\n    &__ingredients {\r\n        width: 25px;\r\n    }\r\n}"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports) {
 
 /*
@@ -696,7 +711,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -762,7 +777,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(12);
+var	fixUrls = __webpack_require__(13);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -1078,7 +1093,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports) {
 
 
@@ -1173,7 +1188,7 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1191,7 +1206,7 @@ var _component2 = _interopRequireDefault(_component);
 
 var _utils = __webpack_require__(1);
 
-var _auth = __webpack_require__(6);
+var _auth = __webpack_require__(7);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1340,7 +1355,7 @@ var Router = function (_Component) {
 exports.default = Router;
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1350,27 +1365,27 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _login = __webpack_require__(15);
+var _login = __webpack_require__(16);
 
 var _login2 = _interopRequireDefault(_login);
 
-var _app = __webpack_require__(18);
+var _app = __webpack_require__(19);
 
 var _app2 = _interopRequireDefault(_app);
 
-var _registration = __webpack_require__(20);
+var _registration = __webpack_require__(21);
 
 var _registration2 = _interopRequireDefault(_registration);
 
-var _user = __webpack_require__(22);
+var _user = __webpack_require__(23);
 
 var _user2 = _interopRequireDefault(_user);
 
-var _create = __webpack_require__(23);
+var _create = __webpack_require__(24);
 
 var _create2 = _interopRequireDefault(_create);
 
-var _auth = __webpack_require__(6);
+var _auth = __webpack_require__(7);
 
 var _auth2 = __webpack_require__(2);
 
@@ -1408,7 +1423,7 @@ var routes = [{
 exports.default = routes;
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1432,7 +1447,7 @@ var _header = __webpack_require__(4);
 
 var _header2 = _interopRequireDefault(_header);
 
-var _login = __webpack_require__(16);
+var _login = __webpack_require__(17);
 
 var _login2 = _interopRequireDefault(_login);
 
@@ -1482,7 +1497,7 @@ var Login = function (_Component) {
 exports.default = Login;
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1500,13 +1515,13 @@ var _component2 = _interopRequireDefault(_component);
 
 var _utils = __webpack_require__(1);
 
-var _error = __webpack_require__(17);
+var _error = __webpack_require__(18);
 
 var _error2 = _interopRequireDefault(_error);
 
 var _auth = __webpack_require__(2);
 
-var _index = __webpack_require__(5);
+var _index = __webpack_require__(6);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1595,7 +1610,7 @@ var LoginForm = function (_Component) {
 exports.default = LoginForm;
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1651,7 +1666,7 @@ var ErrorMessage = function (_Component) {
 exports.default = ErrorMessage;
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1675,7 +1690,7 @@ var _header = __webpack_require__(4);
 
 var _header2 = _interopRequireDefault(_header);
 
-var _main = __webpack_require__(19);
+var _main = __webpack_require__(20);
 
 var _main2 = _interopRequireDefault(_main);
 
@@ -1716,7 +1731,7 @@ var App = function (_Component) {
 exports.default = App;
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1805,7 +1820,11 @@ var Main = function (_Component) {
 
             var button = document.createElement('button');
             button.classList.add('add-button');
-            button.innerText = 'add new pizza';
+            var a = document.createElement('a');
+            a.href = '#/create';
+            a.classList.add('add-link');
+            a.innerText = 'add new pizza';
+            button.appendChild(a);
 
             container.append(button, this.createPizza(pizzas));
             return [container];
@@ -1818,7 +1837,7 @@ var Main = function (_Component) {
 exports.default = Main;
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1842,7 +1861,7 @@ var _header = __webpack_require__(4);
 
 var _header2 = _interopRequireDefault(_header);
 
-var _registration = __webpack_require__(21);
+var _registration = __webpack_require__(22);
 
 var _registration2 = _interopRequireDefault(_registration);
 
@@ -1892,7 +1911,7 @@ var Registration = function (_Component) {
 exports.default = Registration;
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2002,7 +2021,7 @@ var RegistrationForm = function (_Component) {
 exports.default = RegistrationForm;
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2028,7 +2047,9 @@ var _footer2 = _interopRequireDefault(_footer);
 
 var _utils = __webpack_require__(1);
 
-var _authHttp = __webpack_require__(7);
+var _authHttp = __webpack_require__(8);
+
+var _constants = __webpack_require__(5);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2065,7 +2086,7 @@ var User = function (_Component) {
         value: function getUserInfo() {
             var _this2 = this;
 
-            _authHttp.AUTH_HTTP_SERVICE.getUserInfo().then(function (result) {
+            _authHttp.AUTH_HTTP_SERVICE.get(_constants.USER_URL).then(function (result) {
                 _this2.updateState({
                     username: result.username,
                     email: result.email,
@@ -2083,7 +2104,6 @@ var User = function (_Component) {
                 created = _state.created,
                 visited = _state.visited;
 
-            console.log(this.state);
             var user = '\n        <main class="user">\n            <ul>\n                <li>' + username + '</li>\n                <li>' + email + '</li>\n                <li>' + created + '</li>\n                <li>' + visited + '</li>\n            </ul>\n        </main>\n        ';
             var fragment = (0, _utils.toHtml)(user);
             return [this.header.update(), fragment, this.footer.update()];
@@ -2096,7 +2116,7 @@ var User = function (_Component) {
 exports.default = User;
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2120,9 +2140,11 @@ var _footer = __webpack_require__(3);
 
 var _footer2 = _interopRequireDefault(_footer);
 
-var _create = __webpack_require__(24);
+var _create = __webpack_require__(25);
 
 var _utils = __webpack_require__(1);
+
+var _constants = __webpack_require__(5);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2151,19 +2173,29 @@ var NewPizza = function (_Component) {
     _createClass(NewPizza, [{
         key: 'showForm',
         value: function showForm() {
+            var _this2 = this;
+
             Promise.all([_create.CREATE_DATA.getIngredients(), _create.CREATE_DATA.getTags()]).then(function () {
-                _create.CREATE_DATA.ingredients;
+
+                var container = document.querySelector('.create__options');
+                container.appendChild(_this2.showIngredients(_create.CREATE_DATA.ingredients));
             });
         }
     }, {
         key: 'showIngredients',
         value: function showIngredients(data) {
-            var ingredientsString = '\n\n        ';
+            console.log(data);
+            var ingredientsString = '\n            <form class=\'create__form\'>\n                <label>\n                    <span class=\'create__title\'>Pizza Name</span>\n                    <input type=\'text\' name=\'name\' required min=\'3\' max=\'24\'>\n                </label>\n                <label>\n                    <span>Description</span>\n                    <input type=\'text\' name=\'description\'>\n                </label>\n                <label>\n                    <span>Size<span>\n                    <label>\n                        <span>30</span>\n                        <input type=\'radio\' name=\'size\' value=\'30\'>\n                    </label>\n                    <label>\n                        <span>45</span>\n                        <input type=\'radio\' name=\'size\' value=\'30\'>\n                    </label>\n                    <label>\n                        <span>60</span>\n                        <input type=\'radio\' name=\'size\' value=\'30\'>\n                    </label>    \n                </label>\n                <div>\n                ' + data.reduce(function (html, data) {
+                html += '\n                    <label><label>\n                    <img src=\'' + _constants.DOMAIN + '/' + data.image_url + '\' class=\'create__ingredients\'>\n                    <input type=\'checkbox\'>\n                    ';
+                return html;
+            }, '') + '\n                </div>\n            </form>\n        ';
+            var fragment = (0, _utils.toHtml)(ingredientsString);
+            return fragment;
         }
     }, {
         key: 'render',
         value: function render() {
-            var containerString = '\n            <main class=\'create\'>\n                <section class=\'create__canvas\'></section>\n                <section class=\'create__options></section>\n            </main>\n        ';
+            var containerString = '\n            <main class=\'create\'>\n                <div class=\'container create__container\'>\n                    <h1 class=\'create__title\'>Create Pizza</h1>\n                    <section class=\'create__canvas\'></section>\n                    <section class=\'create__options\'></section>\n                </div>\n            </main>\n        ';
             var fragment = (0, _utils.toHtml)(containerString);
 
             return [this.header.update(), fragment, this.footer.update()];
@@ -2176,7 +2208,7 @@ var NewPizza = function (_Component) {
 exports.default = NewPizza;
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2189,9 +2221,9 @@ exports.CREATE_DATA = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _authHttp = __webpack_require__(7);
+var _authHttp = __webpack_require__(8);
 
-var _constants = __webpack_require__(25);
+var _constants = __webpack_require__(5);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -2229,20 +2261,6 @@ var PizzaDataService = function () {
 }();
 
 var CREATE_DATA = exports.CREATE_DATA = new PizzaDataService();
-
-/***/ }),
-/* 25 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var DOMAIN = exports.DOMAIN = 'https://pizza-tele.ga';
-var INGREDIENTS_URL = exports.INGREDIENTS_URL = DOMAIN + '/api/v1/ingredient/list';
-var TAG_URL = exports.TAG_URL = DOMAIN + '/api/v1/tag/list';
 
 /***/ })
 /******/ ]);

@@ -34,7 +34,6 @@ class User extends Component {
 
     render() {
         const { username, email, created, visited } = this.state;
-        console.log(this.state);
         const user = `
         <main class="user">
             <ul>

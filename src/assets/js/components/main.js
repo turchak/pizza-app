@@ -85,6 +85,7 @@ class Main extends Component {
         button.classList.add('add-button');
         const a = document.createElement('a');
         a.href = '#/create';
+        a.classList.add('add-link');
         a.innerText = 'add new pizza';
         button.appendChild(a);
 
