@@ -8,36 +8,36 @@ import { AUTH_SERVICE } from './utils/auth';
 
 const routes = [
     {
-        component: App,
+        Component: App,
         href: '',
         redirectTo: '/'
     },
     {
-        component: App,
+        Component: App,
         href: '/',
         onEnter: authGuard
     },
     {
-        component: Login,
+        Component: Login,
         href: '/login'
     },
     {
-        component: Registration,
+        Component: Registration,
         href: '/registration'
     },
     {
-        component: User,
+        Component: User,
         href: '/user',
         onEnter: authGuard
     },
     {
-        component: App,
+        Component: App,
         href: '/logout',
         logout: AUTH_SERVICE.clearStorage,
         onEnter: authGuard
     },
     {
-        component: NewPizza,
+        Component: NewPizza,
         href: '/create',
         onEnter: authGuard
     }

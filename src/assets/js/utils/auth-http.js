@@ -18,20 +18,6 @@ class AuthHttpService {
         );
     }
 
-    // getUserInfo() {
-    //     const headers = new Headers();
-    //     headers.append('Authorization', `Bearer ${AUTH_SERVICE.token}`);
-    //     headers.append('content-type', 'application/json');
-    //     const url = 'https://pizza-tele.ga/api/v1/user/my_info';
-    //     const options = {
-    //         method: 'GET',
-    //         headers: headers
-    //     };
-    //     return this.get(url).then(res => {
-    //         return res.json();
-    //     });
-    // }
-
     post() {
 
     }
