@@ -1,10 +1,12 @@
+import { DOMAIN } from '../utils/constants'; 
+
 class AuthService {
     constructor () {
         this._token = localStorage.getItem('token');
         this._claims = JSON.parse(localStorage.getItem('claims'));
-        this.loginUrl = 'https://pizza-tele.ga/api/v1/user/login'; 
-        this.storeUrl = 'https://pizza-tele.ga/api/v1/store/list'; 
-        this.createUrl = 'https://pizza-tele.ga/api/v1/user/create';
+        this.loginUrl = `${DOMAIN}/api/v1/user/login`; 
+        this.storeUrl = `${DOMAIN}/api/v1/store/list`; 
+        this.createUrl = `${DOMAIN}/api/v1/user/create`;
     }
 
     get token() {

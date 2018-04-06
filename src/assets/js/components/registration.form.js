@@ -58,7 +58,7 @@ class RegistrationForm extends Component {
                 <select hidden id="registration-store" name="store"></select>
                 <label for="registration-store-password">Store password</label>
                 <input class="registration__input" for="registration-store-password" type="password" name="store_password" placeholder="Should be valid store password. Min length 8 chars">
-                <button class="registration__button" type="submit">sign up</button>
+                <button class="button registration__button" type="submit">sign up</button>
             </form>
         </div>
         `;

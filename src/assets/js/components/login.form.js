@@ -62,7 +62,7 @@ class LoginForm extends Component {
                 <input class="login__input" id="login-username" type="text" name="username" placeholder="Your name" value=${ !!username ? username : '' }>
                 <label for="login-password">Password</label>
                 <input class="login__input" id="login-password" type="password" name="password" placeholder="Your password" value=${ !!password ? password : '' }>
-                <button class="login__button" type="submit">sign in</button>
+                <button class="button login__button" type="submit">sign in</button>
             </form>
         </div>
         `;

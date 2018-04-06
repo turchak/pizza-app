@@ -13,27 +13,18 @@ class Header extends Component {
     render() {
         //TODO: need delete <a href="#/login" class="login__button-link">sign in</a>
         const isAuthorized = AUTH_SERVICE.isAuthorized();
+
         const loginButton = `
-        <button class="auth__button auth__button--in">
-            <a href="#/login" class="auth__button-link">sign in</a>
-        </button>
+            <a href="#/login" class="button auth__button auth__button--in">sign in</a>
         `;
-
         const logoutButton = `
-        <button class="auth__button auth__button--out">
-            <a href="#/logout" class="auth__button-link">sign out</a>
-        </button>
+            <a href="#/logout" class="button auth__button auth__button--out">sign out</a>
         `;
-
         const userButton = `
-        <button class="auth__button auth__button--info">
-            <a href="#/user" class="auth__button-link">user info</a>
-        </button>
+            <a href="#/user" class="button auth__button auth__button--info">user info</a>
         `;
         const registrationButton = `
-        <button class="auth__button auth__button--up">
-            <a href="#/registration" class="auth__button-link">sign up</a>
-        </button>
+            <a href="#/registration" class="button auth__button auth__button--up">sign up</a>
         `;
 
         const header = `

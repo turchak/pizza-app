@@ -2,15 +2,12 @@
   padding-top: 10px;
   background: $orange;
 
-  & .add-button {
+  & .add-link {
+    width: 140px;
     margin: 10px auto;
     background: $yellow-plus;
-
-    & .add-link {
-      text-decoration: none;
-      color: $grey;
-    }
-
+    text-decoration: none;
+    color: $grey;
     &:hover {
       background: $yellow;
     }

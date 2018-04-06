@@ -80,16 +80,12 @@ class Main extends Component {
     render() {
         const container = document.createElement('div');
         container.classList.add('container');
-
-        const button = document.createElement('button');
-        button.classList.add('add-button');
         const a = document.createElement('a');
         a.href = '#/create';
-        a.classList.add('add-link');
+        a.className = 'button add-link';
         a.innerText = 'add new pizza';
-        button.appendChild(a);
 
-        container.append(button, this.createPizza(pizzas));
+        container.append(a, this.createPizza(pizzas));
         return [
             container,
         ];
