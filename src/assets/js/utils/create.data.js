@@ -1,5 +1,5 @@
-import { AUTH_HTTP_SERVICE } from "./auth-http";
-import { INGREDIENTS_URL, TAG_URL } from "./constants";
+import { AUTH_HTTP_SERVICE } from './auth-http';
+import { INGREDIENTS_URL, TAG_URL } from './constants';
 
 class PizzaDataService {
     constructor() {
@@ -22,8 +22,8 @@ class PizzaDataService {
                 this.tags = data.results;
                 return data.results;
             }  
-        )
+        );
     }
 }
 
-export const CREATE_DATA = new PizzaDataService(); 
+export const CREATE_DATA = new PizzaDataService();

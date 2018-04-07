@@ -1,5 +1,6 @@
 import { DOMAIN } from '../utils/constants';
 import { Sprite } from './sprite';
+import { RANDOM } from '../utils/utils';
 
 class Draw {
     constructor() {
@@ -22,26 +23,42 @@ class Draw {
         this._loadResources().then(
             (resources) => {
                 resources.forEach(resource => this.images[resource.name] = resource.image);
-                this.host.append(this.canvas)
-                let pizza = new Sprite(this.images["pizza"], 160, 160, 300, 300)
-                
-                
-                this.sprites["pizza"] = pizza;
-                this.spritesPool.push(pizza);
-                
-                this._draw();
-                let corn = new Sprite(this.images["cheese"], random(80, 240), random(80, 240));
-                this.spritesPool.push(corn)
-                let onion = new Sprite(this.images["cheese"], random(80, 240), random(80, 240));
-                this.spritesPool.push(onion)
-                this._draw();
+                this.host.append(this.canvas);
+                this._startSet();
             }
         );
     }
 
+    _startSet() {
+        this.spritesPool = [];
+        let pizza = new Sprite(this.images['pizza'], 160, 160, 300, 300);
+        this.sprites['pizza'] = pizza;
+        this.spritesPool.push(pizza);
+        this._draw();
+    }
+
+    handleClick(options) {
+        this._startSet();
+        if(options.length === 0) {
+            this._startSet();
+        } else {
+            options.forEach(el => {
+                this._print(el, 15);
+            });
+        }   
+    }
+
+    _print(name, count) {
+        for(let i = 1; i <= count; i++) {
+            let ingredient = new Sprite(this.images[`${name}`], RANDOM(80, 240), RANDOM(80, 240));
+            this.spritesPool.push(ingredient); 
+        }
+        this._draw();
+    }
+
     _draw() {
-        this.ctx.clearRect(0,0,this.canvasWidth, this.canvasHeight)
-        this.spritesPool.forEach(sprite => sprite.draw(this.ctx))
+        this.ctx.clearRect(0,0,this.canvasWidth, this.canvasHeight);
+        this.spritesPool.forEach(sprite => sprite.draw(this.ctx));
     }
 
     _loadResources() {
@@ -62,11 +79,6 @@ class Draw {
             image.src = url;
         });
     }
-}
-
-function random(min,max)
-{
-    return Math.floor(Math.random()*(max-min+1)+min);
 }
 
 export const DRAW = new Draw();

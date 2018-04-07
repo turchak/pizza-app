@@ -14,6 +14,7 @@ class NewPizza extends Component {
         this.header = new Header();
         this.footer = new Footer();
         this.renderData();
+        this.handleClick = this.handleClick.bind(this);
     }
 
     renderData() {
@@ -21,7 +22,8 @@ class NewPizza extends Component {
         Promise.all([CREATE_DATA.getIngredients(), CREATE_DATA.getTags()])
             .then(() => {
                 const container = document.querySelector('.create__options');
-                let canvas = document.querySelector('.create__canvas')
+                container.addEventListener('change', this.handleClick);
+                let canvas = document.querySelector('.create__canvas');
                 const form  = document.createElement('form');
                 container.appendChild(form);
                 form.append(this.renderForm());
@@ -30,10 +32,26 @@ class NewPizza extends Component {
                 DRAW.onInit(
                     {
                         host: canvas,
-                        ingredients: CREATE_DATA.ingredients
+                        ingredients: CREATE_DATA.ingredients,
                     }
-                ) 
+                ); 
             });    
+    }
+
+    handleClick(ev) {
+        if (ev.target.dataset.flag === 'ingredient') {
+            console.log(true);
+            const ingredientsInputs = document.querySelectorAll('[data-flag]');
+            const options = []; 
+            ingredientsInputs.forEach(ingredientInput => {
+                if(ingredientInput.checked) {
+                    options.push(ingredientInput.value);
+                }
+            });
+            console.log(options)
+            DRAW.handleClick(options)
+        }
+        return false;
     }
 
     renderForm() {
@@ -44,7 +62,7 @@ class NewPizza extends Component {
         </label>
         <label>
             <span>Description</span>
-            <input type='text' name='description'>
+            <textarea class='create__description'></textarea>
         </label>
         <label>
             <span>Size<span>
@@ -73,8 +91,8 @@ class NewPizza extends Component {
                 <div class='create__ingredients'>${data.reduce((html, data) => {
         html += `
                         <label class='create__ingredients-item'>
-                            <input class='create__ingredients-input' type='checkbox'>
-                            <img src='${DOMAIN}/${data.image_url}' class='create__ingredients' title='${data.description}'>
+                            <input class='create__ingredients-input' type='checkbox' value='${data.name}' data-flag='ingredient'>
+                            <img src='${DOMAIN}/${data.image_url}' class='create__ingredients' title='${data.description}' data-name='ingredient'>
                         </label>
                         `;
         return html;
@@ -83,6 +101,8 @@ class NewPizza extends Component {
                 <h2 class='create__tag-title'>Tag<h2>
         `;
         const fragment = toHtml(ingredientsString);
+        const ingredientsInputs = fragment.querySelector('.create__ingredients');
+        ingredientsInputs.addEventListener('click', this.handleClick);
         return fragment;
     }
 
