@@ -22,7 +22,6 @@ class Login extends Component {
     }
 
     render() {
-        
         return [
             this.header.update(),
             this.login.update(),

@@ -63,7 +63,7 @@ class Draw {
 
     _loadResources() {
         let promises = [];
-        promises.push(this._loadImage("pizza", this.crust_pizza));
+        promises.push(this._loadImage('pizza', this.crust_pizza));
         promises = promises.concat(this.ingredients.map(ingredient => {
             let ingr_url = `${DOMAIN}/${ingredient.image_url}`;
             return this._loadImage(ingredient.name, ingr_url);

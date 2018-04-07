@@ -159,7 +159,7 @@ exports.AUTH_SERVICE = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _constants = __webpack_require__(2);
+var _constants = __webpack_require__(3);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -284,6 +284,26 @@ var AUTH_SERVICE = exports.AUTH_SERVICE = new AuthService();
 
 
 Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var toHtml = exports.toHtml = function toHtml(string) {
+    var template = document.createElement('template');
+    template.innerHTML = string;
+    return template.content;
+};
+
+var RANDOM = exports.RANDOM = function RANDOM(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+};
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var DOMAIN = exports.DOMAIN = 'https://pizza-tele.ga';
@@ -292,7 +312,7 @@ var TAG_URL = exports.TAG_URL = DOMAIN + '/api/v1/tag/list';
 var USER_URL = exports.USER_URL = DOMAIN + '/api/v1/user/my_info';
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -342,7 +362,7 @@ var Footer = function (_Component) {
 exports.default = Footer;
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -358,7 +378,7 @@ var _component = __webpack_require__(0);
 
 var _component2 = _interopRequireDefault(_component);
 
-var _utils = __webpack_require__(5);
+var _utils = __webpack_require__(2);
 
 var _auth = __webpack_require__(1);
 
@@ -405,52 +425,6 @@ var Header = function (_Component) {
 }(_component2.default);
 
 exports.default = Header;
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-var toHtml = exports.toHtml = function toHtml(string) {
-    var template = document.createElement('template');
-    template.innerHTML = string;
-    return template.content;
-};
-
-var URL_PARAM_REGEXP = /:\w+/g;
-var isUrlParam = function isUrlParam(path) {
-    return URL_PARAM_REGEXP.test(path);
-};
-var urlToRegExp = function urlToRegExp(url) {
-    return RegExp('^' + url.replace(URL_PARAM_REGEXP, '(.*)') + '$');
-};
-var isEqualPaths = exports.isEqualPaths = function isEqualPaths(template, url) {
-    return urlToRegExp(template).test(url);
-};
-
-var extractUrlParams = exports.extractUrlParams = function extractUrlParams(template, url) {
-    var values = url.split('/');
-    var params = {};
-
-    if (!values) {
-        return params;
-    }
-
-    return template.split('/').reduce(function (acc, param, index) {
-        if (!isUrlParam(param)) {
-            return acc;
-        }
-        //We need to remove ':' from param name
-        acc[param.slice(1)] = values[index];
-
-        return acc;
-    }, params);
-};
 
 /***/ }),
 /* 6 */
@@ -610,7 +584,7 @@ exports = module.exports = __webpack_require__(11)(true);
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&subset=cyrillic);", ""]);
 
 // module
-exports.push([module.i, "* {\n  box-sizing: border-box; }\n\nimg {\n  width: 100%; }\n\nh1, h2 {\n  margin: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline; }\n\n.button {\n  display: block;\n  appearance: none;\n  user-select: none;\n  text-align: center;\n  white-space: nowrap;\n  text-decoration: none;\n  height: 3rem;\n  padding: 0 0.5rem;\n  border: 0.125rem solid transparent;\n  font-family: \"Open Sans\", sans-serif;\n  text-transform: uppercase;\n  font-weight: 600;\n  font-size: 0.8125rem;\n  line-height: 2.625rem;\n  -webkit-font-smoothing: antialiased;\n  border-radius: 0.25rem;\n  letter-spacing: 0.09375rem;\n  transition: all 0.3s ease;\n  box-shadow: 8px 10px 20px 0 rgba(46, 61, 73, 0.15);\n  cursor: pointer; }\n  .button:hover {\n    box-shadow: 2px 4px 8px 0 rgba(46, 61, 73, 0.2); }\n\ninput[type=text], input[type=password] {\n  width: 100%;\n  height: 44px;\n  margin-bottom: 20px;\n  padding-left: 15px;\n  padding-right: 15px;\n  border: 1px solid #dbe2e8;\n  box-shadow: 0 2px 2px 0 rgba(46, 60, 73, 0.05);\n  border-radius: 2px;\n  color: #2e3d49; }\n  input[type=text]:active, input[type=password]:active {\n    outline: none;\n    border-color: #f7a75a; }\n  input[type=text]:focus, input[type=password]:focus {\n    outline: none;\n    border-color: #f7a75a; }\n  input[type=text]::placeholder, input[type=password]::placeholder {\n    opacity: .5; }\n\nhtml {\n  height: 100%;\n  overflow-y: scroll; }\n\nbody {\n  margin: 0;\n  color: #525c65;\n  font-size: 16px;\n  font-family: \"Open Sans\", sans-serif;\n  line-height: 1.5rem;\n  height: 100%;\n  -webkit-font-smoothing: antialiased; }\n\n.container {\n  max-width: 1200px;\n  margin: 0 auto;\n  padding: 0 15px; }\n\n#root {\n  height: 100%; }\n\n.login-container {\n  display: flex;\n  flex-direction: column;\n  min-height: 100vh; }\n\n.registration-container {\n  display: flex;\n  flex-direction: column;\n  min-height: 100vh; }\n\n.user-container {\n  display: flex;\n  flex-direction: column;\n  min-height: 100vh; }\n\n.create-container {\n  display: flex;\n  flex-direction: column;\n  min-height: 100vh; }\n\n.header {\n  width: 100%;\n  background: #cc3354; }\n\n.nav {\n  display: flex;\n  justify-content: center;\n  flex-wrap: wrap; }\n  @media (min-width: 768px) {\n    .nav {\n      flex-wrap: nowrap;\n      padding: 15px 0; } }\n  .nav .current-time {\n    display: flex;\n    justify-content: space-between;\n    align-self: flex-start;\n    order: 3;\n    margin: 15px auto 15px 0;\n    color: #fff; }\n    @media (min-width: 768px) {\n      .nav .current-time {\n        justify-content: flex-start;\n        align-self: center;\n        order: 1;\n        width: 25%;\n        margin: 0; } }\n    @media (min-width: 1024px) {\n      .nav .current-time {\n        width: 30%; } }\n    @media (min-width: 1200px) {\n      .nav .current-time {\n        width: 25%; } }\n    .nav .current-time svg {\n      width: 25px;\n      height: 25px;\n      fill: #ffd31a; }\n    .nav .current-time time {\n      margin-left: 5px; }\n  .nav .logo {\n    order: 1;\n    width: 100%;\n    padding: 15px 0; }\n    @media (min-width: 768px) {\n      .nav .logo {\n        order: 2;\n        width: 50%;\n        padding: 0; } }\n    @media (min-width: 1024px) {\n      .nav .logo {\n        width: 40%; } }\n    @media (min-width: 1200px) {\n      .nav .logo {\n        width: 50%; } }\n    .nav .logo svg {\n      width: 100%;\n      fill: #ffd31a; }\n  .nav .auth {\n    display: flex;\n    justify-content: space-between;\n    order: 2;\n    width: 100%;\n    text-transform: uppercase; }\n    @media (min-width: 768px) {\n      .nav .auth {\n        flex-direction: column;\n        justify-content: space-between;\n        align-items: flex-end;\n        width: 25%; } }\n    @media (min-width: 1024px) {\n      .nav .auth {\n        flex-direction: row;\n        align-items: center;\n        width: 30%; } }\n    @media (min-width: 1200px) {\n      .nav .auth {\n        width: 25%; } }\n    .nav .auth__button {\n      width: 140px;\n      color: #fff;\n      background: #f43745; }\n      .nav .auth__button:hover {\n        background: #e5354b; }\n      .nav .auth__button-link {\n        display: inline-block;\n        text-decoration: none;\n        color: #fff;\n        width: 100%;\n        height: 100%; }\n\n.login {\n  flex: 1 0 auto;\n  padding: 60px 0;\n  background: #ff8b17; }\n  .login__title {\n    margin-bottom: 15px;\n    text-transform: uppercase; }\n  .login__form {\n    max-width: 620px;\n    margin: 0 auto;\n    padding: 60px;\n    border: 1px solid #dbe2e8;\n    background: #fff;\n    box-shadow: 2px 2px 3px 0 rgba(117, 124, 129, 0.12); }\n  .login__button {\n    min-width: 207px;\n    width: 100%;\n    margin-top: 20px;\n    color: #fff;\n    background: #f7a75a; }\n\n.error__text {\n  color: #909070; }\n\n.registration {\n  flex: 1 0 auto;\n  padding: 60px 0;\n  background: #ff8b17; }\n  .registration__title {\n    margin-bottom: 15px;\n    text-transform: uppercase; }\n  .registration__form {\n    max-width: 620px;\n    margin: 0 auto;\n    padding: 60px;\n    border: 1px solid #dbe2e8;\n    background: #fff;\n    box-shadow: 2px 2px 3px 0 rgba(117, 124, 129, 0.12); }\n  .registration__input {\n    width: 100%;\n    height: 44px;\n    margin-bottom: 20px;\n    padding-left: 15px;\n    padding-right: 15px;\n    border: 1px solid #dbe2e8;\n    box-shadow: 0 2px 2px 0 rgba(46, 60, 73, 0.05);\n    border-radius: 2px;\n    color: #2e3d49; }\n    .registration__input:active {\n      outline: none;\n      border-color: #f7a75a; }\n    .registration__input:focus {\n      outline: none;\n      border-color: #f7a75a; }\n    .registration__input::placeholder {\n      opacity: .5; }\n  .registration__button {\n    min-width: 207px;\n    width: 100%;\n    margin-top: 20px;\n    color: #fff;\n    background: #f7a75a; }\n  .registration__select {\n    width: 100%;\n    height: 44px;\n    margin-bottom: 20px;\n    padding-left: 15px;\n    padding-right: 15px;\n    border: 1px solid #dbe2e8;\n    box-shadow: 0 2px 2px 0 rgba(46, 60, 73, 0.05);\n    border-radius: 2px;\n    color: #2e3d49; }\n\n.user {\n  flex: 1 0 auto;\n  padding: 60px 0;\n  background: #ff8b17; }\n\n.main {\n  padding-top: 10px;\n  background: #ff8b17; }\n  .main .add-link {\n    width: 140px;\n    margin: 10px auto;\n    background: #ffc822;\n    text-decoration: none;\n    color: #525c65; }\n    .main .add-link:hover {\n      background: #ffd31a; }\n  .main section {\n    display: flex;\n    flex-wrap: wrap; }\n    .main section .pizza {\n      display: flex;\n      flex-wrap: wrap;\n      margin: 20px;\n      padding: 15px;\n      background: #fffde5;\n      border-radius: 0.375rem;\n      box-shadow: 5px 5px 25px 0 rgba(46, 61, 73, 0.2);\n      transition: all 0.3s ease; }\n      @media (min-width: 768px) {\n        .main section .pizza {\n          width: calc(50% - 40px); } }\n      @media (min-width: 1200px) {\n        .main section .pizza {\n          width: calc(100% / 3 - 40px); } }\n      .main section .pizza__img {\n        align-self: center; }\n      .main section .pizza__name {\n        width: 100%;\n        margin: 15px 0;\n        font-size: 18px;\n        font-weight: 600;\n        white-space: nowrap;\n        text-align: center; }\n      .main section .pizza:hover {\n        box-shadow: 2px 4px 8px 0 rgba(46, 61, 73, 0.2); }\n      .main section .pizza__time {\n        width: 50%; }\n      .main section .pizza__queue-number {\n        width: 50%;\n        text-align: right;\n        color: #e5354b; }\n      .main section .pizza__eta {\n        width: 50%; }\n        .main section .pizza__eta time {\n          color: #cc3354; }\n        .main section .pizza__eta span:first-child {\n          text-transform: uppercase; }\n      .main section .pizza__price {\n        width: 50%;\n        text-align: right; }\n\n.footer {\n  flex-shrink: 0;\n  background: #303030; }\n  .footer .container {\n    display: flex;\n    flex-wrap: wrap;\n    align-items: center;\n    padding: 15px;\n    color: #fff; }\n    @media (min-width: 768px) {\n      .footer .container {\n        justify-content: space-between; } }\n    .footer .container address {\n      font-style: normal; }\n      .footer .container address a {\n        color: #fff; }\n\n.create {\n  flex: 1 0 auto;\n  padding: 60px 0;\n  background: #ff8b17; }\n  .create__container {\n    display: flex;\n    flex-wrap: wrap; }\n  .create__title {\n    width: 100%;\n    text-align: center; }\n  .create__canvas {\n    width: 50%;\n    height: 100px; }\n  .create__options {\n    width: 50%; }\n  .create form {\n    display: flex;\n    flex-direction: column; }\n  .create__description {\n    width: 100%;\n    height: 60px;\n    padding: 15px;\n    border: 1px solid #dbe2e8;\n    box-shadow: 0 2px 2px 0 rgba(46, 60, 73, 0.05);\n    border-radius: 2px; }\n  .create__ingredients {\n    display: flex;\n    flex-wrap: wrap;\n    width: 50%; }\n    .create__ingredients-item {\n      position: relative;\n      display: flex;\n      padding: 5px;\n      width: calc(100% / 7); }\n    .create__ingredients-input {\n      position: absolute;\n      top: 50%;\n      left: 50%;\n      transform: translate(-50%, -50%);\n      opacity: 0;\n      pointer-events: none; }\n      .create__ingredients-input:checked ~ img {\n        box-shadow: 0 0 0 2px #ffffff; }\n    .create__ingredients img {\n      width: 100%; }\n  .create__tags {\n    display: flex;\n    flex-direction: column; }\n", "", {"version":3,"sources":["C:/home/kottans/task_12/src/assets/scss/src/assets/scss/common.scss","C:/home/kottans/task_12/src/assets/scss/src/assets/scss/variables.scss","C:/home/kottans/task_12/src/assets/scss/src/assets/scss/blocks/header.scss","C:/home/kottans/task_12/src/assets/scss/src/assets/scss/helpers/media-queries.scss","C:/home/kottans/task_12/src/assets/scss/src/assets/scss/blocks/login.scss","C:/home/kottans/task_12/src/assets/scss/src/assets/scss/blocks/registration.scss","C:/home/kottans/task_12/src/assets/scss/src/assets/scss/blocks/user.scss","C:/home/kottans/task_12/src/assets/scss/src/assets/scss/blocks/main.scss","C:/home/kottans/task_12/src/assets/scss/src/assets/scss/blocks/footer.scss","C:/home/kottans/task_12/src/assets/scss/src/assets/scss/blocks/create.scss"],"names":[],"mappings":"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","file":"app.scss","sourcesContent":["* {\r\n    box-sizing: border-box;\r\n}\r\n\r\nimg {\r\n    width: 100%;\r\n}\r\n\r\n\r\n\r\nh1, h2 {\r\n    margin: 0;\r\n\tfont-size: 100%;\r\n\tfont: inherit;\r\n\tvertical-align: baseline;\r\n}\r\n\r\n.button {\r\n    display: block;\r\n    appearance: none;\r\n    user-select: none;\r\n    text-align: center;\r\n    white-space: nowrap;\r\n    text-decoration: none;\r\n    height: 3rem;\r\n    padding: 0 0.5rem;\r\n    border: 0.125rem solid transparent;\r\n    font-family: \"Open Sans\", sans-serif;\r\n    text-transform: uppercase;\r\n    font-weight: 600;\r\n    font-size: 0.8125rem;\r\n    line-height: 2.625rem;\r\n    -webkit-font-smoothing: antialiased;\r\n    border-radius: 0.25rem;\r\n    letter-spacing: 0.09375rem;\r\n    transition: all 0.3s ease;\r\n    box-shadow: 8px 10px 20px 0 rgba(46,61,73,0.15);\r\n    cursor: pointer;\r\n\r\n    &:hover {\r\n        box-shadow: 2px 4px 8px 0 rgba(46,61,73,0.2);\r\n    }\r\n}\r\n\r\ninput[type=text], input[type=password] {\r\n    width: 100%;\r\n    height: 44px;\r\n    margin-bottom: 20px;\r\n    padding-left: 15px;\r\n    padding-right: 15px;\r\n    border: 1px solid #dbe2e8;\r\n    box-shadow: 0 2px 2px 0 rgba(46, 60, 73, 0.05);\r\n    border-radius: 2px;\r\n    color: #2e3d49;\r\n\r\n    &:active {\r\n        outline: none;\r\n        border-color: $light-orange;\r\n    }\r\n\r\n    &:focus {\r\n        outline: none;\r\n        border-color: $light-orange;\r\n    }\r\n\r\n    &::placeholder {\r\n        opacity: .5;\r\n    }\r\n}\r\n\r\nhtml {\r\n    height: 100%;\r\n    overflow-y:scroll;\r\n}\r\n\r\nbody {\r\n    margin: 0;\r\n    color: $grey;\r\n    font-size: 16px;\r\n    font-family: \"Open Sans\", sans-serif;\r\n    line-height: 1.5rem;\r\n    height: 100%;\r\n    -webkit-font-smoothing: antialiased;\r\n}\r\n\r\n.container {\r\n    max-width: 1200px;\r\n    margin: 0 auto;\r\n    padding: 0 15px;\r\n}\r\n\r\n#root {\r\n    height: 100%;\r\n}\r\n\r\n.login-container {\r\n    display: flex;\r\n    flex-direction: column;\r\n    min-height: 100vh;\r\n}\r\n\r\n.registration-container {\r\n    display: flex;\r\n    flex-direction: column;\r\n    min-height: 100vh;\r\n}\r\n\r\n.user-container {\r\n    display: flex;\r\n    flex-direction: column;\r\n    min-height: 100vh;\r\n}\r\n\r\n.create-container {\r\n    display: flex;\r\n    flex-direction: column;\r\n    min-height: 100vh;\r\n}","// colors\r\n$wheat:       #fffde5;\r\n$yellow:      #ffd31a;\r\n$yellow-plus: #ffc822;\r\n$grey:        #525c65;\r\n$orange:      #ff8b17;\r\n$black:       #000;\r\n$white:       #fff;\r\n\r\n//sub-colors\r\n$grey-dark:        #303030;\r\n$light-orange:     #f7a75a;\r\n$orange-red-light: #f43745;\r\n$orange-red:       #e5354b;\r\n$orange-pink-light:#d83550;\r\n$orange-pink:      #cc3354;",".header {\r\n    width: 100%;\r\n    background: $orange-pink;\r\n}\r\n\r\n.nav {\r\n    display: flex;\r\n    justify-content: center;\r\n    flex-wrap: wrap;\r\n    @include tablet-min {\r\n        flex-wrap: nowrap;\r\n        padding: 15px 0;\r\n    }\r\n\r\n    & .current-time {\r\n        display: flex;\r\n        justify-content: space-between;\r\n        align-self: flex-start;\r\n        order: 3;\r\n        margin: 15px auto 15px 0;\r\n        color: $white;\r\n        @include tablet-min {\r\n            justify-content: flex-start;\r\n            align-self: center;\r\n            order: 1;\r\n            width: 25%;\r\n            margin: 0;\r\n        }\r\n        @include tablet-landscape-min {\r\n            width: 30%;\r\n        }\r\n        @include desktop-min {\r\n            width: 25%;\r\n        }\r\n\r\n        & svg {\r\n            width: 25px;\r\n            height: 25px;\r\n            fill: $yellow;\r\n        }\r\n\r\n        & time {\r\n            margin-left: 5px;\r\n        }\r\n    }\r\n\r\n    & .logo {\r\n        order: 1;\r\n        width: 100%;\r\n        padding: 15px 0;\r\n        @include tablet-min {\r\n            order: 2;\r\n            width: 50%;\r\n            padding: 0;\r\n        }\r\n        @include tablet-landscape-min {\r\n            width: 40%;\r\n        }\r\n        @include desktop-min {\r\n            width: 50%;\r\n        }\r\n\r\n        & svg {\r\n            width: 100%;\r\n            fill: $yellow;\r\n        }\r\n    }\r\n\r\n    & .auth {\r\n        display: flex;\r\n        justify-content: space-between;\r\n        order: 2;\r\n        width: 100%;\r\n        text-transform: uppercase;\r\n        @include tablet-min {\r\n            flex-direction: column;\r\n            justify-content: space-between;\r\n            align-items: flex-end;\r\n            width: 25%;\r\n        }\r\n        @include tablet-landscape-min {\r\n            flex-direction: row;\r\n            align-items: center;\r\n            width: 30%;\r\n        }\r\n        @include desktop-min {\r\n            width: 25%;\r\n        }\r\n\r\n        &__button {\r\n            width: 140px;\r\n            color: $white;\r\n            background: $orange-red-light;\r\n\r\n            &:hover {\r\n                background: $orange-red;\r\n            }\r\n            //TODO: fix this class\r\n            &-link {\r\n                display: inline-block;\r\n                text-decoration: none;\r\n                color:#fff;\r\n                width: 100%;\r\n                height: 100%;\r\n            }\r\n        }\r\n    }\r\n}","// Settings\r\n$mobile-s-width:   320px;\r\n$mobile-m-width:   375px;\r\n$mobile-l-width:   425px;\r\n$tablet-p-width:   768px;\r\n$tablet-l-width:   1024px;\r\n$desktop-width:    1200px;\r\n$desktop-l-width:  1440px;\r\n$desktop-4k-width: 2560px;\r\n\r\n// Mixins\r\n@mixin mobile-small-min {\r\n\t@media (min-width: #{$mobile-s-width}){\r\n\t\t@content;\r\n\t}\r\n}\r\n\r\n@mixin mobile-medium-min {\r\n\t@media (min-width: #{$mobile-m-width}){\r\n\t\t@content;\r\n\t}\r\n}\r\n\r\n@mixin mobile-large-min {\r\n\t@media (min-width: #{$mobile-l-width}){\r\n\t\t@content;\r\n\t}\r\n}\r\n\r\n@mixin tablet-min {\r\n\t@media (min-width: #{$tablet-p-width}){\r\n\t\t@content;\r\n\t}\r\n}\r\n\r\n@mixin tablet-landscape-min {\r\n\t@media (min-width: #{$tablet-l-width}){\r\n\t\t@content;\r\n\t}\r\n}\r\n\r\n@mixin desktop-min {\r\n\t@media (min-width: #{$desktop-width}){\r\n\t\t@content;\r\n\t}\r\n}\r\n\r\n@mixin desktop-l-min {\r\n\t@media (min-width: #{$desktop-l-width}){\r\n\t\t@content;\r\n\t}\r\n}\r\n\r\n@mixin desktop-4k {\r\n\t@media (min-width: #{$desktop-4k-width}){\r\n\t\t@content;\r\n\t}\r\n}\r\n\r\n@mixin retina {\r\n  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi){\r\n    @content;\r\n  }\r\n}\r\n",".login {\r\n    flex: 1 0 auto;\r\n    padding: 60px 0;\r\n    background: $orange;\r\n\r\n    &__title {\r\n        margin-bottom: 15px;\r\n        text-transform: uppercase;\r\n    }\r\n\r\n    &__form {\r\n        max-width: 620px;\r\n        margin: 0 auto;\r\n        padding: 60px;\r\n        border: 1px solid #dbe2e8;\r\n        background: #fff;\r\n        box-shadow: 2px 2px 3px 0 rgba(117, 124, 129, 0.12);\r\n    }\r\n\r\n    &__button {\r\n        min-width: 207px;\r\n        width: 100%;\r\n        margin-top: 20px;\r\n        color: #fff;\r\n        background: $light-orange;\r\n    }\r\n}\r\n\r\n.error {\r\n    &__container {\r\n\r\n    }\r\n\r\n    &__text {\r\n        color: #909070;\r\n    }\r\n}",".registration {\r\n    flex: 1 0 auto;\r\n    padding: 60px 0;\r\n    background: $orange;\r\n\r\n    &__title {\r\n        margin-bottom: 15px;\r\n        text-transform: uppercase;\r\n    }\r\n\r\n    &__form {\r\n        max-width: 620px;\r\n        margin: 0 auto;\r\n        padding: 60px;\r\n        border: 1px solid #dbe2e8;\r\n        background: #fff;\r\n        box-shadow: 2px 2px 3px 0 rgba(117, 124, 129, 0.12);\r\n    }\r\n\r\n    &__input {\r\n        width: 100%;\r\n        height: 44px;\r\n        margin-bottom: 20px;\r\n        padding-left: 15px;\r\n        padding-right: 15px;\r\n        border: 1px solid #dbe2e8;\r\n        box-shadow: 0 2px 2px 0 rgba(46, 60, 73, 0.05);\r\n        border-radius: 2px;\r\n        color: #2e3d49;\r\n\r\n        &:active {\r\n            outline: none;\r\n            border-color: $light-orange;\r\n        }\r\n\r\n        &:focus {\r\n            outline: none;\r\n            border-color: $light-orange;\r\n        }\r\n\r\n        &::placeholder {\r\n            opacity: .5;\r\n        }\r\n    }\r\n\r\n    &__button {\r\n        min-width: 207px;\r\n        width: 100%;\r\n        margin-top: 20px;\r\n        color: #fff;\r\n        background: $light-orange;\r\n    }\r\n\r\n    &__select {\r\n        width: 100%;\r\n        height: 44px;\r\n        margin-bottom: 20px;\r\n        padding-left: 15px;\r\n        padding-right: 15px;\r\n        border: 1px solid #dbe2e8;\r\n        box-shadow: 0 2px 2px 0 rgba(46, 60, 73, 0.05);\r\n        border-radius: 2px;\r\n        color: #2e3d49;\r\n    }\r\n}",".user {\r\n    flex: 1 0 auto;\r\n    padding: 60px 0;\r\n    background: $orange;\r\n}",".main {\r\n  padding-top: 10px;\r\n  background: $orange;\r\n\r\n  & .add-link {\r\n    width: 140px;\r\n    margin: 10px auto;\r\n    background: $yellow-plus;\r\n    text-decoration: none;\r\n    color: $grey;\r\n    &:hover {\r\n      background: $yellow;\r\n    }\r\n  }\r\n\r\n  & section {\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n\r\n    & .pizza {\r\n      display: flex;\r\n      flex-wrap: wrap;\r\n      margin: 20px;\r\n      padding: 15px;\r\n      background: $wheat;\r\n      border-radius: 0.375rem;\r\n      box-shadow: 5px 5px 25px 0 rgba(46,61,73,0.2);\r\n      transition: all 0.3s ease;\r\n      @include tablet-min {\r\n        width: calc(50% - 40px);\r\n      }\r\n      @include desktop-min {\r\n        width: calc(100% / 3 - 40px);\r\n      }\r\n\r\n      &__img {\r\n        align-self: center;\r\n      }\r\n\r\n      &__name {\r\n        width: 100%;\r\n        margin: 15px 0;\r\n        font-size: 18px;\r\n        font-weight: 600;\r\n        white-space: nowrap;\r\n        text-align: center;\r\n      }\r\n\r\n      &:hover {\r\n        box-shadow: 2px 4px 8px 0 rgba(46,61,73,0.2);\r\n      }\r\n\r\n      &__time {\r\n        width: 50%;\r\n      }\r\n\r\n      &__queue-number {\r\n        width: 50%;\r\n        text-align: right;\r\n        color: $orange-red;\r\n      }\r\n\r\n      &__eta {\r\n        width: 50%;\r\n\r\n        & time {\r\n          color: $orange-pink;\r\n        }\r\n\r\n        & span:first-child {\r\n          text-transform: uppercase;\r\n        }\r\n      }\r\n\r\n      &__price {\r\n        width: 50%;\r\n        text-align: right;\r\n      }\r\n    }\r\n  }\r\n}\r\n\r\n",".footer {\r\n    flex-shrink: 0;\r\n    background: $grey-dark;\r\n\r\n    & .container {\r\n        display: flex;\r\n        flex-wrap: wrap;\r\n        align-items: center;\r\n        padding: 15px;\r\n        color: $white;\r\n        @include tablet-min {\r\n            justify-content: space-between;\r\n        }\r\n\r\n        & address {\r\n            font-style: normal;\r\n\r\n            & a {\r\n                color: $white;\r\n            }\r\n        }\r\n    }\r\n}\r\n",".create {\r\n    flex: 1 0 auto;\r\n    padding: 60px 0;\r\n    \r\n    background: $orange;\r\n\r\n    &__container {\r\n        display: flex;\r\n        flex-wrap: wrap;\r\n    }\r\n\r\n    &__title {\r\n        width: 100%;\r\n        text-align: center;\r\n    }\r\n\r\n    &__canvas {\r\n        width: 50%;\r\n        height: 100px;\r\n    }\r\n\r\n    &__options {\r\n        width: 50%;\r\n    }\r\n\r\n    & form {\r\n        display: flex;\r\n        flex-direction: column;\r\n    }\r\n\r\n    &__description {\r\n        width: 100%;\r\n        height: 60px;\r\n        padding: 15px;\r\n        border: 1px solid #dbe2e8;\r\n        box-shadow: 0 2px 2px 0 rgba(46, 60, 73, 0.05);\r\n        border-radius: 2px;\r\n    }\r\n\r\n    &__ingredients {\r\n        display: flex;\r\n        flex-wrap: wrap;\r\n        width: 50%;\r\n\r\n        &-item {\r\n            position: relative;\r\n            display: flex;\r\n            padding: 5px;\r\n            width: calc(100% / 7);\r\n        }\r\n\r\n        &-input {\r\n            position: absolute;\r\n            top: 50%;\r\n            left: 50%;\r\n            transform: translate(-50%, -50%);\r\n            opacity: 0;\r\n            pointer-events: none;\r\n\r\n            &:checked ~ img {\r\n                box-shadow: 0 0 0 2px #ffffff;\r\n            }\r\n        }\r\n\r\n        & img {\r\n            width: 100%;\r\n        }\r\n\r\n        &-title {\r\n            \r\n        }\r\n    }\r\n\r\n    &__tags {\r\n        display: flex;\r\n        flex-direction: column;\r\n    }\r\n}"],"sourceRoot":""}]);
+exports.push([module.i, "* {\n  box-sizing: border-box; }\n\nimg {\n  width: 100%; }\n\nh1, h2 {\n  margin: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline; }\n\n.button {\n  display: block;\n  appearance: none;\n  user-select: none;\n  text-align: center;\n  white-space: nowrap;\n  text-decoration: none;\n  height: 3rem;\n  padding: 0 0.5rem;\n  border: 0.125rem solid transparent;\n  font-family: \"Open Sans\", sans-serif;\n  text-transform: uppercase;\n  font-weight: 600;\n  font-size: 0.8125rem;\n  line-height: 2.625rem;\n  -webkit-font-smoothing: antialiased;\n  border-radius: 0.25rem;\n  letter-spacing: 0.09375rem;\n  transition: all 0.3s ease;\n  box-shadow: 8px 10px 20px 0 rgba(46, 61, 73, 0.15);\n  cursor: pointer; }\n  .button:hover {\n    box-shadow: 2px 4px 8px 0 rgba(46, 61, 73, 0.2); }\n\ninput[type=text], input[type=password] {\n  width: 100%;\n  height: 44px;\n  margin-bottom: 20px;\n  padding-left: 15px;\n  padding-right: 15px;\n  border: 1px solid #dbe2e8;\n  box-shadow: 0 2px 2px 0 rgba(46, 60, 73, 0.05);\n  border-radius: 2px;\n  color: #2e3d49; }\n  input[type=text]:active, input[type=password]:active {\n    outline: none;\n    border-color: #f7a75a; }\n  input[type=text]:focus, input[type=password]:focus {\n    outline: none;\n    border-color: #f7a75a; }\n  input[type=text]::placeholder, input[type=password]::placeholder {\n    opacity: .5; }\n\nhtml {\n  height: 100%;\n  overflow-y: scroll; }\n\nbody {\n  margin: 0;\n  color: #525c65;\n  font-size: 16px;\n  font-family: \"Open Sans\", sans-serif;\n  line-height: 1.5rem;\n  height: 100%;\n  -webkit-font-smoothing: antialiased; }\n\n.container {\n  max-width: 1200px;\n  margin: 0 auto;\n  padding: 0 15px; }\n\n#root {\n  height: 100%; }\n\n.login-container {\n  display: flex;\n  flex-direction: column;\n  min-height: 100vh; }\n\n.registration-container {\n  display: flex;\n  flex-direction: column;\n  min-height: 100vh; }\n\n.user-container {\n  display: flex;\n  flex-direction: column;\n  min-height: 100vh; }\n\n.create-container {\n  display: flex;\n  flex-direction: column;\n  min-height: 100vh; }\n\n.header {\n  width: 100%;\n  background: #cc3354; }\n\n.nav {\n  display: flex;\n  justify-content: center;\n  flex-wrap: wrap; }\n  @media (min-width: 768px) {\n    .nav {\n      flex-wrap: nowrap;\n      padding: 15px 0; } }\n  .nav .current-time {\n    display: flex;\n    justify-content: space-between;\n    align-self: flex-start;\n    order: 3;\n    margin: 15px auto 15px 0;\n    color: #fff; }\n    @media (min-width: 768px) {\n      .nav .current-time {\n        justify-content: flex-start;\n        align-self: center;\n        order: 1;\n        width: 25%;\n        margin: 0; } }\n    @media (min-width: 1024px) {\n      .nav .current-time {\n        width: 30%; } }\n    @media (min-width: 1200px) {\n      .nav .current-time {\n        width: 25%; } }\n    .nav .current-time svg {\n      width: 25px;\n      height: 25px;\n      fill: #ffd31a; }\n    .nav .current-time time {\n      margin-left: 5px; }\n  .nav .logo {\n    order: 1;\n    width: 100%;\n    padding: 15px 0; }\n    @media (min-width: 768px) {\n      .nav .logo {\n        order: 2;\n        width: 50%;\n        padding: 0; } }\n    @media (min-width: 1024px) {\n      .nav .logo {\n        width: 40%; } }\n    @media (min-width: 1200px) {\n      .nav .logo {\n        width: 50%; } }\n    .nav .logo svg {\n      width: 100%;\n      fill: #ffd31a; }\n  .nav .auth {\n    display: flex;\n    justify-content: space-between;\n    order: 2;\n    width: 100%;\n    text-transform: uppercase; }\n    @media (min-width: 768px) {\n      .nav .auth {\n        flex-direction: column;\n        justify-content: space-between;\n        align-items: flex-end;\n        width: 25%; } }\n    @media (min-width: 1024px) {\n      .nav .auth {\n        flex-direction: row;\n        align-items: center;\n        width: 30%; } }\n    @media (min-width: 1200px) {\n      .nav .auth {\n        width: 25%; } }\n    .nav .auth__button {\n      width: 140px;\n      color: #fff;\n      background: #f43745; }\n      .nav .auth__button:hover {\n        background: #e5354b; }\n      .nav .auth__button-link {\n        display: inline-block;\n        text-decoration: none;\n        color: #fff;\n        width: 100%;\n        height: 100%; }\n\n.login {\n  flex: 1 0 auto;\n  padding: 60px 0;\n  background: #ff8b17; }\n  .login__title {\n    margin-bottom: 15px;\n    text-transform: uppercase; }\n  .login__form {\n    max-width: 620px;\n    margin: 0 auto;\n    padding: 60px;\n    border: 1px solid #dbe2e8;\n    background: #fff;\n    box-shadow: 2px 2px 3px 0 rgba(117, 124, 129, 0.12); }\n  .login__button {\n    min-width: 207px;\n    width: 100%;\n    margin-top: 20px;\n    color: #fff;\n    background: #f7a75a; }\n\n.error__text {\n  color: #909070; }\n\n.registration {\n  flex: 1 0 auto;\n  padding: 60px 0;\n  background: #ff8b17; }\n  .registration__title {\n    margin-bottom: 15px;\n    text-transform: uppercase; }\n  .registration__form {\n    max-width: 620px;\n    margin: 0 auto;\n    padding: 60px;\n    border: 1px solid #dbe2e8;\n    background: #fff;\n    box-shadow: 2px 2px 3px 0 rgba(117, 124, 129, 0.12); }\n  .registration__input {\n    width: 100%;\n    height: 44px;\n    margin-bottom: 20px;\n    padding-left: 15px;\n    padding-right: 15px;\n    border: 1px solid #dbe2e8;\n    box-shadow: 0 2px 2px 0 rgba(46, 60, 73, 0.05);\n    border-radius: 2px;\n    color: #2e3d49; }\n    .registration__input:active {\n      outline: none;\n      border-color: #f7a75a; }\n    .registration__input:focus {\n      outline: none;\n      border-color: #f7a75a; }\n    .registration__input::placeholder {\n      opacity: .5; }\n  .registration__button {\n    min-width: 207px;\n    width: 100%;\n    margin-top: 20px;\n    color: #fff;\n    background: #f7a75a; }\n  .registration__select {\n    width: 100%;\n    height: 44px;\n    margin-bottom: 20px;\n    padding-left: 15px;\n    padding-right: 15px;\n    border: 1px solid #dbe2e8;\n    box-shadow: 0 2px 2px 0 rgba(46, 60, 73, 0.05);\n    border-radius: 2px;\n    color: #2e3d49; }\n\n.user {\n  flex: 1 0 auto;\n  padding: 60px 0;\n  background: #ff8b17; }\n\n.main {\n  padding-top: 10px;\n  background: #ff8b17; }\n  .main .add-link {\n    width: 140px;\n    margin: 10px auto;\n    background: #ffc822;\n    text-decoration: none;\n    color: #525c65; }\n    .main .add-link:hover {\n      background: #ffd31a; }\n  .main section {\n    display: flex;\n    flex-wrap: wrap; }\n    .main section .pizza {\n      display: flex;\n      flex-wrap: wrap;\n      margin: 20px;\n      padding: 15px;\n      background: #fffde5;\n      border-radius: 0.375rem;\n      box-shadow: 5px 5px 25px 0 rgba(46, 61, 73, 0.2);\n      transition: all 0.3s ease; }\n      @media (min-width: 768px) {\n        .main section .pizza {\n          width: calc(50% - 40px); } }\n      @media (min-width: 1200px) {\n        .main section .pizza {\n          width: calc(100% / 3 - 40px); } }\n      .main section .pizza__img {\n        align-self: center; }\n      .main section .pizza__name {\n        width: 100%;\n        margin: 15px 0;\n        font-size: 18px;\n        font-weight: 600;\n        white-space: nowrap;\n        text-align: center; }\n      .main section .pizza:hover {\n        box-shadow: 2px 4px 8px 0 rgba(46, 61, 73, 0.2); }\n      .main section .pizza__time {\n        width: 50%; }\n      .main section .pizza__queue-number {\n        width: 50%;\n        text-align: right;\n        color: #e5354b; }\n      .main section .pizza__eta {\n        width: 50%; }\n        .main section .pizza__eta time {\n          color: #cc3354; }\n        .main section .pizza__eta span:first-child {\n          text-transform: uppercase; }\n      .main section .pizza__price {\n        width: 50%;\n        text-align: right; }\n\n.footer {\n  flex-shrink: 0;\n  background: #303030; }\n  .footer .container {\n    display: flex;\n    flex-wrap: wrap;\n    align-items: center;\n    padding: 15px;\n    color: #fff; }\n    @media (min-width: 768px) {\n      .footer .container {\n        justify-content: space-between; } }\n    .footer .container address {\n      font-style: normal; }\n      .footer .container address a {\n        color: #fff; }\n\n.create {\n  flex: 1 0 auto;\n  padding: 60px 0;\n  background: #ff8b17; }\n  .create__container {\n    display: flex;\n    flex-wrap: wrap; }\n  .create__title {\n    font-size: 35px;\n    width: 100%;\n    text-align: center; }\n  .create__canvas {\n    width: 50%;\n    height: 100px; }\n  .create__name {\n    font-size: 20px; }\n  .create__options {\n    width: 50%; }\n  .create form {\n    display: flex;\n    flex-direction: column; }\n  .create__description {\n    width: 100%;\n    height: 60px;\n    padding: 15px;\n    border: 1px solid #dbe2e8;\n    box-shadow: 0 2px 2px 0 rgba(46, 60, 73, 0.05);\n    border-radius: 2px; }\n  .create__ingredients {\n    display: flex;\n    flex-wrap: wrap;\n    width: 50%; }\n    .create__ingredients-item {\n      position: relative;\n      display: flex;\n      padding: 5px;\n      width: calc(100% / 7); }\n    .create__ingredients-input {\n      position: absolute;\n      top: 50%;\n      left: 50%;\n      transform: translate(-50%, -50%);\n      opacity: 0;\n      pointer-events: none; }\n      .create__ingredients-input:checked ~ img {\n        box-shadow: 0 0 0 2px #ffffff; }\n    .create__ingredients img {\n      width: 100%; }\n  .create__tags {\n    display: flex;\n    flex-direction: column; }\n", "", {"version":3,"sources":["C:/home/kottans/task_12/src/assets/scss/src/assets/scss/common.scss","C:/home/kottans/task_12/src/assets/scss/src/assets/scss/variables.scss","C:/home/kottans/task_12/src/assets/scss/src/assets/scss/blocks/header.scss","C:/home/kottans/task_12/src/assets/scss/src/assets/scss/helpers/media-queries.scss","C:/home/kottans/task_12/src/assets/scss/src/assets/scss/blocks/login.scss","C:/home/kottans/task_12/src/assets/scss/src/assets/scss/blocks/registration.scss","C:/home/kottans/task_12/src/assets/scss/src/assets/scss/blocks/user.scss","C:/home/kottans/task_12/src/assets/scss/src/assets/scss/blocks/main.scss","C:/home/kottans/task_12/src/assets/scss/src/assets/scss/blocks/footer.scss","C:/home/kottans/task_12/src/assets/scss/src/assets/scss/blocks/create.scss"],"names":[],"mappings":"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","file":"app.scss","sourcesContent":["* {\r\n    box-sizing: border-box;\r\n}\r\n\r\nimg {\r\n    width: 100%;\r\n}\r\n\r\n\r\n\r\nh1, h2 {\r\n    margin: 0;\r\n\tfont-size: 100%;\r\n\tfont: inherit;\r\n\tvertical-align: baseline;\r\n}\r\n\r\n.button {\r\n    display: block;\r\n    appearance: none;\r\n    user-select: none;\r\n    text-align: center;\r\n    white-space: nowrap;\r\n    text-decoration: none;\r\n    height: 3rem;\r\n    padding: 0 0.5rem;\r\n    border: 0.125rem solid transparent;\r\n    font-family: \"Open Sans\", sans-serif;\r\n    text-transform: uppercase;\r\n    font-weight: 600;\r\n    font-size: 0.8125rem;\r\n    line-height: 2.625rem;\r\n    -webkit-font-smoothing: antialiased;\r\n    border-radius: 0.25rem;\r\n    letter-spacing: 0.09375rem;\r\n    transition: all 0.3s ease;\r\n    box-shadow: 8px 10px 20px 0 rgba(46,61,73,0.15);\r\n    cursor: pointer;\r\n\r\n    &:hover {\r\n        box-shadow: 2px 4px 8px 0 rgba(46,61,73,0.2);\r\n    }\r\n}\r\n\r\ninput[type=text], input[type=password] {\r\n    width: 100%;\r\n    height: 44px;\r\n    margin-bottom: 20px;\r\n    padding-left: 15px;\r\n    padding-right: 15px;\r\n    border: 1px solid #dbe2e8;\r\n    box-shadow: 0 2px 2px 0 rgba(46, 60, 73, 0.05);\r\n    border-radius: 2px;\r\n    color: #2e3d49;\r\n\r\n    &:active {\r\n        outline: none;\r\n        border-color: $light-orange;\r\n    }\r\n\r\n    &:focus {\r\n        outline: none;\r\n        border-color: $light-orange;\r\n    }\r\n\r\n    &::placeholder {\r\n        opacity: .5;\r\n    }\r\n}\r\n\r\nhtml {\r\n    height: 100%;\r\n    overflow-y:scroll;\r\n}\r\n\r\nbody {\r\n    margin: 0;\r\n    color: $grey;\r\n    font-size: 16px;\r\n    font-family: \"Open Sans\", sans-serif;\r\n    line-height: 1.5rem;\r\n    height: 100%;\r\n    -webkit-font-smoothing: antialiased;\r\n}\r\n\r\n.container {\r\n    max-width: 1200px;\r\n    margin: 0 auto;\r\n    padding: 0 15px;\r\n}\r\n\r\n#root {\r\n    height: 100%;\r\n}\r\n\r\n.login-container {\r\n    display: flex;\r\n    flex-direction: column;\r\n    min-height: 100vh;\r\n}\r\n\r\n.registration-container {\r\n    display: flex;\r\n    flex-direction: column;\r\n    min-height: 100vh;\r\n}\r\n\r\n.user-container {\r\n    display: flex;\r\n    flex-direction: column;\r\n    min-height: 100vh;\r\n}\r\n\r\n.create-container {\r\n    display: flex;\r\n    flex-direction: column;\r\n    min-height: 100vh;\r\n}","// colors\r\n$wheat:       #fffde5;\r\n$yellow:      #ffd31a;\r\n$yellow-plus: #ffc822;\r\n$grey:        #525c65;\r\n$orange:      #ff8b17;\r\n$black:       #000;\r\n$white:       #fff;\r\n\r\n//sub-colors\r\n$grey-dark:        #303030;\r\n$light-orange:     #f7a75a;\r\n$orange-red-light: #f43745;\r\n$orange-red:       #e5354b;\r\n$orange-pink-light:#d83550;\r\n$orange-pink:      #cc3354;",".header {\r\n    width: 100%;\r\n    background: $orange-pink;\r\n}\r\n\r\n.nav {\r\n    display: flex;\r\n    justify-content: center;\r\n    flex-wrap: wrap;\r\n    @include tablet-min {\r\n        flex-wrap: nowrap;\r\n        padding: 15px 0;\r\n    }\r\n\r\n    & .current-time {\r\n        display: flex;\r\n        justify-content: space-between;\r\n        align-self: flex-start;\r\n        order: 3;\r\n        margin: 15px auto 15px 0;\r\n        color: $white;\r\n        @include tablet-min {\r\n            justify-content: flex-start;\r\n            align-self: center;\r\n            order: 1;\r\n            width: 25%;\r\n            margin: 0;\r\n        }\r\n        @include tablet-landscape-min {\r\n            width: 30%;\r\n        }\r\n        @include desktop-min {\r\n            width: 25%;\r\n        }\r\n\r\n        & svg {\r\n            width: 25px;\r\n            height: 25px;\r\n            fill: $yellow;\r\n        }\r\n\r\n        & time {\r\n            margin-left: 5px;\r\n        }\r\n    }\r\n\r\n    & .logo {\r\n        order: 1;\r\n        width: 100%;\r\n        padding: 15px 0;\r\n        @include tablet-min {\r\n            order: 2;\r\n            width: 50%;\r\n            padding: 0;\r\n        }\r\n        @include tablet-landscape-min {\r\n            width: 40%;\r\n        }\r\n        @include desktop-min {\r\n            width: 50%;\r\n        }\r\n\r\n        & svg {\r\n            width: 100%;\r\n            fill: $yellow;\r\n        }\r\n    }\r\n\r\n    & .auth {\r\n        display: flex;\r\n        justify-content: space-between;\r\n        order: 2;\r\n        width: 100%;\r\n        text-transform: uppercase;\r\n        @include tablet-min {\r\n            flex-direction: column;\r\n            justify-content: space-between;\r\n            align-items: flex-end;\r\n            width: 25%;\r\n        }\r\n        @include tablet-landscape-min {\r\n            flex-direction: row;\r\n            align-items: center;\r\n            width: 30%;\r\n        }\r\n        @include desktop-min {\r\n            width: 25%;\r\n        }\r\n\r\n        &__button {\r\n            width: 140px;\r\n            color: $white;\r\n            background: $orange-red-light;\r\n\r\n            &:hover {\r\n                background: $orange-red;\r\n            }\r\n            //TODO: fix this class\r\n            &-link {\r\n                display: inline-block;\r\n                text-decoration: none;\r\n                color:#fff;\r\n                width: 100%;\r\n                height: 100%;\r\n            }\r\n        }\r\n    }\r\n}","// Settings\r\n$mobile-s-width:   320px;\r\n$mobile-m-width:   375px;\r\n$mobile-l-width:   425px;\r\n$tablet-p-width:   768px;\r\n$tablet-l-width:   1024px;\r\n$desktop-width:    1200px;\r\n$desktop-l-width:  1440px;\r\n$desktop-4k-width: 2560px;\r\n\r\n// Mixins\r\n@mixin mobile-small-min {\r\n\t@media (min-width: #{$mobile-s-width}){\r\n\t\t@content;\r\n\t}\r\n}\r\n\r\n@mixin mobile-medium-min {\r\n\t@media (min-width: #{$mobile-m-width}){\r\n\t\t@content;\r\n\t}\r\n}\r\n\r\n@mixin mobile-large-min {\r\n\t@media (min-width: #{$mobile-l-width}){\r\n\t\t@content;\r\n\t}\r\n}\r\n\r\n@mixin tablet-min {\r\n\t@media (min-width: #{$tablet-p-width}){\r\n\t\t@content;\r\n\t}\r\n}\r\n\r\n@mixin tablet-landscape-min {\r\n\t@media (min-width: #{$tablet-l-width}){\r\n\t\t@content;\r\n\t}\r\n}\r\n\r\n@mixin desktop-min {\r\n\t@media (min-width: #{$desktop-width}){\r\n\t\t@content;\r\n\t}\r\n}\r\n\r\n@mixin desktop-l-min {\r\n\t@media (min-width: #{$desktop-l-width}){\r\n\t\t@content;\r\n\t}\r\n}\r\n\r\n@mixin desktop-4k {\r\n\t@media (min-width: #{$desktop-4k-width}){\r\n\t\t@content;\r\n\t}\r\n}\r\n\r\n@mixin retina {\r\n  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi){\r\n    @content;\r\n  }\r\n}\r\n",".login {\r\n    flex: 1 0 auto;\r\n    padding: 60px 0;\r\n    background: $orange;\r\n\r\n    &__title {\r\n        margin-bottom: 15px;\r\n        text-transform: uppercase;\r\n    }\r\n\r\n    &__form {\r\n        max-width: 620px;\r\n        margin: 0 auto;\r\n        padding: 60px;\r\n        border: 1px solid #dbe2e8;\r\n        background: #fff;\r\n        box-shadow: 2px 2px 3px 0 rgba(117, 124, 129, 0.12);\r\n    }\r\n\r\n    &__button {\r\n        min-width: 207px;\r\n        width: 100%;\r\n        margin-top: 20px;\r\n        color: #fff;\r\n        background: $light-orange;\r\n    }\r\n}\r\n\r\n.error {\r\n    &__container {\r\n\r\n    }\r\n\r\n    &__text {\r\n        color: #909070;\r\n    }\r\n}",".registration {\r\n    flex: 1 0 auto;\r\n    padding: 60px 0;\r\n    background: $orange;\r\n\r\n    &__title {\r\n        margin-bottom: 15px;\r\n        text-transform: uppercase;\r\n    }\r\n\r\n    &__form {\r\n        max-width: 620px;\r\n        margin: 0 auto;\r\n        padding: 60px;\r\n        border: 1px solid #dbe2e8;\r\n        background: #fff;\r\n        box-shadow: 2px 2px 3px 0 rgba(117, 124, 129, 0.12);\r\n    }\r\n\r\n    &__input {\r\n        width: 100%;\r\n        height: 44px;\r\n        margin-bottom: 20px;\r\n        padding-left: 15px;\r\n        padding-right: 15px;\r\n        border: 1px solid #dbe2e8;\r\n        box-shadow: 0 2px 2px 0 rgba(46, 60, 73, 0.05);\r\n        border-radius: 2px;\r\n        color: #2e3d49;\r\n\r\n        &:active {\r\n            outline: none;\r\n            border-color: $light-orange;\r\n        }\r\n\r\n        &:focus {\r\n            outline: none;\r\n            border-color: $light-orange;\r\n        }\r\n\r\n        &::placeholder {\r\n            opacity: .5;\r\n        }\r\n    }\r\n\r\n    &__button {\r\n        min-width: 207px;\r\n        width: 100%;\r\n        margin-top: 20px;\r\n        color: #fff;\r\n        background: $light-orange;\r\n    }\r\n\r\n    &__select {\r\n        width: 100%;\r\n        height: 44px;\r\n        margin-bottom: 20px;\r\n        padding-left: 15px;\r\n        padding-right: 15px;\r\n        border: 1px solid #dbe2e8;\r\n        box-shadow: 0 2px 2px 0 rgba(46, 60, 73, 0.05);\r\n        border-radius: 2px;\r\n        color: #2e3d49;\r\n    }\r\n}",".user {\r\n    flex: 1 0 auto;\r\n    padding: 60px 0;\r\n    background: $orange;\r\n}",".main {\r\n  padding-top: 10px;\r\n  background: $orange;\r\n\r\n  & .add-link {\r\n    width: 140px;\r\n    margin: 10px auto;\r\n    background: $yellow-plus;\r\n    text-decoration: none;\r\n    color: $grey;\r\n    &:hover {\r\n      background: $yellow;\r\n    }\r\n  }\r\n\r\n  & section {\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n\r\n    & .pizza {\r\n      display: flex;\r\n      flex-wrap: wrap;\r\n      margin: 20px;\r\n      padding: 15px;\r\n      background: $wheat;\r\n      border-radius: 0.375rem;\r\n      box-shadow: 5px 5px 25px 0 rgba(46,61,73,0.2);\r\n      transition: all 0.3s ease;\r\n      @include tablet-min {\r\n        width: calc(50% - 40px);\r\n      }\r\n      @include desktop-min {\r\n        width: calc(100% / 3 - 40px);\r\n      }\r\n\r\n      &__img {\r\n        align-self: center;\r\n      }\r\n\r\n      &__name {\r\n        width: 100%;\r\n        margin: 15px 0;\r\n        font-size: 18px;\r\n        font-weight: 600;\r\n        white-space: nowrap;\r\n        text-align: center;\r\n      }\r\n\r\n      &:hover {\r\n        box-shadow: 2px 4px 8px 0 rgba(46,61,73,0.2);\r\n      }\r\n\r\n      &__time {\r\n        width: 50%;\r\n      }\r\n\r\n      &__queue-number {\r\n        width: 50%;\r\n        text-align: right;\r\n        color: $orange-red;\r\n      }\r\n\r\n      &__eta {\r\n        width: 50%;\r\n\r\n        & time {\r\n          color: $orange-pink;\r\n        }\r\n\r\n        & span:first-child {\r\n          text-transform: uppercase;\r\n        }\r\n      }\r\n\r\n      &__price {\r\n        width: 50%;\r\n        text-align: right;\r\n      }\r\n    }\r\n  }\r\n}\r\n\r\n",".footer {\r\n    flex-shrink: 0;\r\n    background: $grey-dark;\r\n\r\n    & .container {\r\n        display: flex;\r\n        flex-wrap: wrap;\r\n        align-items: center;\r\n        padding: 15px;\r\n        color: $white;\r\n        @include tablet-min {\r\n            justify-content: space-between;\r\n        }\r\n\r\n        & address {\r\n            font-style: normal;\r\n\r\n            & a {\r\n                color: $white;\r\n            }\r\n        }\r\n    }\r\n}\r\n",".create {\r\n    flex: 1 0 auto;\r\n    padding: 60px 0;\r\n    \r\n    background: $orange;\r\n\r\n    &__container {\r\n        display: flex;\r\n        flex-wrap: wrap;\r\n    }\r\n\r\n    &__title {\r\n        font-size: 35px;\r\n        width: 100%;\r\n        text-align: center;\r\n    }\r\n\r\n    &__canvas {\r\n        width: 50%;\r\n        height: 100px;\r\n    }\r\n\r\n    &__name {\r\n        font-size: 20px;\r\n    }\r\n\r\n    &__options {\r\n        width: 50%;\r\n    }\r\n\r\n    & form {\r\n        display: flex;\r\n        flex-direction: column;\r\n    }\r\n\r\n    &__description {\r\n        width: 100%;\r\n        height: 60px;\r\n        padding: 15px;\r\n        border: 1px solid #dbe2e8;\r\n        box-shadow: 0 2px 2px 0 rgba(46, 60, 73, 0.05);\r\n        border-radius: 2px;\r\n    }\r\n\r\n    &__ingredients {\r\n        display: flex;\r\n        flex-wrap: wrap;\r\n        width: 50%;\r\n\r\n        &-item {\r\n            position: relative;\r\n            display: flex;\r\n            padding: 5px;\r\n            width: calc(100% / 7);\r\n        }\r\n\r\n        &-input {\r\n            position: absolute;\r\n            top: 50%;\r\n            left: 50%;\r\n            transform: translate(-50%, -50%);\r\n            opacity: 0;\r\n            pointer-events: none;\r\n\r\n            &:checked ~ img {\r\n                box-shadow: 0 0 0 2px #ffffff;\r\n            }\r\n        }\r\n\r\n        & img {\r\n            width: 100%;\r\n        }\r\n    }\r\n\r\n    &__tags {\r\n        display: flex;\r\n        flex-direction: column;\r\n    }\r\n}"],"sourceRoot":""}]);
 
 // exports
 
@@ -1398,11 +1372,11 @@ var _component = __webpack_require__(0);
 
 var _component2 = _interopRequireDefault(_component);
 
-var _footer = __webpack_require__(3);
+var _footer = __webpack_require__(4);
 
 var _footer2 = _interopRequireDefault(_footer);
 
-var _header = __webpack_require__(4);
+var _header = __webpack_require__(5);
 
 var _header2 = _interopRequireDefault(_header);
 
@@ -1445,7 +1419,6 @@ var Login = function (_Component) {
     }, {
         key: 'render',
         value: function render() {
-
             return [this.header.update(), this.login.update(), this.footer.update()];
         }
     }]);
@@ -1472,7 +1445,7 @@ var _component = __webpack_require__(0);
 
 var _component2 = _interopRequireDefault(_component);
 
-var _utils = __webpack_require__(5);
+var _utils = __webpack_require__(2);
 
 var _error = __webpack_require__(18);
 
@@ -1641,11 +1614,11 @@ var _component = __webpack_require__(0);
 
 var _component2 = _interopRequireDefault(_component);
 
-var _footer = __webpack_require__(3);
+var _footer = __webpack_require__(4);
 
 var _footer2 = _interopRequireDefault(_footer);
 
-var _header = __webpack_require__(4);
+var _header = __webpack_require__(5);
 
 var _header2 = _interopRequireDefault(_header);
 
@@ -1808,11 +1781,11 @@ var _component = __webpack_require__(0);
 
 var _component2 = _interopRequireDefault(_component);
 
-var _footer = __webpack_require__(3);
+var _footer = __webpack_require__(4);
 
 var _footer2 = _interopRequireDefault(_footer);
 
-var _header = __webpack_require__(4);
+var _header = __webpack_require__(5);
 
 var _header2 = _interopRequireDefault(_header);
 
@@ -1882,7 +1855,7 @@ var _component = __webpack_require__(0);
 
 var _component2 = _interopRequireDefault(_component);
 
-var _utils = __webpack_require__(5);
+var _utils = __webpack_require__(2);
 
 var _auth = __webpack_require__(1);
 
@@ -1992,19 +1965,19 @@ var _component = __webpack_require__(0);
 
 var _component2 = _interopRequireDefault(_component);
 
-var _header = __webpack_require__(4);
+var _header = __webpack_require__(5);
 
 var _header2 = _interopRequireDefault(_header);
 
-var _footer = __webpack_require__(3);
+var _footer = __webpack_require__(4);
 
 var _footer2 = _interopRequireDefault(_footer);
 
-var _utils = __webpack_require__(5);
+var _utils = __webpack_require__(2);
 
 var _authHttp = __webpack_require__(8);
 
-var _constants = __webpack_require__(2);
+var _constants = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2087,19 +2060,19 @@ var _component = __webpack_require__(0);
 
 var _component2 = _interopRequireDefault(_component);
 
-var _header = __webpack_require__(4);
+var _header = __webpack_require__(5);
 
 var _header2 = _interopRequireDefault(_header);
 
-var _footer = __webpack_require__(3);
+var _footer = __webpack_require__(4);
 
 var _footer2 = _interopRequireDefault(_footer);
 
 var _create = __webpack_require__(25);
 
-var _utils = __webpack_require__(5);
+var _utils = __webpack_require__(2);
 
-var _constants = __webpack_require__(2);
+var _constants = __webpack_require__(3);
 
 var _draw = __webpack_require__(26);
 
@@ -2124,6 +2097,7 @@ var NewPizza = function (_Component) {
         _this.header = new _header2.default();
         _this.footer = new _footer2.default();
         _this.renderData();
+        _this.handleClick = _this.handleClick.bind(_this);
         return _this;
     }
 
@@ -2134,6 +2108,7 @@ var NewPizza = function (_Component) {
 
             Promise.all([_create.CREATE_DATA.getIngredients(), _create.CREATE_DATA.getTags()]).then(function () {
                 var container = document.querySelector('.create__options');
+                container.addEventListener('change', _this2.handleClick);
                 var canvas = document.querySelector('.create__canvas');
                 var form = document.createElement('form');
                 container.appendChild(form);
@@ -2147,9 +2122,24 @@ var NewPizza = function (_Component) {
             });
         }
     }, {
+        key: 'handleClick',
+        value: function handleClick(ev) {
+            if (ev.target.dataset.flag === 'ingredient') {
+                var ingredientsInputs = document.querySelectorAll('[data-flag]');
+                var options = [];
+                ingredientsInputs.forEach(function (ingredientInput) {
+                    if (ingredientInput.checked) {
+                        options.push(ingredientInput.value);
+                    }
+                });
+                _draw.DRAW.handleClick(options);
+            }
+            return false;
+        }
+    }, {
         key: 'renderForm',
         value: function renderForm() {
-            var formString = '\n        <label>\n            <span class=\'create__title\'>Pizza Name</span>\n            <input type=\'text\' name=\'name\' required min=\'3\' max=\'24\'>\n        </label>\n        <label>\n            <span>Description</span>\n            <textarea class=\'create__description\'></textarea>\n        </label>\n        <label>\n            <span>Size<span>\n        <label>\n            <span>30</span>\n            <input type=\'radio\' name=\'size\' value=\'30\'>\n        </label>\n        <label>\n            <span>45</span>\n            <input type=\'radio\' name=\'size\' value=\'30\'>\n        </label>\n        <label>\n            <span>60</span>\n            <input type=\'radio\' name=\'size\' value=\'30\'>\n        </label>    \n        </label>\n            <h2 class=\'create__ingredients-title\'>Ingredients<h2>\n        ';
+            var formString = '\n        <label>\n            <span class=\'create__name\'>Pizza Name</span>\n            <input type=\'text\' name=\'name\' required min=\'3\' max=\'24\'>\n        </label>\n        <label>\n            <span>Description</span>\n            <textarea class=\'create__description\'></textarea>\n        </label>\n        <label>\n            <span>Size<span>\n        <label>\n            <span>30</span>\n            <input type=\'radio\' name=\'size\' value=\'30\'>\n        </label>\n        <label>\n            <span>45</span>\n            <input type=\'radio\' name=\'size\' value=\'30\'>\n        </label>\n        <label>\n            <span>60</span>\n            <input type=\'radio\' name=\'size\' value=\'30\'>\n        </label>    \n        </label>\n            <h2 class=\'create__ingredients-title\'>Ingredients<h2>\n        ';
 
             var form = (0, _utils.toHtml)(formString);
             return form;
@@ -2158,10 +2148,12 @@ var NewPizza = function (_Component) {
         key: 'renderIngredients',
         value: function renderIngredients(data) {
             var ingredientsString = '   \n                <div class=\'create__ingredients\'>' + data.reduce(function (html, data) {
-                html += '\n                        <label class=\'create__ingredients-item\'>\n                            <input class=\'create__ingredients-input\' type=\'checkbox\'>\n                            <img src=\'' + _constants.DOMAIN + '/' + data.image_url + '\' class=\'create__ingredients\' title=\'' + data.description + '\'>\n                        </label>\n                        ';
+                html += '\n                        <label class=\'create__ingredients-item\'>\n                            <input class=\'create__ingredients-input\' type=\'checkbox\' value=\'' + data.name + '\' data-flag=\'ingredient\'>\n                            <img src=\'' + _constants.DOMAIN + '/' + data.image_url + '\' class=\'create__ingredients\' title=\'' + data.description + '\' data-name=\'ingredient\'>\n                        </label>\n                        ';
                 return html;
             }, '') + '\n                </div>\n                <h2 class=\'create__tag-title\'>Tag<h2>\n        ';
             var fragment = (0, _utils.toHtml)(ingredientsString);
+            var ingredientsInputs = fragment.querySelector('.create__ingredients');
+            ingredientsInputs.addEventListener('click', this.handleClick);
             return fragment;
         }
     }, {
@@ -2205,7 +2197,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _authHttp = __webpack_require__(8);
 
-var _constants = __webpack_require__(2);
+var _constants = __webpack_require__(3);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -2258,9 +2250,11 @@ exports.DRAW = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _constants = __webpack_require__(2);
+var _constants = __webpack_require__(3);
 
 var _sprite = __webpack_require__(27);
+
+var _utils = __webpack_require__(2);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -2293,36 +2287,61 @@ var Draw = function () {
                     return _this.images[resource.name] = resource.image;
                 });
                 _this.host.append(_this.canvas);
-                var pizza = new _sprite.Sprite(_this.images["pizza"], 160, 160, 300, 300);
-                _this.sprites["pizza"] = pizza;
-                _this.spritesPool.push(pizza);
-                _this._draw();
-                var corn = new _sprite.Sprite(_this.images["cheese"], random(80, 240), random(80, 240));
-                var onion = new _sprite.Sprite(_this.images["cheese"], random(80, 240), random(80, 240));
-                _this.spritesPool.push(onion, corn);
-                _this._draw();
+                _this._startSet();
             });
+        }
+    }, {
+        key: '_startSet',
+        value: function _startSet() {
+            this.spritesPool = [];
+            var pizza = new _sprite.Sprite(this.images['pizza'], 160, 160, 300, 300);
+            this.sprites['pizza'] = pizza;
+            this.spritesPool.push(pizza);
+            this._draw();
+        }
+    }, {
+        key: 'handleClick',
+        value: function handleClick(options) {
+            var _this2 = this;
+
+            this._startSet();
+            if (options.length === 0) {
+                this._startSet();
+            } else {
+                options.forEach(function (el) {
+                    _this2._print(el, 15);
+                });
+            }
+        }
+    }, {
+        key: '_print',
+        value: function _print(name, count) {
+            for (var i = 1; i <= count; i++) {
+                var ingredient = new _sprite.Sprite(this.images['' + name], (0, _utils.RANDOM)(80, 240), (0, _utils.RANDOM)(80, 240));
+                this.spritesPool.push(ingredient);
+            }
+            this._draw();
         }
     }, {
         key: '_draw',
         value: function _draw() {
-            var _this2 = this;
+            var _this3 = this;
 
             this.ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
             this.spritesPool.forEach(function (sprite) {
-                return sprite.draw(_this2.ctx);
+                return sprite.draw(_this3.ctx);
             });
         }
     }, {
         key: '_loadResources',
         value: function _loadResources() {
-            var _this3 = this;
+            var _this4 = this;
 
             var promises = [];
-            promises.push(this._loadImage("pizza", this.crust_pizza));
+            promises.push(this._loadImage('pizza', this.crust_pizza));
             promises = promises.concat(this.ingredients.map(function (ingredient) {
                 var ingr_url = _constants.DOMAIN + '/' + ingredient.image_url;
-                return _this3._loadImage(ingredient.name, ingr_url);
+                return _this4._loadImage(ingredient.name, ingr_url);
             }));
             return Promise.all(promises);
         }
@@ -2344,10 +2363,6 @@ var Draw = function () {
 
     return Draw;
 }();
-
-function random(min, max) {
-    return Math.floor(Math.random() * (max - min + 1) + min);
-}
 
 var DRAW = exports.DRAW = new Draw();
 

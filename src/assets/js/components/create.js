@@ -40,7 +40,6 @@ class NewPizza extends Component {
 
     handleClick(ev) {
         if (ev.target.dataset.flag === 'ingredient') {
-            console.log(true);
             const ingredientsInputs = document.querySelectorAll('[data-flag]');
             const options = []; 
             ingredientsInputs.forEach(ingredientInput => {
@@ -48,8 +47,7 @@ class NewPizza extends Component {
                     options.push(ingredientInput.value);
                 }
             });
-            console.log(options)
-            DRAW.handleClick(options)
+            DRAW.handleClick(options);
         }
         return false;
     }
@@ -57,7 +55,7 @@ class NewPizza extends Component {
     renderForm() {
         const formString = `
         <label>
-            <span class='create__title'>Pizza Name</span>
+            <span class='create__name'>Pizza Name</span>
             <input type='text' name='name' required min='3' max='24'>
         </label>
         <label>

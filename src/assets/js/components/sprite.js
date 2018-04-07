@@ -7,7 +7,6 @@ export class Sprite {
         this.height = height || this.image.height;
         this.cx = cx || 0;
         this.cy = cy || 0;
-        
     }
     get cx() {
         return Math.round(this.x + this.width * 0.5)
@@ -26,6 +25,6 @@ export class Sprite {
     }
 
     draw(ctx) {
-        ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+        ctx.drawImage(this.image, this.x, this.y, this.width, this.height); 
     }
 }

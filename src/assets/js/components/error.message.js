@@ -15,7 +15,6 @@ class ErrorMessage extends Component {
         error.innerHTML = text;
         return error;
     }
-
 }
 
 export default ErrorMessage;
