@@ -1,44 +1,46 @@
 import Component from '../framework/component';
+import { img } from '../utils/image';
 
 //TODO: hardcore
 const pizzas = [
     {
         title: 'Bavarian',
-        url: 'bavarian'
+        url: img.bavarian
     },
     {
         title: 'Chicken with mushrooms',
-        url: 'chicken-with-mushrooms'
+        url: img.chickenWithMushrooms
     },
     {
         title: 'Chicken with pineapple',
-        url: 'chicken-with-pineapple'
+        url: img.chickenWithPineapple
     },
     {
         title: 'Fruit',
-        url: 'fruit'
+        url: img.fruit
     },
     {
         title: 'Margherita',
-        url: 'margherita'
+        url: img.margherita
     },
     {
         title: 'Turkey',
-        url: 'turkey'
+        url: img.turkey
     },
     {
         title: 'Pepperoni',
-        url: 'pepperoni'
+        url: img.pepperoni
     },
     {
         title: 'Prosciutto',
-        url: 'prosciutto'
+        url: img.prosciutto
     },
     {
         title: 'Zucchini',
-        url: 'zucchini'
+        url: img.zucchini
     },
 ]
+
 
 class Main extends Component {
     constructor(props) {
@@ -53,7 +55,7 @@ class Main extends Component {
         const list = (title, url) => {
             return `
             <article class="pizza">
-                <img class="pizza__img" src="./assets/img/pizza-${url}.png" alt="pizza-photo">
+                <img class="pizza__img" src="${url}" alt="pizza-photo">
                 <h2 class="pizza__name">${title}</h2>
                 <time class="pizza__time" datetime="2018-01-31T19:00">12:01:48</time>
                 <span class="pizza__queue-number">#1</span>
