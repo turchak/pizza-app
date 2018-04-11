@@ -108,13 +108,15 @@
     &__ingredients {
         display: flex;
         flex-wrap: wrap;
-        width: 50%;
+        // width: 50%;
 
         &-item {
             position: relative;
             display: flex;
+            font-size: 14px;
+            justify-content: space-between;
             padding: 5px;
-            width: calc(100% / 7);
+            width: 25%;
         }
 
         &-input {
@@ -125,13 +127,25 @@
             opacity: 0;
             pointer-events: none;
 
-            &:checked ~ img {
+            &:checked ~ span {
                 box-shadow: 0 0 0 2px #ffffff;
             }
         }
 
         & img {
+            position: absolute;
+            top: 50%;
+            padding: 5px;
+            transform: translateY(-50%);
+            width: 35px;
+        }
+
+        & span {
+            background: $yellow;
             width: 100%;
+            border-radius: 4px;
+            padding: 10px 10px 10px 45px;
+            cursor: pointer;
         }
     }
 

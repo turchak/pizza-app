@@ -90,14 +90,15 @@ class NewPizza extends Component {
     renderIngredients(data) {
         const ingredientsString = `   
                 <div class='create__ingredients'>${data.reduce((html, data) => {
-        html += `
+                    html += `
                         <label class='create__ingredients-item'>
                             <input class='create__ingredients-input' type='checkbox' value='${data.name}' data-flag='ingredient'>
                             <img src='${DOMAIN}/${data.image_url}' class='create__ingredients' title='${data.description}' data-name='ingredient'>
+                            <span>${data.name}</span>
                         </label>
                         `;
-        return html;
-    },'')}
+                    return html;
+                },'')}
                 </div>
                 <h2 class='create__tag-title'>Tag<h2>
         `;
