@@ -16,16 +16,79 @@
     }
 
     &__canvas {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         width: 50%;
-        height: 100px;
+        
     }
 
-    &__name {
-        font-size: 20px;
+    &__size {
+        display: flex;
+        flex-wrap: wrap;
+
+        &-title {
+            display: block;
+            width: 100%;
+        }
+
+        &-option {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            cursor: pointer;
+
+            &:not(:last-child) {
+                margin-right: 10px;
+            }
+
+            & span {
+                position: absolute;
+                color: white;
+                z-index: 2;
+            }
+            
+            & input {
+                position: absolute;
+                opacity: 0;
+
+                &:checked ~ .fa-circle {
+                    border: 6px solid $yellow;
+                    border-radius: 50%;
+                }
+            }
+
+            &--small {
+                border: 1px solid $yellow;
+                border-radius: 50%;
+                color: $orange-pink;
+                font-size: 40px;
+                z-index: 1;
+            }
+
+            &--medium {
+                border: 1px solid $yellow;
+                border-radius: 50%;
+                color: $orange-pink;
+                font-size: 50px;
+                z-index: 1;
+            }
+
+            &--large {
+                border: 1px solid $yellow;
+                border-radius: 50%;
+                color: $orange-pink;
+                font-size: 60px;
+                z-index: 1;
+            }
+        }
     }
 
     &__options {
         width: 50%;
+        padding: 0 15px;
+        margin: 20px 0;
     }
 
     & form {

@@ -62,20 +62,23 @@ class NewPizza extends Component {
             <span>Description</span>
             <textarea class='create__description'></textarea>
         </label>
-        <label>
-            <span>Size<span>
-        <label>
-            <span>30</span>
-            <input type='radio' name='size' value='30'>
-        </label>
-        <label>
-            <span>45</span>
-            <input type='radio' name='size' value='30'>
-        </label>
-        <label>
-            <span>60</span>
-            <input type='radio' name='size' value='30'>
-        </label>    
+        <label class='create__size'>
+            <span class='create__size-title'>Size</span>
+            <label class='create__size-option'>
+                <span>30</span>
+                <input type='radio' name='size' value='30'>
+                <i class="fas fa-circle create__size-option--small"></i>
+            </label>
+            <label class='create__size-option'>
+                <span>45</span>
+                <input type='radio' name='size' value='30' checked>
+                <i class="fas fa-circle create__size-option--medium"></i>
+            </label>
+            <label class='create__size-option'>
+                <span>60</span>
+                <input type='radio' name='size' value='30'>
+                <i class="fas fa-circle create__size-option--large"></i>
+            </label>    
         </label>
             <h2 class='create__ingredients-title'>Ingredients<h2>
         `;
