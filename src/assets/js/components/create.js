@@ -39,6 +39,7 @@ class NewPizza extends Component {
     }
 
     handleClick(ev) {
+        // console.log(ev)
         if (ev.target.dataset.flag === 'ingredient') {
             const ingredientsInputs = document.querySelectorAll('[data-flag]');
             const options = []; 
@@ -103,8 +104,6 @@ class NewPizza extends Component {
                 <h2 class='create__tag-title'>Tag<h2>
         `;
         const fragment = toHtml(ingredientsString);
-        const ingredientsInputs = fragment.querySelector('.create__ingredients');
-        ingredientsInputs.addEventListener('click', this.handleClick);
         return fragment;
     }
 

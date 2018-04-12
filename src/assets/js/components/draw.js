@@ -17,6 +17,8 @@ class Draw {
         this.ingredients = data.ingredients;
         this.images = {};
         this.sprites = {};
+        this.lastOptions = [];
+        this.buffer = [];
         this.spritesPool = [];
         this.canvas.width = this.canvasWidth;
         this.canvas.height = this.canvasHeight;
@@ -39,21 +41,62 @@ class Draw {
 
     handleClick(options) {
         this._startSet();
-        if(options.length === 0) {
+
+        
+        if (options.length < (this.buffer.length)) {
+            console.log('here')
+            let preBuffer = [];
+            this.lastOptions = [];
+            options.forEach(el => {
+                console.log(el)
+                this.lastOptions.push(el)
+                this.buffer.forEach(elem => {
+                    
+                    if (elem.id === el) {
+                        preBuffer.push({
+                            id: elem.id,
+                            sprites: elem.sprites
+                        });
+                        this.spritesPool = this.spritesPool.concat(elem.sprites);
+                    } 
+                })
+                
+            });
+            
+            this.buffer = [];
+            this.buffer = this.buffer.concat(preBuffer);
+            this._draw();
+        }
+        if (options.length === 0) {
+            this.buffer = [];
             this._startSet();
+            
         } else {
             options.forEach(el => {
-                this._print(el, 15);
-            });
+                if (this.lastOptions.includes(el)) {
+                return;
+                } else {
+                    this.lastOptions.push(el);
+                    this._generateSprite(el, 10);
+                    this.buffer.forEach(elem => {
+                        this.spritesPool = this.spritesPool.concat(elem.sprites);
+                    })
+                    this._draw();
+                }
+            });  
         }   
     }
 
-    _print(name, count) {
+    _generateSprite(name, count) {
+        const sprites = [];
         for(let i = 1; i <= count; i++) {
             let ingredient = new Sprite(this.images[`${name}`], RANDOM(80, 240), RANDOM(80, 240));
-            this.spritesPool.push(ingredient); 
+            sprites.push(ingredient);          
         }
-        this._draw();
+        this.buffer.push({
+            id: name,
+            sprites: sprites
+        });
     }
 
     _draw() {
