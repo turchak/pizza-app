@@ -10,6 +10,7 @@ class Draw {
 
     onInit(data) {
         this.host = data.host;
+        this.size = '60';
         this.canvas = document.createElement('canvas');
         this.ctx = this.canvas.getContext('2d');
         this.canvasWidth = 320;
@@ -33,22 +34,38 @@ class Draw {
 
     _startSet() {
         this.spritesPool = [];
-        let pizza = new Sprite(this.images['pizza'], 160, 160, 300, 300);
+        // let pizza = new Sprite(this.images['pizza'], 160, 160, 300, 300);
+        let pizza = new Sprite(this.images['pizza'], 160, 160, 300*`${parseInt(this.size)}`/60, 300*`${parseInt(this.size)}`/60);
         this.sprites['pizza'] = pizza;
         this.spritesPool.push(pizza);
         this._draw();
     }
 
-    handleClick(options) {
+    handleClick(options, size) {
+        this.size = size;
         this._startSet();
-
+        if (options.length == this.buffer.length) {
+            this.buffer.forEach(elem => {
+                const filteredElem = elem.sprites.filter(elem => {
+                    if (this.size == 30) {
+                        return elem.x < 180 && elem.x > 110  && elem.y > 110 && elem.y < 180;
+                    }
+                    if (this.size == 45) {
+                        return elem.x < 200 && elem.x > 90  && elem.y > 90 && elem.y < 200;
+                    }
+                    if (this.size == 60) {
+                        return elem.x < 255 && elem.x > 40  && elem.y > 40 && elem.y < 255;
+                    }
+                });
+                this.spritesPool = this.spritesPool.concat(filteredElem);
+            })
+            this._draw();
+        }
         
-        if (options.length < (this.buffer.length)) {
-            console.log('here')
+        if (options.length < this.buffer.length) {
             let preBuffer = [];
             this.lastOptions = [];
             options.forEach(el => {
-                console.log(el)
                 this.lastOptions.push(el)
                 this.buffer.forEach(elem => {
                     
@@ -57,7 +74,20 @@ class Draw {
                             id: elem.id,
                             sprites: elem.sprites
                         });
-                        this.spritesPool = this.spritesPool.concat(elem.sprites);
+                        const filteredElem = elem.sprites.filter(elem => {
+                            if (this.size == 30) {
+                                return elem.x < 180 && elem.x > 110  && elem.y > 110 && elem.y < 180;
+                            }
+                            if (this.size == 45) {
+                                return elem.x < 200 && elem.x > 90  && elem.y > 90 && elem.y < 200;
+                            }
+                            if (this.size == 60) {
+                                return elem.x < 255 && elem.x > 40  && elem.y > 40 && elem.y < 255;
+                            }
+                        });
+                        this.spritesPool = this.spritesPool.concat(filteredElem);
+
+                        // this.spritesPool = this.spritesPool.concat(elem.sprites);
                     } 
                 })
                 
@@ -74,12 +104,25 @@ class Draw {
         } else {
             options.forEach(el => {
                 if (this.lastOptions.includes(el)) {
-                return;
+                    this._draw();  
                 } else {
                     this.lastOptions.push(el);
                     this._generateSprite(el, 10);
-                    this.buffer.forEach(elem => {
-                        this.spritesPool = this.spritesPool.concat(elem.sprites);
+                    this.buffer.forEach(el => {
+                        const filteredElem = el.sprites.filter(elem => {
+                            if (this.size == 30) {
+                                return elem.x < 180 && elem.x > 110  && elem.y > 110 && elem.y < 180;
+                            }
+                            if (this.size == 45) {
+                                return elem.x < 200 && elem.x > 90  && elem.y > 90 && elem.y < 200;
+                            }
+                            if (this.size == 60) {
+                                return elem.x < 255 && elem.x > 40  && elem.y > 40 && elem.y < 255;
+                            }
+                            
+                        });
+                        this.spritesPool = this.spritesPool.concat(filteredElem);
+                        // this.spritesPool = this.spritesPool.concat(elem.sprites);
                     })
                     this._draw();
                 }
@@ -90,7 +133,7 @@ class Draw {
     _generateSprite(name, count) {
         const sprites = [];
         for(let i = 1; i <= count; i++) {
-            let ingredient = new Sprite(this.images[`${name}`], RANDOM(80, 240), RANDOM(80, 240));
+            let ingredient = new Sprite(this.images[`${name}`], RANDOM(70, 250), RANDOM(70, 250));
             sprites.push(ingredient);          
         }
         this.buffer.push({
@@ -120,6 +163,9 @@ class Draw {
             image.onload = () => resolve({name, image});
             image.onerror = (e) => reject(e);
             image.src = url;
+            image.width = 20;
+            image.height = 20;
+            image.crossOrigin = ""
         });
     }
 }

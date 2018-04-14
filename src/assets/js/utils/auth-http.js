@@ -18,7 +18,17 @@ class AuthHttpService {
         );
     }
 
-    post() {
+    post(url, data) {
+        return fetch(url, {
+            method: 'POST',
+            body: data,
+            headers: new Headers({
+                'Authorization': `Bearer ${AUTH_SERVICE.token}`
+            })
+        }).then(
+            response => Promise.resolve(response.json()), 
+            response => Promise.reject(response.statusCode)
+        )
 
     }
 

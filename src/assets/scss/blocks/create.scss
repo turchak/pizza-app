@@ -8,6 +8,28 @@
         display: flex;
         flex-wrap: wrap;
     }
+    
+    &__button {
+        display: flex;
+        justify-content: flex-end;
+        
+
+        &-cancel {
+            width: 140px;
+            background: $grey;
+            margin-right: 10px;
+            color: #fff;
+        }
+
+        &-send {
+            width: 140px;
+            background: $orange-red-light;
+            margin-right: 10px;
+            color: #fff;
+        }
+    }
+
+
 
     &__title {
         font-size: 35px;
