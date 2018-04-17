@@ -1,5 +1,6 @@
 .main {
-  padding-top: 10px;
+  flex: 1 0 auto;
+  padding: 20px 0;
   background: $orange;
 
   & .add-link {
@@ -52,6 +53,7 @@
 
       &__time {
         width: 50%;
+        white-space: nowrap;
       }
 
       &__queue-number {
@@ -76,7 +78,22 @@
         width: 50%;
         text-align: right;
       }
+
+     
     }
   }
 }
 
+.pizza__add {
+  width: 140px;
+  text-decoration: none;
+  color:$black;
+  background: $yellow-plus;
+}
+
+.dashboard__container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+}

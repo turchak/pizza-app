@@ -10,18 +10,14 @@ import PizzaTurkey from '../../media/pizza-turkey.png';
 import PizzaZucchini from '../../media/pizza-zucchini.png';
 
 export const img = {
-    bavarian: PizzaBavarian,
-    chickenWithMushrooms: PizzaChickenWithMushrooms,
-    chickenWithPineapple: PizzaChickenWithPineapple,
-    fruit: PizzaFruit,
-    margherita: PizzaMargherita,
-    pepperoni: PizzaPepperoni,
-    premiumCheese: PizzaPremiumCheese,
-    prosciutto: PizzaProsciutto,
-    turkey: PizzaTurkey,
-    zucchini: PizzaZucchini
-}
-
-
-
-
+	bavarian: PizzaBavarian,
+	chickenWithMushrooms: PizzaChickenWithMushrooms,
+	chickenWithPineapple: PizzaChickenWithPineapple,
+	fruit: PizzaFruit,
+	margherita: PizzaMargherita,
+	pepperoni: PizzaPepperoni,
+	premiumCheese: PizzaPremiumCheese,
+	prosciutto: PizzaProsciutto,
+	turkey: PizzaTurkey,
+	zucchini: PizzaZucchini,
+};
