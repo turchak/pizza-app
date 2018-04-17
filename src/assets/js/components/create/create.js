@@ -1,11 +1,11 @@
-import Component from '../framework/component';
-import Header from './header';
-import Footer from './footer';
-import { CREATE_DATA } from '../utils/create.data';
-import { toHtml } from '../utils/utils';
-import { DOMAIN, CREATE_PIZZA } from '../utils/constants';
+import Component from '../../framework/component';
+import Header from '../header/header';
+import Footer from '../footer/footer';
+import { CREATE_DATA } from '../../utils/create.data';
+import { toHtml } from '../../utils/utils';
+import { DOMAIN, CREATE_PIZZA } from '../../utils/constants';
 import { DRAW } from './draw';
-import { AUTH_HTTP_SERVICE } from '../utils/auth-http';
+import { AUTH_HTTP_SERVICE } from '../../utils/auth-http';
 
 class NewPizza extends Component {
 	constructor(props) {

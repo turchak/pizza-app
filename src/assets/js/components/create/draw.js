@@ -1,6 +1,6 @@
-import { DOMAIN } from '../utils/constants';
+import { DOMAIN } from '../../utils/constants';
 import { Sprite } from './sprite';
-import { RANDOM } from '../utils/utils';
+import { RANDOM } from '../../utils/utils';
 
 class Draw {
 	constructor() {

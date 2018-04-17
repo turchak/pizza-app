@@ -1,8 +1,8 @@
-import Login from './components/login';
-import App from './components/app';
-import Registration from './components/registration';
-import User from './components/user';
-import NewPizza from './components/create';
+import Login from './components/login/login';
+import App from './components/app/app';
+import Registration from './components/registration/registration';
+import User from './components/user/user';
+import NewPizza from './components/create/create';
 import { authGuard } from './utils/auth.guard';
 import { AUTH_SERVICE } from './utils/auth';
 

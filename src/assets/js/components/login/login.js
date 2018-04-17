@@ -1,7 +1,7 @@
-import Component from '../framework/component';
-import Footer from '../components/footer';
-import Header from '../components/header';
-import LoginForm from '../components/login.form';
+import Component from '../../framework/component';
+import Footer from '../footer/footer';
+import Header from '../header/header';
+import LoginForm from './login.form';
 
 class Login extends Component {
 	constructor(props) {

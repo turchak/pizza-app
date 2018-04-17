@@ -23,7 +23,7 @@ const config = {
 		rules: [
 			{
 				test: /\.scss$/,
-				include: [path.resolve(__dirname, 'src', 'assets', 'scss')],
+				// include: [path.resolve(__dirname, 'src', 'assets', 'scss')],
 				use: extractPlugin.extract({
 					use: [
 						{

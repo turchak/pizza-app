@@ -1,8 +1,8 @@
-import Component from '../framework/component';
-import { toHtml } from '../utils/utils';
-import ErrorMessage from './error.message';
-import { AUTH_SERVICE } from '../utils/auth';
-import { APP_ROUTER } from '../index';
+import Component from '../../framework/component';
+import { toHtml } from '../../utils/utils';
+import ErrorMessage from '../notification/error.message';
+import { AUTH_SERVICE } from '../../utils/auth';
+import { APP_ROUTER } from '../../index';
 
 class LoginForm extends Component {
 	constructor(props) {

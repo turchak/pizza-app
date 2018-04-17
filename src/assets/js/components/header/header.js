@@ -1,6 +1,6 @@
-import Component from '../framework/component';
-import { toHtml } from '../utils/utils';
-import { AUTH_SERVICE } from '../utils/auth';
+import Component from '../../framework/component';
+import { toHtml } from '../../utils/utils';
+import { AUTH_SERVICE } from '../../utils/auth';
 
 class Header extends Component {
 	constructor(props) {

@@ -1,9 +1,9 @@
-import Component from '../framework/component';
-import Header from '../components/header';
-import Footer from '../components/footer';
-import { toHtml } from '../utils/utils';
-import { AUTH_HTTP_SERVICE } from '../utils/auth-http';
-import { USER_URL } from '../utils/constants';
+import Component from '../../framework/component';
+import Header from '../header/header';
+import Footer from '../footer/footer';
+import { toHtml } from '../../utils/utils';
+import { AUTH_HTTP_SERVICE } from '../../utils/auth-http';
+import { USER_URL } from '../../utils/constants';
 
 class User extends Component {
 	constructor(props) {

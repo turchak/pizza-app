@@ -1,6 +1,6 @@
-import Component from '../framework/component';
-import PizzaList from './list';
-import { toHtml } from '../utils/utils';
+import Component from '../../framework/component';
+import PizzaList from '../dashboard/list';
+import { toHtml } from '../../utils/utils';
 
 class Main extends Component {
 	constructor(props) {

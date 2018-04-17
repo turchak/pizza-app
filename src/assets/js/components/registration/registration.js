@@ -1,7 +1,7 @@
-import Component from '../framework/component';
-import Footer from '../components/footer';
-import Header from '../components/header';
-import RegistrationForm from '../components/registration.form';
+import Component from '../../framework/component';
+import Footer from '../footer/footer';
+import Header from '../header/header';
+import RegistrationForm from './registration.form';
 
 class Registration extends Component {
 	constructor(props) {

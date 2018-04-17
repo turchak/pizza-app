@@ -1,7 +1,7 @@
-import Component from '../framework/component';
-import { toHtml } from '../utils/utils';
-import { AUTH_HTTP_SERVICE } from '../utils/auth-http';
-import { PIZZA_LIST, DOMAIN } from '../utils/constants';
+import Component from '../../framework/component';
+import { toHtml } from '../../utils/utils';
+import { AUTH_HTTP_SERVICE } from '../../utils/auth-http';
+import { PIZZA_LIST, DOMAIN } from '../../utils/constants';
 
 class PizzaList extends Component {
 	constructor(props) {
@@ -9,14 +9,15 @@ class PizzaList extends Component {
 		this.host = document.createElement('div');
 		this.host.classList.add('list');
 		this.pizzas = [];
-		this.getPizzaList();
 	}
 
-	getPizzaList() {
+	getPizzaList(container) {
 		AUTH_HTTP_SERVICE.get(PIZZA_LIST).then(res => {
-			const data = res.results;
-			const pizzaList = this.createPizza(data);
-			const container = document.querySelector('.list-container');
+			const result = res.results;
+			result.forEach(el => {
+				this.pizzas.push(el);
+			});
+			const pizzaList = this.createPizza(this.pizzas);
 			container.appendChild(pizzaList);
 			return container;
 		});
@@ -61,6 +62,9 @@ class PizzaList extends Component {
         `;
 
 		const fragment = toHtml(containerString);
+		const container = fragment.querySelector('.list-container');
+
+		this.getPizzaList(container);
 
 		return fragment;
 	}

@@ -1,7 +1,7 @@
-import Component from '../framework/component';
-import Footer from '../components/footer';
-import Header from '../components/header';
-import Main from '../components/main';
+import Component from '../../framework/component';
+import Footer from '../footer/footer';
+import Header from '../header/header';
+import Main from './main';
 
 class App extends Component {
 	constructor(props) {
