@@ -3,7 +3,6 @@ import Component from '../../framework/component';
 class Footer extends Component {
 	constructor(props) {
 		super(props);
-
 		this.host = document.createElement('footer');
 		this.host.classList.add('footer');
 	}

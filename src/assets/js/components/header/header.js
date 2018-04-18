@@ -5,7 +5,6 @@ import { AUTH_SERVICE } from '../../utils/auth';
 class Header extends Component {
 	constructor(props) {
 		super(props);
-
 		this.host = document.createElement('header');
 		this.host.classList.add('header');
 	}
