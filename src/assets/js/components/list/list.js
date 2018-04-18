@@ -1,26 +1,12 @@
 import Component from '../../framework/component';
 import { toHtml } from '../../utils/utils';
-import { AUTH_HTTP_SERVICE } from '../../utils/auth-http';
-import { PIZZA_LIST, DOMAIN } from '../../utils/constants';
+import { DOMAIN } from '../../utils/constants';
 
 class PizzaList extends Component {
 	constructor(props) {
 		super(props);
 		this.host = document.createElement('div');
 		this.host.classList.add('list');
-		this.pizzas = [];
-	}
-
-	getPizzaList(container) {
-		AUTH_HTTP_SERVICE.get(PIZZA_LIST).then(res => {
-			const result = res.results;
-			result.forEach(el => {
-				this.pizzas.push(el);
-			});
-			const pizzaList = this.createPizza(this.pizzas);
-			container.appendChild(pizzaList);
-			return container;
-		});
 	}
 
 	createPizza(pizzas) {
@@ -56,17 +42,24 @@ class PizzaList extends Component {
 
 	render() {
 		const containerString = `
-        <div class='list-container'>
-            
+		<div class="container list__container">
         </div>
-        `;
+		`;
 
-		const fragment = toHtml(containerString);
-		const container = fragment.querySelector('.list-container');
+		const containerFragment = toHtml(containerString);
+		const container = containerFragment.querySelector('.list__container');
 
-		this.getPizzaList(container);
+		if (this.props) {
+			const { pizzas } = this.props;
 
-		return fragment;
+			if (pizzas.length === 0) {
+				container.innerText = 'No pizzas :(';
+			} else {
+				container.append(this.createPizza(pizzas));
+			}
+		}
+
+		return container;
 	}
 }
 export default PizzaList;
