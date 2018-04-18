@@ -3,6 +3,7 @@ class Component {
 		this.props = props || {};
 		this.state = {};
 		this.host = null;
+		this.onInit();
 	}
 
 	updateState(nextState) {
@@ -10,15 +11,21 @@ class Component {
 		return this._render();
 	}
 
+	onInit() {}
+
 	update(nextProps) {
 		this.props = nextProps;
 		return this._render();
 	}
+
 	unmount() {
 		this.onBeforeUnmount();
 	}
+
 	onBeforeUnmount() {}
+
 	onBeforeUpdate(nextProps) {}
+
 	get name() {
 		return this.constructor.name;
 	}

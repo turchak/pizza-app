@@ -23,7 +23,6 @@ class NewPizza extends Component {
 		this.handleClick = this.handleClick.bind(this);
 		this.handleResize = this.handleResize.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
-		this.renderData();
 	}
 
 	handleSubmit(ev) {
@@ -46,7 +45,7 @@ class NewPizza extends Component {
 		});
 	}
 
-	renderData() {
+	onInit() {
 		Promise.all([CREATE_DATA.getIngredients(), CREATE_DATA.getTags()]).then(() => {
 			const container = document.querySelector('.create__options');
 			container.addEventListener('change', this.handleClick);

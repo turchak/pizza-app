@@ -16,9 +16,8 @@ class PizzaList extends Component {
             <article class="pizza">
                 <img class="pizza__img" src="${DOMAIN}/${pizza.img_url}" alt="${pizza.name}">
                 <h2 class="pizza__name">${pizza.name}</h2>
-                <time class="pizza__time" datetime="${pizza.time_prepared}">${
-	pizza.time_prepared
-}</time>
+				<time class="pizza__time" datetime="
+				${pizza.time_prepared}">${pizza.time_prepared}</time>
                 <span class="pizza__queue-number">#1</span>
                 <div class="pizza__eta">
                     <span>eta</span>
@@ -53,7 +52,7 @@ class PizzaList extends Component {
 			const { pizzas } = this.props;
 
 			if (pizzas.length === 0) {
-				container.innerText = 'No pizzas :(';
+				container.innerText = '';
 			} else {
 				container.append(this.createPizza(pizzas));
 			}
