@@ -1,4 +1,4 @@
-import { AUTH_HTTP_SERVICE } from './auth-http';
+import { AUTH_HTTP_SERVICE } from './auth.http';
 import { INGREDIENTS_URL, TAG_URL, PIZZA_LIST } from './constants';
 
 class PizzaDataService {
@@ -18,6 +18,19 @@ class PizzaDataService {
 		}
 		this.pizzas.unshift(pizza);
 		return true;
+	}
+
+	removePizza(uuids) {
+		uuids.forEach(uuid => {
+			const index = this.pizzas.findIndex(p => {
+				return uuid === p.uuid;
+			});
+			{
+				if (index != -1) {
+					this.pizzas.splice(index, 1);
+				}
+			}
+		});
 	}
 
 	getUnacceptedPizzas(reset, limit, offset) {

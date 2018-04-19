@@ -3,7 +3,7 @@ import Footer from '../footer/footer';
 import Header from '../header/header';
 import PizzaList from '../list/list';
 import { toHtml } from '../../utils/utils';
-import { CREATE_DATA } from '../../utils/create.data';
+import { CREATE_DATA } from '../../utils/pizza.data';
 import { WS } from '../../utils/ws';
 
 class App extends Component {
@@ -17,14 +17,21 @@ class App extends Component {
 	}
 
 	onInit() {
-		CREATE_DATA.getUnacceptedPizzas(true, 12, 0).then(res => {
-			WS.establish();
-			WS.subscribe('CREATE_PIZZA', data => {
-				CREATE_DATA.addPizza(data);
-				this.list.update({
-					pizzas: CREATE_DATA.pizzas,
-				});
+		WS.establish();
+		WS.subscribe('CREATE_PIZZA', data => {
+			CREATE_DATA.addPizza(data);
+			this.list.update({
+				pizzas: CREATE_DATA.pizzas,
 			});
+		});
+		WS.subscribe('ACCEPT_PIZZA', data => {
+			CREATE_DATA.removePizza(data);
+			this.list.update({
+				pizzas: CREATE_DATA.pizzas,
+			});
+		});
+
+		CREATE_DATA.getUnacceptedPizzas(true, 12, 0).then(res => {
 			this.list.update({
 				pizzas: CREATE_DATA.pizzas,
 			});

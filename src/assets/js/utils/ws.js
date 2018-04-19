@@ -1,4 +1,4 @@
-import { AUTH_HTTP_SERVICE } from './auth-http';
+import { AUTH_HTTP_SERVICE } from './auth.http';
 import { WS_TICKET, WS_PATH } from './constants';
 import { EventEmitter } from './event.emitter';
 
@@ -18,6 +18,7 @@ class Ws {
 
 	_onmessage(data) {
 		const event = JSON.parse(data);
+		console.log('message: ', event);
 		this._emitter.emit(event.event_name, event.data);
 	}
 
