@@ -29,7 +29,7 @@ class PizzaList extends Component {
                     <span>${pizza.price}</span>
                 </div>
             </article> 
-        `;
+            `;
 		};
 
 		pizzas.forEach(pizza => {

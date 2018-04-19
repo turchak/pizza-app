@@ -2,9 +2,9 @@ import Component from '../../framework/component';
 import Footer from '../footer/footer';
 import Header from '../header/header';
 import PizzaList from '../list/list';
-import { AUTH_HTTP_SERVICE } from '../../utils/auth-http';
-import { PIZZA_LIST } from '../../utils/constants';
 import { toHtml } from '../../utils/utils';
+import { CREATE_DATA } from '../../utils/create.data';
+import { WS } from '../../utils/ws';
 
 class App extends Component {
 	constructor(props) {
@@ -17,9 +17,16 @@ class App extends Component {
 	}
 
 	onInit() {
-		return AUTH_HTTP_SERVICE.get(PIZZA_LIST).then(res => {
+		CREATE_DATA.getUnacceptedPizzas(true, 12, 0).then(res => {
+			WS.establish();
+			WS.subscribe('CREATE_PIZZA', data => {
+				CREATE_DATA.addPizza(data);
+				this.list.update({
+					pizzas: CREATE_DATA.pizzas,
+				});
+			});
 			this.list.update({
-				pizzas: res.results,
+				pizzas: CREATE_DATA.pizzas,
 			});
 		});
 	}
