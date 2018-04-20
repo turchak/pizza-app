@@ -11,11 +11,16 @@ const routes = [
 		Component: App,
 		href: '',
 		redirectTo: '/',
+		onEnter: {
+			guard: authGuard,
+		},
 	},
 	{
 		Component: App,
 		href: '/',
-		onEnter: authGuard,
+		onEnter: {
+			guard: authGuard,
+		},
 	},
 	{
 		Component: Login,
@@ -28,18 +33,23 @@ const routes = [
 	{
 		Component: User,
 		href: '/user',
-		onEnter: authGuard,
+		onEnter: {
+			guard: authGuard,
+		},
 	},
 	{
-		Component: App,
 		href: '/logout',
-		logout: AUTH_SERVICE.clearStorage,
-		onEnter: authGuard,
+		onEnter: {
+			logout: true,
+			guard: authGuard,
+		},
 	},
 	{
 		Component: NewPizza,
 		href: '/create',
-		onEnter: authGuard,
+		onEnter: {
+			guard: authGuard,
+		},
 	},
 ];
 

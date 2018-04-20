@@ -20,21 +20,21 @@ class App extends Component {
 		WS.establish();
 		WS.subscribe('CREATE_PIZZA', data => {
 			CREATE_DATA.addPizza(data);
-			this.list.update({
-				pizzas: CREATE_DATA.pizzas,
-			});
+			return this.updateList();
 		});
 		WS.subscribe('ACCEPT_PIZZA', data => {
 			CREATE_DATA.removePizza(data);
-			this.list.update({
-				pizzas: CREATE_DATA.pizzas,
-			});
+			return this.updateList();
 		});
 
 		CREATE_DATA.getUnacceptedPizzas(true, 12, 0).then(res => {
-			this.list.update({
-				pizzas: CREATE_DATA.pizzas,
-			});
+			return this.updateList();
+		});
+	}
+
+	updateList() {
+		this.list.update({
+			pizzas: CREATE_DATA.pizzas,
 		});
 	}
 

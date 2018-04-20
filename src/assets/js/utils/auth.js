@@ -28,7 +28,7 @@ class AuthService {
 	}
 
 	isAuthorized() {
-		if (!localStorage.getItem('token')) return false;
+		if (!this.token) return false;
 		if (!this.tokenIsNotExpired()) {
 			this.clearStorage();
 			return false;

@@ -1,11 +1,11 @@
 import Component from './component';
-import { authGuard } from '../utils/auth.guard';
+import { AUTH_SERVICE } from '../utils/auth';
 
 class Router extends Component {
 	constructor(props) {
 		super(props);
-
 		const { routes, host } = this.props;
+		this.host = host;
 
 		this.state = {
 			routes,
@@ -13,7 +13,6 @@ class Router extends Component {
 			activeComponent: null,
 		};
 
-		this.host = host;
 		this.handleUrlChange = this.handleUrlChange.bind(this);
 		this.applyRoute = this.applyRoute.bind(this);
 
@@ -29,28 +28,17 @@ class Router extends Component {
 	handleUrlChange(url) {
 		const { routes, activeRoute } = this.state;
 		const nextRoute = routes.find(({ href }) => href === url);
-
 		if (nextRoute && nextRoute !== activeRoute) {
 			if (nextRoute.redirectTo) {
 				return this.handleRedirect(nextRoute.redirectTo);
 			}
 
-			if (nextRoute.logout) {
-				console.log('logout');
-				this.handleLogout(nextRoute);
-			}
-
 			if (nextRoute.onEnter) {
-				console.log('onEnter');
-				this.handleOnEnter(nextRoute);
+				return this.handleOnEnter(nextRoute);
 			}
 
 			this.applyRoute(nextRoute);
 		}
-	}
-
-	handleLogout(nextRoute) {
-		nextRoute.logout();
 	}
 
 	handleRedirect(url) {
@@ -58,8 +46,15 @@ class Router extends Component {
 	}
 
 	handleOnEnter(nextRoute) {
-		authGuard().then(res => {
-			res.success ? null : this.handleRedirect(res.redirect);
+		const { onEnter } = nextRoute;
+
+		if (onEnter.logout) {
+			AUTH_SERVICE.clearStorage();
+		}
+
+		const onEnterGuard = onEnter.guard;
+		onEnterGuard(nextRoute).then(res => {
+			return res.success ? this.applyRoute(res.route) : this.handleRedirect(res.redirect);
 		});
 	}
 
