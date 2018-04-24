@@ -16,7 +16,7 @@ export class EventEmitter {
 		if (!this.events[eventName]) {
 			this.events[eventName] = [];
 		}
-
+		console.log('this.events: ', this.events);
 		this.events[eventName].push(fn);
 		return () => {
 			this.events[eventName] = this.events[eventName].filter(eventFn => fn !== eventFn);

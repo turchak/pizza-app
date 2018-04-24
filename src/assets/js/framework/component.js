@@ -19,6 +19,7 @@ class Component {
 	}
 
 	unmount() {
+		console.log('unmountiong');
 		this.onBeforeUnmount();
 	}
 

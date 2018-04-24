@@ -13,7 +13,7 @@ class Ws {
 	}
 
 	subscribe(eventName, callback) {
-		this._emitter.subscribe(eventName, callback);
+		return this._emitter.subscribe(eventName, callback);
 	}
 
 	_onmessage(data) {

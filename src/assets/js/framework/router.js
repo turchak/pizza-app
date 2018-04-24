@@ -60,7 +60,10 @@ class Router extends Component {
 
 	applyRoute(route) {
 		const { Component } = route;
+		const { activeComponent } = this.state;
 		const componentInstance = new Component();
+
+		activeComponent ? activeComponent.unmount() : null;
 
 		this.updateState({
 			activeRoute: route,

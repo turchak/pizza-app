@@ -4,11 +4,13 @@ import Footer from '../footer/footer';
 import { toHtml } from '../../utils/utils';
 import { AUTH_HTTP_SERVICE } from '../../utils/auth.http';
 import { USER_URL } from '../../utils/constants';
+import { TIME } from '../../utils/time';
 
 class User extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			isValid: false,
 			username: null,
 			email: null,
 			created: null,
@@ -18,34 +20,53 @@ class User extends Component {
 		this.host.classList.add('user-container');
 		this.header = new Header();
 		this.footer = new Footer();
-		this.getUserInfo();
+		this.getUser();
 	}
 
-	getUserInfo() {
-		AUTH_HTTP_SERVICE.get(USER_URL).then(result => {
+	getUser() {
+		AUTH_HTTP_SERVICE.get(USER_URL).then(res => {
 			this.updateState({
-				username: result.username,
-				email: result.email,
-				created: result.created_at,
-				visited: result.last_login,
+				username: res.username,
+				email: res.email,
+				created: res.created_at,
+				visited: res.last_login,
+				isValid: true,
 			});
 		});
 	}
 
 	render() {
-		const { username, email, created, visited } = this.state;
-		const user = `
-        <main class="user">
-            <ul>
-                <li>${username}</li>
-                <li>${email}</li>
-                <li>${created}</li>
-                <li>${visited}</li>
-            </ul>
-        </main>
-        `;
-		const fragment = toHtml(user);
-		return [this.header.update(), fragment, this.footer.update()];
+		const { username, email, created, visited, isValid } = this.state;
+
+		const containerString = `
+			<main class='user'>
+				<div class='container user__container'></div>
+			</main>`;
+
+		const containerFragment = toHtml(containerString);
+		const containerElement = containerFragment.querySelector('.container');
+
+		if (isValid) {
+			const userString = `
+				<ul class='user__info'>
+					<li class='user__name'>User: 
+						<span>${username}</span>
+					</li>
+					<li class='user__mail'>E-mail: 
+						<span>${email}</span>
+					</li>
+					<li class='user__created'>Created:
+						<span>${TIME.convertDate(created)}</span>
+					</li>
+					<li class='user__visited'>Last seen:
+						<span>${TIME.convertDate(visited)}</span>
+					</li>
+				</ul>`;
+			const userFragment = toHtml(userString);
+			containerElement.append(userFragment);
+		}
+
+		return [this.header.update(), containerFragment, this.footer.update()];
 	}
 }
 

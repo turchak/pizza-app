@@ -9,7 +9,7 @@
   flex-wrap: wrap;
   @include tablet-min {
     flex-wrap: nowrap;
-    padding: 15px 0;
+    padding: 10px 0;
   }
 
   & .current-time {

@@ -18,18 +18,35 @@ class App extends Component {
 
 	onInit() {
 		WS.establish();
-		WS.subscribe('CREATE_PIZZA', data => {
-			CREATE_DATA.addPizza(data);
-			return this.updateList();
+
+		this.unsubscribeAdd = this.subscribe({
+			event: 'CREATE_PIZZA',
+			method: CREATE_DATA.addPizza,
 		});
-		WS.subscribe('ACCEPT_PIZZA', data => {
-			CREATE_DATA.removePizza(data);
-			return this.updateList();
+
+		this.unsubscribeRemove = this.subscribe({
+			event: 'ACCEPT_PIZZA',
+			method: CREATE_DATA.removePizza,
 		});
 
 		CREATE_DATA.getUnacceptedPizzas(true, 12, 0).then(res => {
 			return this.updateList();
 		});
+	}
+
+	subscribe(param) {
+		let { event, method } = param;
+
+		const unsubscribe = WS.subscribe(event, data => {
+			method(data);
+			this.updateList();
+		});
+		return unsubscribe;
+	}
+
+	onBeforeUnmount() {
+		this.unsubscribeAdd();
+		this.unsubscribeRemove();
 	}
 
 	updateList() {

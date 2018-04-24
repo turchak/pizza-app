@@ -1,6 +1,7 @@
 import Component from '../../framework/component';
 import { toHtml } from '../../utils/utils';
 import { DOMAIN } from '../../utils/constants';
+import { TIME } from '../../utils/time';
 
 class PizzaList extends Component {
 	constructor(props) {
@@ -16,8 +17,9 @@ class PizzaList extends Component {
             <article class="pizza">
                 <img class="pizza__img" src="${DOMAIN}/${pizza.img_url}" alt="${pizza.name}">
                 <h2 class="pizza__name">${pizza.name}</h2>
-				<time class="pizza__time" datetime="
-				${pizza.time_prepared}">${pizza.time_prepared}</time>
+				<time class="pizza__time" datetime="${TIME.convertDate(pizza.time_prepared)}">${TIME.convertDate(
+	pizza.time_prepared
+)}</time>
                 <span class="pizza__queue-number">#1</span>
                 <div class="pizza__eta">
                     <span>eta</span>

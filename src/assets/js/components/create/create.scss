@@ -1,18 +1,16 @@
 .create {
     flex: 1 0 auto;
-    padding: 60px 0;
-    
+    padding: 20px 0;
     background: $orange;
 
     &__container {
         display: flex;
         flex-wrap: wrap;
     }
-    
+
     &__button {
         display: flex;
         justify-content: flex-end;
-        
 
         &-cancel {
             width: 140px;
@@ -29,10 +27,8 @@
         }
     }
 
-
-
     &__title {
-        font-size: 35px;
+        font-size: 20px;
         width: 100%;
         text-align: center;
     }
@@ -41,13 +37,14 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 50%;
-        
+        width: 100%;
+        padding-top: 10px;
     }
 
     &__size {
         display: flex;
         flex-wrap: wrap;
+        justify-content: space-around;
 
         &-title {
             display: block;
@@ -70,7 +67,7 @@
                 color: white;
                 z-index: 2;
             }
-            
+
             & input {
                 position: absolute;
                 opacity: 0;
@@ -80,7 +77,7 @@
                     border-radius: 50%;
                 }
             }
-            
+
             &--small {
                 border: 1px solid $yellow;
                 border-radius: 50%;
@@ -108,9 +105,8 @@
     }
 
     &__options {
-        width: 50%;
-        padding: 0 15px;
-        margin: 20px 0;
+        width: 100%;
+        margin: 10px 0;
     }
 
     & form {
@@ -130,15 +126,14 @@
     &__ingredients {
         display: flex;
         flex-wrap: wrap;
-        // width: 50%;
 
         &-item {
             position: relative;
             display: flex;
             font-size: 14px;
             justify-content: space-between;
-            padding: 5px;
-            width: 25%;
+            padding: 3px;
+            width: 50%;
         }
 
         &-input {
@@ -173,6 +168,57 @@
 
     &__tags {
         display: flex;
-        flex-direction: column;
+        flex-wrap: wrap;
+
+        & label {
+            position: relative;
+            width: 50%;
+            margin: 5px 0;
+            justify-content: center;
+        }
+
+        input {
+            position: absolute;
+            opacity: 0;
+            top: 0;
+            left: 0;
+
+            &:checked ~ .create__tags-icon--unchecked {
+                position: absolute;
+                opacity: 0;
+            }
+
+            &:checked ~ .create__tags-icon--checked {
+                position: absolute;
+                opacity: 1;
+            }
+        }
+
+        &-icon {
+            color: #fff;
+
+            &--checked {
+                position: absolute;
+                opacity: 0;
+                top: 50%;
+                left: 0;
+                transform: translateY(-50%);
+                color: #fff;
+            }
+
+            &--unchecked {
+                position: absolute;
+                opacity: 1;
+                top: 50%;
+                left: 0;
+                transform: translateY(-50%);
+                color: $grey;
+            }
+        }
+
+        & span {
+            padding-left: 20px;
+            font-size: 14px;
+        }
     }
 }

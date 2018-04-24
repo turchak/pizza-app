@@ -6,6 +6,8 @@ class PizzaDataService {
 		this.ingredients = [];
 		this.tags = [];
 		this.pizzas = [];
+		this.addPizza = this.addPizza.bind(this);
+		this.removePizza = this.removePizza.bind(this);
 	}
 
 	addPizza(pizza) {
@@ -34,15 +36,13 @@ class PizzaDataService {
 	}
 
 	getUnacceptedPizzas(reset, limit, offset) {
-		return AUTH_HTTP_SERVICE.get(`${PIZZA_LIST}?limit=${limit || 100}&offset=${offset || 0}`).then(
-			res => {
-				if (reset) {
-					this.pizzas = res.results;
-				} else {
-					this.pizzas = this.pizzas.concat(res.results);
-				}
+		return AUTH_HTTP_SERVICE.get(`${PIZZA_LIST}?limit=${limit || 100}&offset=${offset || 0}`).then(res => {
+			if (reset) {
+				this.pizzas = res.results;
+			} else {
+				this.pizzas = this.pizzas.concat(res.results);
 			}
-		);
+		});
 	}
 
 	getIngredients() {

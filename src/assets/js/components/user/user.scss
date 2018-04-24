@@ -1,5 +1,24 @@
 .user {
     flex: 1 0 auto;
-    padding: 60px 0;
+    padding: 20px 0;
     background: $orange;
+
+    &__container {
+        display: flex;
+        justify-content: center;
+    }
+
+    &__info {
+        width: 100%;
+        padding: 20px;
+        border: 1px solid #dbe2e8;
+        border-radius: 4px;
+        list-style: none;
+        background-color: #fff;
+        box-shadow: 5px 5px 25px 0 rgba(46,61,73,.2);
+
+        & li:not(:last-child) {
+            margin-bottom: 20px;
+        }
+    }
 }

@@ -10,7 +10,7 @@ import { AUTH_HTTP_SERVICE } from '../../utils/auth.http';
 class NewPizza extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {
+		this.condition = {
 			size: '60',
 			options: [],
 			ingredients: [],
@@ -21,13 +21,12 @@ class NewPizza extends Component {
 		this.header = new Header();
 		this.footer = new Footer();
 		this.handleClick = this.handleClick.bind(this);
-		this.handleResize = this.handleResize.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
 	handleSubmit(ev) {
 		ev.preventDefault();
-		const { size, ingredients, tags } = this.state;
+		const { size, ingredients, tags } = this.condition;
 		const canvas = document.querySelector('canvas');
 		const name = document.querySelector('.create__name-value');
 		const description = document.querySelector('.create__description');
@@ -49,6 +48,7 @@ class NewPizza extends Component {
 		Promise.all([CREATE_DATA.getIngredients(), CREATE_DATA.getTags()]).then(() => {
 			const container = document.querySelector('.create__options');
 			container.addEventListener('change', this.handleClick);
+
 			let canvas = document.querySelector('.create__canvas');
 			const form = document.createElement('form');
 			const buttonsString = `
@@ -83,33 +83,30 @@ class NewPizza extends Component {
 				}
 			});
 
-			this.state = Object.assign({}, this.state, {
+			this.condition = Object.assign({}, this.condition, {
 				options: newOptions,
 			});
-			this.state = Object.assign({}, this.state, {
+			this.condition = Object.assign({}, this.condition, {
 				ingredients: newIngredients,
 			});
-			// console.log(this.state);
-			const { size, options } = this.state;
+			const { size, options } = this.condition;
 			DRAW.handleClick(options, size);
 		}
-		return false;
-	}
 
-	handleResize(ev) {
 		if (ev.target.dataset.attr === 'size') {
 			const sizeFields = document.querySelectorAll('[data-attr]');
 			sizeFields.forEach(sizeField => {
 				if (sizeField.checked) {
 					const newSize = sizeField.value;
-					this.state = Object.assign({}, this.state, {
+					this.condition = Object.assign({}, this.condition, {
 						size: newSize,
 					});
 				}
 			});
-			let { size, options } = this.state;
+			let { size, options } = this.condition;
 			DRAW.handleClick(options, size);
 		}
+		return false;
 	}
 
 	renderForm() {
@@ -140,33 +137,28 @@ class NewPizza extends Component {
                 <i class="fas fa-circle create__size-option--large"></i>
             </label>    
         </label>
-            <h2 class='create__ingredients-title'>Ingredients<h2>
+            <span class='create__ingredients-title'>Ingredients<span>
         `;
 
 		const form = toHtml(formString);
-		const sizeFields = form.querySelector('.create__size');
-		sizeFields.addEventListener('change', this.handleResize);
 		return form;
 	}
 
 	renderIngredients(data) {
 		const ingredientsString = `   
-                <div class='create__ingredients'>${data.reduce((html, data) => {
+        <div class='create__ingredients'>${data.reduce((html, data) => {
 		html += `
-                        <label class='create__ingredients-item'>
-                            <input class='create__ingredients-input' type='checkbox' value='${
-	data.name
-}' data-flag='ingredient' data-id='${data.id}'>
-                            <img src='${DOMAIN}/${
-	data.image_url
-}' class='create__ingredients' title='${data.description}' data-name='ingredient'>
-                            <span>${data.name}</span>
-                        </label>
-                        `;
+        <label class='create__ingredients-item'>
+			<input class='create__ingredients-input' type='checkbox' value='${data.name}' 
+			data-flag='ingredient' data-id='${data.id}'>
+			<img src='${DOMAIN}/${data.image_url}' class='create__ingredients' title='${data.description}'
+			data-name='ingredient'>
+            <span>${data.name}</span>
+        </label>`;
 		return html;
 	}, '')}
-                </div>
-                <h2 class='create__tag-title'>Tag<h2>
+        </div>
+        	<span class='create__tag-title'>Tag<span>
         `;
 		const fragment = toHtml(ingredientsString);
 		return fragment;
@@ -174,13 +166,15 @@ class NewPizza extends Component {
 
 	renderTags(data) {
 		const tagsString = `
-                <div class='create__tags'>${data.reduce((html, data) => {
+        <div class='create__tags'>${data.reduce((html, data) => {
 		html += `
-                        <label class='create__tags-item'>
-                            <input type='checkbox'>
-                            <span>${data.name}</span>
-                        </label>
-                        `;
+        <label class='create__tags-item' for=${data.name}>
+			<input type='checkbox' id=${data.name} data-id=${data.id}>
+			<i class="far fa-square create__tags-icon create__tags-icon--unchecked"></i>
+			<i class="far fa-check-square create__tags-icon create__tags-icon--checked"></i>
+            <span>${data.name}</span>
+        </label>
+                `;
 		return html;
 	}, '')}
                 </div>
@@ -191,7 +185,7 @@ class NewPizza extends Component {
 
 	render() {
 		const containerString = `
-            <main class='create'>
+            <main class='create' id='create'>
                 <div class='container create__container'>
                     <h1 class='create__title'>Create Pizza</h1>
                     <section class='create__canvas'></section>
@@ -199,9 +193,9 @@ class NewPizza extends Component {
                 </div>
             </main>
         `;
-		const fragment = toHtml(containerString);
+		const containerFragment = toHtml(containerString);
 
-		return [this.header.update(), fragment, this.footer.update()];
+		return [this.header.update(), containerFragment, this.footer.update()];
 	}
 }
 
