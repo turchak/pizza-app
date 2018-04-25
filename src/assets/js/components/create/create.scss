@@ -12,10 +12,19 @@
         display: flex;
         justify-content: space-between;
 
+        @include tablet-min {
+            justify-content: flex-end;
+        }
+
+
         &-cancel {
             width: 140px;
             background: $grey;
             color: #fff;
+
+            @include tablet-min {
+                margin-right: 15px;
+            }
         }
 
         &-send {
@@ -38,12 +47,21 @@
         align-items: center;
         width: 100%;
         padding-top: 10px;
+
+        @include tablet-landscape-min {
+            width: 50%;
+        }
     }
 
     &__size {
         display: flex;
         flex-wrap: wrap;
         justify-content: space-around;
+
+        @include tablet-min {
+            justify-content: flex-start;
+        }
+
 
         &-title {
             display: block;
@@ -106,6 +124,10 @@
     &__options {
         width: 100%;
         margin: 10px 0;
+
+        @include tablet-landscape-min {
+            width: 50%;
+        }
     }
 
     & form {
@@ -133,6 +155,10 @@
             justify-content: space-between;
             padding: 3px;
             width: 50%;
+
+            @include tablet-min {
+                width: 25%;
+            }
         }
 
         &-input {
@@ -178,6 +204,16 @@
             width: 50%;
             margin: 5px 0;
             justify-content: center;
+
+            @include tablet-min {
+                width: 20%;
+            }
+
+
+            @include tablet-landscape-min {
+                flex-wrap: wrap;
+                width: 100%;
+            }
         }
 
         input {

@@ -35,10 +35,10 @@ class NewPizza extends Component {
 
 			const form = document.createElement('form');
 			const buttonsString = `
-                    <div class='create__button'>
-                        <button class='button create__button-cancel' type='button'>cancel</button>
-                        <button class='button create__button-send' type='submit'>create</button>
-                    </div>
+            	<div class='create__button'>
+                	<button class='button create__button-cancel' type='button'>cancel</button>
+                 	<button class='button create__button-send' type='submit'>create</button>
+            	</div>
                 `;
 			const buttonsFragment = toHtml(buttonsString);
 			const buttons = buttonsFragment.querySelector('.create__button');
@@ -164,30 +164,29 @@ class NewPizza extends Component {
                 <i class="fas fa-circle create__size-option--large"></i>
             </label>    
         </label>
-            <span class='create__ingredients-title'>Ingredients<span>
+        <span class='create__ingredients-title'>Ingredients<span>
         `;
 
-		const form = toHtml(formString);
-		return form;
+		const formFragment = toHtml(formString);
+		return formFragment;
 	}
 
 	renderIngredients(data) {
 		const ingredientsString = `   
         <div class='create__ingredients'>${data.reduce((html, data) => {
 		html += `
-        <label class='create__ingredients-item'>
-			<input class='create__ingredients-input' type='checkbox' value='${data.name}' data-flag='ingredient' data-id='${data.id}'>
-			<img src='${DOMAIN}/${data.image_url}' class='create__ingredients' title='${data.description}'
-			data-name='ingredient'>
-            <span>${data.name}</span>
-        </label>`;
+        	<label class='create__ingredients-item'>
+				<input class='create__ingredients-input' type='checkbox' value='${data.name}' data-flag='ingredient' data-id='${data.id}'>
+				<img src='${DOMAIN}/${data.image_url}' class='create__ingredients' title='${data.description}' data-name='ingredient'>
+            	<span>${data.name}</span>
+        	</label>`;
 		return html;
 	}, '')}
         </div>
-        	<span class='create__tags-title'>Tag<span>
+        <span class='create__tags-title'>Tag<span>
         `;
-		const fragment = toHtml(ingredientsString);
-		return fragment;
+		const ingredientsFragment = toHtml(ingredientsString);
+		return ingredientsFragment;
 	}
 
 	renderTags(data) {

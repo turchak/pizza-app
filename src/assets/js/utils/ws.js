@@ -18,7 +18,6 @@ class Ws {
 
 	_onmessage(data) {
 		const event = JSON.parse(data);
-		console.log('message: ', event);
 		this._emitter.emit(event.event_name, event.data);
 	}
 

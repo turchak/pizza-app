@@ -17,13 +17,11 @@ class PizzaList extends Component {
             <article class="pizza">
                 <img class="pizza__img" src="${DOMAIN}/${pizza.img_url}" alt="${pizza.name}">
                 <h2 class="pizza__name">${pizza.name}</h2>
-				<time class="pizza__time" datetime="${TIME.convertDate(pizza.time_prepared)}">${TIME.convertDate(
-	pizza.time_prepared
-)}</time>
+				<time class="pizza__time" datetime="${TIME.convertDate(pizza.time_prepared)}">${TIME.convertDate(pizza.time_prepared)}</time>
                 <span class="pizza__queue-number">#1</span>
                 <div class="pizza__eta">
                     <span>eta</span>
-                    <time datetime="04:00">4</time>
+                    <time datetime="07:00">7</time>
                     <span>min</span>
                 </div>
                 <div class="pizza__price">
@@ -43,8 +41,8 @@ class PizzaList extends Component {
 
 	render() {
 		const containerString = `
-		<div class="container list__container">
-        </div>
+			<div class="container list__container">
+        	</div>
 		`;
 
 		const containerFragment = toHtml(containerString);
