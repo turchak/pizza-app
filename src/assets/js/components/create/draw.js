@@ -150,24 +150,32 @@ class Draw {
 	_loadResources() {
 		let promises = [];
 		promises.push(this._loadImage('pizza', this.crust_pizza));
-		promises = promises.concat(
-			this.ingredients.map(ingredient => {
-				let ingr_url = `${DOMAIN}/${ingredient.image_url}`;
-				return this._loadImage(ingredient.name, ingr_url);
-			})
-		);
+		// promises = promises.concat(
+		// 	this.ingredients.map(ingredient => {
+		// 		let ingr_url = `${DOMAIN}/${ingredient.image_url}`;
+		// 		return this._loadImage(ingredient.name, ingr_url);
+		// 	})
+		// );
+		this.ingredients.map(ingredient => {
+			let ingr_url = `${DOMAIN}/${ingredient.image_url}`;
+			promises.push(this._loadImage(ingredient.name, ingr_url));
+		})
+		console.log(promises)
 		return Promise.all(promises);
 	}
 
 	_loadImage(name, url) {
 		return new Promise((resolve, reject) => {
 			const image = new Image();
-			image.crossOrigin = 'anonymous';
-			image.src = url;
+			image.crossOrigin="anonymous"
+			image.src = `https://thingproxy.freeboard.io/fetch/${url}`;
+			// url;
 			image.width = 20;
 			image.height = 20;
-			image.onload = () => resolve({ name, image });
+			// console.log(image)
 			image.onerror = e => reject(e);
+			image.onload = () => resolve({ name, image });
+			// image.onload = () => resolve({ name, image })
 		});
 	}
 }

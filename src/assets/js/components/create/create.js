@@ -71,7 +71,7 @@ class NewPizza extends Component {
 		fd.append('size', size);
 		fd.append('ingredients', JSON.stringify(ingredients));
 		fd.append('tags', JSON.stringify(tags));
-
+		console.log(canvas)
 		canvas.toBlob(blob => {
 			fd.append('image', blob, 'new_image.png');
 			return AUTH_HTTP_SERVICE.post(CREATE_PIZZA, fd).then(result => console.log(result));
