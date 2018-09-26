@@ -1,12 +1,14 @@
 import Component from '../../framework/component';
 import { toHtml } from '../../utils/utils';
 import { AUTH_SERVICE } from '../../utils/auth';
+import { Timer } from '../timer/timer';
 
 class Header extends Component {
 	constructor(props) {
 		super(props);
 		this.host = document.createElement('header');
 		this.host.classList.add('header');
+		this.timer = new Timer();
 	}
 
 	render() {
@@ -26,7 +28,7 @@ class Header extends Component {
             <a href="#/registration" class="button auth__button auth__button--up">sign up</a>
         `;
 
-		const header = `
+		const headerString = `
         <div class="container">
             <nav class="nav">
                 <aside class="current-time">
@@ -48,8 +50,10 @@ class Header extends Component {
         </div>
         `;
 
-		const fragment = toHtml(header);
-		return fragment;
+		const headerFragment = toHtml(headerString);
+		const currentTimeElem = headerFragment.querySelector('.current-time');
+		headerFragment.append(this.timer.update({ host: currentTimeElem }));
+		return headerFragment;
 	}
 }
 
