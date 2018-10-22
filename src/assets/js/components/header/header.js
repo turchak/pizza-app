@@ -1,7 +1,13 @@
 import Component from '../../framework/component';
-import { toHtml } from '../../utils/utils';
-import { AUTH_SERVICE } from '../../utils/auth';
-import { Timer } from '../timer/timer';
+import {
+	toHtml
+} from '../../utils/utils';
+import {
+	AUTH_SERVICE
+} from '../../utils/auth';
+import {
+	Timer
+} from '../timer/timer';
 
 class Header extends Component {
 	constructor(props) {
@@ -52,7 +58,9 @@ class Header extends Component {
 
 		const headerFragment = toHtml(headerString);
 		const currentTimeElem = headerFragment.querySelector('.current-time');
-		headerFragment.append(this.timer.update({ host: currentTimeElem }));
+		headerFragment.append(this.timer.update({
+			host: currentTimeElem
+		}));
 		return headerFragment;
 	}
 }

@@ -8,13 +8,13 @@ export class Timer extends Component {
 	}
 
 	render() {
-		const registration = `
+		const timer = `
         <div>
             
         </div>
         `;
 
-		const fragment = toHtml(registration);
+		const fragment = toHtml(timer);
 		return fragment;
 	}
 }

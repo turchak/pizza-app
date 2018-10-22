@@ -1,6 +1,10 @@
 import Component from '../../framework/component';
-import { toHtml } from '../../utils/utils';
-import { AUTH_SERVICE } from '../../utils/auth';
+import {
+	toHtml
+} from '../../utils/utils';
+import {
+	AUTH_SERVICE
+} from '../../utils/auth';
 
 class RegistrationForm extends Component {
 	constructor(props) {
@@ -39,7 +43,9 @@ class RegistrationForm extends Component {
 	}
 
 	render() {
-		const { stores } = this.state;
+		const {
+			stores
+		} = this.state;
 
 		const registration = `
         <div class="container">
